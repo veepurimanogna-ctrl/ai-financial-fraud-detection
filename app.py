@@ -21,107 +21,134 @@ st.set_page_config(
 # --- Custom Dark Theme CSS ---
 st.markdown("""
 <style>
-    /* Dark Slate Theme Setup */
+    /* 🤖 Cyber-Sec Neon Theme Setup */
     .main {
-        background-color: #0f172a;
-        color: #f8fafc;
+        background-color: #050505;
+        color: #e0e0e0;
+        background-image: radial-gradient(circle at 50% 0%, #112233 0%, #050505 70%);
     }
     
     .stAppHeader {
-        background-color: #0f172a;
+        background-color: transparent !important;
     }
 
-    /* Metric Cards */
+    /* 🛡️ Glassmorphism Metric Cards */
     .metric-card {
-        background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-        border: 1px solid #334155;
+        background: rgba(10, 15, 20, 0.65);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(0, 255, 255, 0.15);
         border-radius: 12px;
         padding: 20px;
         text-align: center;
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 0 15px rgba(0, 255, 255, 0.05);
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+    
+    .metric-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 0 20px rgba(0, 255, 255, 0.15);
+        border: 1px solid rgba(0, 255, 255, 0.3);
     }
     
     .metric-card h3 {
-        color: #94a3b8;
+        color: #00f2fe;
         font-size: 0.9rem;
         margin-bottom: 8px;
         text-transform: uppercase;
-        letter-spacing: 0.05em;
+        letter-spacing: 0.1em;
+        text-shadow: 0 0 8px rgba(0, 242, 254, 0.3);
     }
     
     .metric-card .value {
-        color: #f8fafc;
-        font-size: 2rem;
-        font-weight: 700;
+        color: #ffffff;
+        font-size: 2.2rem;
+        font-weight: 800;
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
     }
 
     .metric-card .subtext {
-        color: #38bdf8;
+        color: #a0aec0;
         font-size: 0.85rem;
         margin-top: 4px;
+        font-family: monospace;
     }
 
-    /* Risk Badges */
+    /* 🚨 Neon Risk Badges */
     .badge-high {
-        background-color: rgba(239, 68, 68, 0.2);
-        color: #ef4444;
-        border: 1px solid #ef4444;
-        padding: 8px 16px;
-        border-radius: 20px;
-        font-weight: 700;
-        font-size: 1.1rem;
+        background-color: rgba(255, 8, 68, 0.15);
+        color: #ff0844;
+        border: 1px solid #ff0844;
+        padding: 8px 18px;
+        border-radius: 4px;
+        font-weight: 800;
+        font-size: 1.2rem;
         display: inline-block;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        box-shadow: 0 0 15px rgba(255, 8, 68, 0.4);
+        text-shadow: 0 0 8px rgba(255, 8, 68, 0.5);
     }
     
     .badge-medium {
-        background-color: rgba(245, 158, 11, 0.2);
-        color: #f59e0b;
-        border: 1px solid #f59e0b;
-        padding: 8px 16px;
-        border-radius: 20px;
-        font-weight: 700;
-        font-size: 1.1rem;
+        background-color: rgba(255, 170, 0, 0.15);
+        color: #ffaa00;
+        border: 1px solid #ffaa00;
+        padding: 8px 18px;
+        border-radius: 4px;
+        font-weight: 800;
+        font-size: 1.2rem;
         display: inline-block;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        box-shadow: 0 0 15px rgba(255, 170, 0, 0.3);
     }
 
     .badge-low {
-        background-color: rgba(16, 185, 129, 0.2);
-        color: #10b981;
-        border: 1px solid #10b981;
-        padding: 8px 16px;
-        border-radius: 20px;
-        font-weight: 700;
-        font-size: 1.1rem;
+        background-color: rgba(11, 163, 96, 0.15);
+        color: #0ba360;
+        border: 1px solid #0ba360;
+        padding: 8px 18px;
+        border-radius: 4px;
+        font-weight: 800;
+        font-size: 1.2rem;
         display: inline-block;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        box-shadow: 0 0 15px rgba(11, 163, 96, 0.3);
     }
 
-    /* Explanation Boxes */
+    /* 📊 Explanation & Terminal Boxes */
     .driver-box {
-        background-color: rgba(239, 68, 68, 0.1);
-        border-left: 4px solid #ef4444;
+        background-color: rgba(255, 8, 68, 0.08);
+        border-left: 3px solid #ff0844;
         padding: 12px;
-        border-radius: 6px;
         margin-bottom: 10px;
+        font-family: monospace;
+        color: #ffb3c6;
     }
 
     .mitigator-box {
-        background-color: rgba(16, 185, 129, 0.1);
-        border-left: 4px solid #10b981;
+        background-color: rgba(11, 163, 96, 0.08);
+        border-left: 3px solid #0ba360;
         padding: 12px;
-        border-radius: 6px;
         margin-bottom: 10px;
+        font-family: monospace;
+        color: #a7f3d0;
     }
 
-    /* Action Box */
+    /* ⚡ Action Box */
     .action-box {
-        background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
-        border: 1px solid #38bdf8;
-        border-radius: 10px;
+        background: rgba(0, 242, 254, 0.05);
+        border: 1px dashed #00f2fe;
+        border-radius: 4px;
         padding: 16px;
         margin-top: 15px;
         text-align: center;
-        font-weight: 600;
-        color: #38bdf8;
+        font-weight: 700;
+        color: #00f2fe;
+        text-transform: uppercase;
+        letter-spacing: 1px;
     }
 </style>
 """, unsafe_allow_html=True)
