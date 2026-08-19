@@ -402,7 +402,12 @@ with tab2:
     scan_df = None
     if uploaded_file is not None:
         try:
-            scan_df = pd.read_csv(uploaded_file)
+            file_size_mb = uploaded_file.size / (1024 * 1024)
+            if file_size_mb > 150:
+                st.warning(f"⚠️ Large file detected ({file_size_mb:.1f} MB). To prevent server memory crashes, analysis is limited to the first 250,000 transactions.")
+                scan_df = pd.read_csv(uploaded_file, nrows=250000)
+            else:
+                scan_df = pd.read_csv(uploaded_file)
             st.success(f"Uploaded batch CSV containing {len(scan_df):,} records!")
         except Exception as e:
             st.error(f"Error reading CSV file: {e}")
