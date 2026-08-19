@@ -22,6 +22,12 @@ st.set_page_config(
 st.markdown("""
 <style>
     /* 🤖 Cyber-Sec Neon Theme Setup */
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;800&display=swap');
+
+    html, body, [class*="css"] {
+        font-family: 'Outfit', sans-serif;
+    }
+
     .main {
         background-color: #050505;
         color: #e0e0e0;
@@ -246,7 +252,7 @@ tab_overview, tab_login, tab1, tab2, tab3, tab4 = st.tabs([
 # TAB OVERVIEW: SYSTEM OVERVIEW
 # ==========================================
 with tab_overview:
-    st.markdown("<h2 style='text-align: center; color: #00f2fe; margin-bottom: 30px;'>Stop fraud before it reaches you.</h2>", unsafe_allow_html=True)
+    st.markdown("<h1 style='text-align: center; color: #00f2fe; margin-bottom: 30px; font-weight: 800; font-size: 3.8rem; text-shadow: 0 0 20px rgba(0,242,254,0.6); letter-spacing: -1px;'>Stop fraud before it reaches you.</h1>", unsafe_allow_html=True)
     
     col_o1, col_o2 = st.columns([1.2, 1], gap="large")
     with col_o1:
