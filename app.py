@@ -233,12 +233,64 @@ with col_m4:
 st.markdown("<br>", unsafe_allow_html=True)
 
 # --- Navigation Tabs ---
-tab1, tab2, tab3, tab4 = st.tabs([
+tab_overview, tab_login, tab1, tab2, tab3, tab4 = st.tabs([
+    "🏠 System Overview",
+    "🔑 Login / API Access",
     "⚡ Live Risk Simulator", 
     "📂 Batch CSV Fraud Scanner", 
     "📊 Model Performance & Metrics", 
     "🔍 Fraud Insights & Analytics (EDA)"
 ])
+
+# ==========================================
+# TAB OVERVIEW: SYSTEM OVERVIEW
+# ==========================================
+with tab_overview:
+    st.markdown("<h2 style='text-align: center; color: #00f2fe; margin-bottom: 30px;'>Stop fraud before it reaches you.</h2>", unsafe_allow_html=True)
+    
+    col_o1, col_o2 = st.columns([1.2, 1], gap="large")
+    with col_o1:
+        st.markdown("### 🛡️ Why Our System?")
+        st.markdown("""
+        **Real-time request analysis in under 3 milliseconds.**  
+        One API call, instant verdict, zero friction for real users. 
+        Drop it in today, stop the bleeding tomorrow.
+        
+        <br>
+        
+        #### Stops at the Edge:
+        - **Account Takeover:** Prevents unauthorized logins.
+        - **Card Testing:** Blocks mass automated transaction trials.
+        - **Promo Abuse:** Identifies synthetic identities.
+        """, unsafe_allow_html=True)
+        
+    with col_o2:
+        st.markdown("### ⚡ Live Verdict Stream (Simulation)")
+        st.code("""
+12:42:58  ALLOW    US POST /login      1.2ms
+12:42:43  ALERT    IN POST /otp        1.4ms
+12:42:45  ALLOW    CA POST /payment    1.3ms
+12:42:47  BLOCK    RU POST /signup     0.8ms
+12:42:49  ALLOW    GB POST /login      1.0ms
+        """, language="shell")
+
+# ==========================================
+# TAB LOGIN: LOGIN / API ACCESS
+# ==========================================
+with tab_login:
+    st.markdown("<br>", unsafe_allow_html=True)
+    col_l1, col_l2, col_l3 = st.columns([1, 2, 1])
+    with col_l2:
+        st.markdown("<div class='metric-card'>", unsafe_allow_html=True)
+        st.markdown("<h3 style='text-align: center; color: #00f2fe; font-size: 1.5rem;'>Developer Login</h3>", unsafe_allow_html=True)
+        st.markdown("<p style='text-align: center; color: #a0aec0; margin-bottom: 20px;'>Sign in to access your API keys and production dashboard.</p>", unsafe_allow_html=True)
+        
+        st.text_input("Work Email", placeholder="developer@company.com")
+        st.text_input("Password", type="password", placeholder="••••••••")
+        st.markdown("<br>", unsafe_allow_html=True)
+        if st.button("Log In / Get API Key", use_container_width=True):
+            st.success("Authentication Simulation: Secure Access Granted!")
+        st.markdown("</div>", unsafe_allow_html=True)
 
 # ==========================================
 # TAB 1: LIVE RISK SIMULATOR
