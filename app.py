@@ -185,6 +185,7 @@ req_cols = pipeline_bundle['num_features'] + pipeline_bundle['cat_features'] + p
 st.title("🛡️ AI Financial Fraud Detection & Risk Analysis System")
 st.caption("Real-Time Machine Learning Pipeline for Financial Transaction Risk Scoring, Class Imbalance Mitigation, & Explainable AI")
 
+st.markdown("**How this works:** This app analyzes transaction patterns (like location, time, and purchase history) to flag potentially fraudulent activity before it is approved.")
 st.markdown("---")
 
 # --- Top Banner Stats ---
@@ -203,9 +204,9 @@ with col_m2:
     best_roc = metrics_bundle['results'][best_model_name]['roc_auc']
     st.markdown(f"""
     <div class="metric-card">
-        <h3>Model PR-AUC</h3>
+        <h3>Model PR-AUC <span title="Precision-Recall Area Under Curve: Measures how well the model catches fraud without making false alarms. Higher is better.">ℹ️</span></h3>
         <div class="value" style="color: #10b981;">{best_pr:.3f}</div>
-        <div class="subtext">ROC-AUC: {best_roc:.3f}</div>
+        <div class="subtext">ROC-AUC <span title="Receiver Operating Characteristic: Overall accuracy of distinguishing fraud from normal.">ℹ️</span>: {best_roc:.3f}</div>
     </div>
     """, unsafe_allow_html=True)
 
@@ -213,7 +214,7 @@ with col_m3:
     best_rec = metrics_bundle['results'][best_model_name]['recall']
     st.markdown(f"""
     <div class="metric-card">
-        <h3>Fraud Recall Rate</h3>
+        <h3>Fraud Recall Rate <span title="Recall: The percentage of actual fraud cases the model successfully catches. Higher recall = catches more real fraud.">ℹ️</span></h3>
         <div class="value" style="color: #f59e0b;">{best_rec*100:.1f}%</div>
         <div class="subtext">Caught Fraud Cases</div>
     </div>
@@ -225,7 +226,7 @@ with col_m4:
     <div class="metric-card">
         <h3>Dataset Size</h3>
         <div class="value" style="color: #c084fc;">{total_len:,}</div>
-        <div class="subtext">Sparkov Kaggle Schema</div>
+        <div class="subtext">Synthetic data matching real Sparkov schema</div>
     </div>
     """, unsafe_allow_html=True)
 
@@ -502,10 +503,10 @@ with tab3:
                 <h3>{m_name}</h3>
                 <div class="value" style="color: {'#38bdf8' if m_name==best_model_name else '#94a3b8'};">PR-AUC: {res['pr_auc']:.3f}</div>
                 <div style="margin-top: 10px; text-align: left; font-size: 0.9rem;">
-                    • <strong>Recall:</strong> {res['recall']*100:.1f}%<br>
-                    • <strong>Precision:</strong> {res['precision']*100:.1f}%<br>
-                    • <strong>F1-Score:</strong> {res['f1']:.3f}<br>
-                    • <strong>ROC-AUC:</strong> {res['roc_auc']:.3f}
+                    • <strong title="The percentage of actual fraud cases the model successfully catches. Higher recall = catches more real fraud.">Recall ℹ️:</strong> {res['recall']*100:.1f}%<br>
+                    • <strong title="Of the transactions the model flagged as fraud, how many were actually fraud. Higher precision = fewer false alarms.">Precision ℹ️:</strong> {res['precision']*100:.1f}%<br>
+                    • <strong title="A balanced score combining Precision and Recall.">F1-Score ℹ️:</strong> {res['f1']:.3f}<br>
+                    • <strong title="Overall accuracy of distinguishing fraud from normal.">ROC-AUC ℹ️:</strong> {res['roc_auc']:.3f}
                 </div>
             </div>
             """, unsafe_allow_html=True)
@@ -559,6 +560,8 @@ with tab3:
         - **False Positives (Innocent flagged):** `{fp:,}`
         - **False Negatives (Missed fraud):** `{fn:,}`
         """)
+        
+        st.markdown(f"*(**Plain English Summary:** At this threshold, out of {tn+fp+fn+tp:,} test transactions, the model correctly caught {tp:,} out of {tp+fn:,} real fraud cases.)*")
         
         # Confusion Matrix Heatmap
         fig_cm = px.imshow(
@@ -614,6 +617,7 @@ with tab4:
             )
             fig_hour.update_layout(template="plotly_dark", paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', height=320)
             st.plotly_chart(fig_hour, use_container_width=True)
+            st.caption("Takeaway: Fraud is highest in the late night / early morning hours (1 AM - 5 AM).")
 
         with c_eda2:
             st.markdown("#### Fraud Rate by Merchant Category")
@@ -633,6 +637,7 @@ with tab4:
             )
             fig_cat.update_layout(template="plotly_dark", paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', height=320)
             st.plotly_chart(fig_cat, use_container_width=True)
+            st.caption("Takeaway: Fraud is highly concentrated in online shopping and grocery transactions.")
 
         st.markdown("---")
         
@@ -649,5 +654,6 @@ with tab4:
                 color='Importance',
                 color_continuous_scale='Viridis'
             )
-            fig_fi.update_layout(template="plotly_dark", paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', height=400)
+            fig_fi.update_layout(template="plotly_dark", paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', height=350)
             st.plotly_chart(fig_fi, use_container_width=True)
+            st.caption("Takeaway: The amount of the transaction and geographical distance are the strongest predictors of fraud risk.")
