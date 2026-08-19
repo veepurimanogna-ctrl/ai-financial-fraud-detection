@@ -187,6 +187,13 @@ preprocessor = pipeline_bundle['preprocessor']
 model = pipeline_bundle['model']
 req_cols = pipeline_bundle['num_features'] + pipeline_bundle['cat_features'] + pipeline_bundle['bin_features']
 
+
+# --- Session State ---
+if 'logged_in' not in st.session_state:
+    st.session_state.logged_in = False
+if 'current_page' not in st.session_state:
+    st.session_state.current_page = "🏠 System Overview"
+
 # --- Header Section ---
 st.title("🛡️ AI Financial Fraud Detection & Risk Analysis System")
 st.caption("Real-Time Machine Learning Pipeline for Financial Transaction Risk Scoring, Class Imbalance Mitigation, & Explainable AI")
@@ -238,20 +245,46 @@ with col_m4:
 
 st.markdown("<br>", unsafe_allow_html=True)
 
-# --- Navigation Tabs ---
-tab_overview, tab_login, tab1, tab2, tab3, tab4 = st.tabs([
-    "🏠 System Overview",
-    "🔑 Login / API Access",
-    "⚡ Live Risk Simulator", 
-    "📂 Batch CSV Fraud Scanner", 
-    "📊 Model Performance & Metrics", 
-    "🔍 Fraud Insights & Analytics (EDA)"
-])
+# --- Full-Page Custom Navigation ---
+if not st.session_state.logged_in:
+    nav_options = ["🏠 System Overview", "🔑 Login / API Access"]
+else:
+    nav_options = [
+        "🏠 System Overview",
+        "⚡ Live Risk Simulator", 
+        "📂 Batch CSV Fraud Scanner", 
+        "📊 Model Performance & Metrics", 
+        "🔍 Fraud Insights & Analytics (EDA)",
+        "🚪 Logout"
+    ]
+
+# Use a container for navigation to make it look like a top bar
+st.markdown("<br>", unsafe_allow_html=True)
+selected_page = st.radio(
+    "Navigation", 
+    nav_options, 
+    horizontal=True, 
+    index=nav_options.index(st.session_state.current_page) if st.session_state.current_page in nav_options else 0,
+    label_visibility="collapsed"
+)
+
+# Handle Logout immediately
+if selected_page == "🚪 Logout":
+    st.session_state.logged_in = False
+    st.session_state.current_page = "🏠 System Overview"
+    st.rerun()
+
+# Update page state if changed
+if selected_page != st.session_state.current_page and selected_page != "🚪 Logout":
+    st.session_state.current_page = selected_page
+    st.rerun()
+
+st.markdown("---")
 
 # ==========================================
 # TAB OVERVIEW: SYSTEM OVERVIEW
 # ==========================================
-with tab_overview:
+if st.session_state.current_page == "🏠 System Overview":
     st.markdown("<h1 style='text-align: center; color: #00f2fe; margin-bottom: 30px; font-weight: 800; font-size: 3.8rem; text-shadow: 0 0 20px rgba(0,242,254,0.6); letter-spacing: -1px;'>Stop fraud before it reaches you.</h1>", unsafe_allow_html=True)
     
     col_o1, col_o2 = st.columns([1.2, 1], gap="large")
@@ -283,7 +316,7 @@ with tab_overview:
 # ==========================================
 # TAB LOGIN: LOGIN / API ACCESS
 # ==========================================
-with tab_login:
+if st.session_state.current_page == "🔑 Login / API Access":
     st.markdown("<br>", unsafe_allow_html=True)
     col_l1, col_l2, col_l3 = st.columns([1, 2, 1])
     with col_l2:
@@ -295,13 +328,15 @@ with tab_login:
         st.text_input("Password", type="password", placeholder="••••••••")
         st.markdown("<br>", unsafe_allow_html=True)
         if st.button("Log In / Get API Key", use_container_width=True):
-            st.success("Authentication Simulation: Secure Access Granted!")
+            st.session_state.logged_in = True
+            st.session_state.current_page = "⚡ Live Risk Simulator"
+            st.rerun()
         st.markdown("</div>", unsafe_allow_html=True)
 
 # ==========================================
 # TAB 1: LIVE RISK SIMULATOR
 # ==========================================
-with tab1:
+if st.session_state.current_page == "⚡ Live Risk Simulator":
     st.subheader("⚡ Real-Time Transaction Risk Engine")
     st.markdown("Select a pre-configured transaction scenario or input custom parameters to evaluate the risk score instantly.")
     
@@ -452,7 +487,7 @@ with tab1:
 # ==========================================
 # TAB 2: BATCH CSV FRAUD SCANNER
 # ==========================================
-with tab2:
+if st.session_state.current_page == "📂 Batch CSV Fraud Scanner":
     st.subheader("📂 Batch Financial Transaction Fraud Scanner")
     st.markdown("Upload a batch CSV file of transactions (Sparkov Kaggle or standard format) or scan the pre-loaded dataset.")
     
@@ -545,7 +580,7 @@ with tab2:
 # ==========================================
 # TAB 3: MODEL PERFORMANCE & METRICS
 # ==========================================
-with tab3:
+if st.session_state.current_page == "📊 Model Performance & Metrics":
     st.subheader("📊 Model Evaluation & Imbalanced Data Metrics")
     st.markdown("Compare benchmarked models on Precision-Recall AUC (PR-AUC), ROC-AUC, and adjust decision thresholds dynamically.")
     
@@ -642,7 +677,7 @@ with tab3:
 # ==========================================
 # TAB 4: FRAUD INSIGHTS & ANALYTICS (EDA)
 # ==========================================
-with tab4:
+if st.session_state.current_page == "🔍 Fraud Insights & Analytics (EDA)":
     st.subheader("🔍 Exploratory Data Analysis & Feature Importance")
     st.markdown("Visualizing key behavioral patterns and feature importance driving fraud predictions across transactions.")
     
