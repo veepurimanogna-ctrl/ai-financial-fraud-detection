@@ -21,134 +21,122 @@ st.set_page_config(
 # --- Custom Dark Theme CSS ---
 st.markdown("""
 <style>
-    /* 🤖 Cyber-Sec Neon Theme Setup */
+    /* 🏢 Corporate SaaS Light Theme Setup */
     .main {
-        background-color: #050505;
-        color: #e0e0e0;
-        background-image: radial-gradient(circle at 50% 0%, #112233 0%, #050505 70%);
+        background-color: #ffffff;
+        color: #0f172a;
     }
     
     .stAppHeader {
         background-color: transparent !important;
     }
 
-    /* 🛡️ Glassmorphism Metric Cards */
+    /* 📊 Clean Corporate Metric Cards */
     .metric-card {
-        background: rgba(10, 15, 20, 0.65);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        border: 1px solid rgba(0, 255, 255, 0.15);
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
         border-radius: 12px;
         padding: 20px;
         text-align: center;
-        box-shadow: 0 0 15px rgba(0, 255, 255, 0.05);
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
         transition: transform 0.2s, box-shadow 0.2s;
     }
     
     .metric-card:hover {
         transform: translateY(-2px);
-        box-shadow: 0 0 20px rgba(0, 255, 255, 0.15);
-        border: 1px solid rgba(0, 255, 255, 0.3);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        border: 1px solid #cbd5e1;
     }
     
     .metric-card h3 {
-        color: #00f2fe;
+        color: #64748b;
         font-size: 0.9rem;
         margin-bottom: 8px;
         text-transform: uppercase;
-        letter-spacing: 0.1em;
-        text-shadow: 0 0 8px rgba(0, 242, 254, 0.3);
+        letter-spacing: 0.05em;
+        font-weight: 700;
     }
     
     .metric-card .value {
-        color: #ffffff;
+        color: #0f172a;
         font-size: 2.2rem;
         font-weight: 800;
-        text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+        letter-spacing: -0.02em;
     }
 
     .metric-card .subtext {
-        color: #a0aec0;
+        color: #94a3b8;
         font-size: 0.85rem;
         margin-top: 4px;
-        font-family: monospace;
+        font-weight: 500;
     }
 
-    /* 🚨 Neon Risk Badges */
+    /* 🚨 Modern Flat Risk Badges */
     .badge-high {
-        background-color: rgba(255, 8, 68, 0.15);
-        color: #ff0844;
-        border: 1px solid #ff0844;
-        padding: 8px 18px;
-        border-radius: 4px;
-        font-weight: 800;
-        font-size: 1.2rem;
+        background-color: #fef2f2;
+        color: #ef4444;
+        border: 1px solid #fca5a5;
+        padding: 6px 16px;
+        border-radius: 6px;
+        font-weight: 700;
+        font-size: 1.1rem;
         display: inline-block;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        box-shadow: 0 0 15px rgba(255, 8, 68, 0.4);
-        text-shadow: 0 0 8px rgba(255, 8, 68, 0.5);
+        letter-spacing: 0.5px;
     }
     
     .badge-medium {
-        background-color: rgba(255, 170, 0, 0.15);
-        color: #ffaa00;
-        border: 1px solid #ffaa00;
-        padding: 8px 18px;
-        border-radius: 4px;
-        font-weight: 800;
-        font-size: 1.2rem;
+        background-color: #fffbeb;
+        color: #f59e0b;
+        border: 1px solid #fcd34d;
+        padding: 6px 16px;
+        border-radius: 6px;
+        font-weight: 700;
+        font-size: 1.1rem;
         display: inline-block;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        box-shadow: 0 0 15px rgba(255, 170, 0, 0.3);
+        letter-spacing: 0.5px;
     }
 
     .badge-low {
-        background-color: rgba(11, 163, 96, 0.15);
-        color: #0ba360;
-        border: 1px solid #0ba360;
-        padding: 8px 18px;
-        border-radius: 4px;
-        font-weight: 800;
-        font-size: 1.2rem;
+        background-color: #f0fdf4;
+        color: #10b981;
+        border: 1px solid #86efac;
+        padding: 6px 16px;
+        border-radius: 6px;
+        font-weight: 700;
+        font-size: 1.1rem;
         display: inline-block;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        box-shadow: 0 0 15px rgba(11, 163, 96, 0.3);
+        letter-spacing: 0.5px;
     }
 
-    /* 📊 Explanation & Terminal Boxes */
+    /* 📊 Explanation Boxes */
     .driver-box {
-        background-color: rgba(255, 8, 68, 0.08);
-        border-left: 3px solid #ff0844;
+        background-color: #fef2f2;
+        border-left: 4px solid #ef4444;
         padding: 12px;
         margin-bottom: 10px;
-        font-family: monospace;
-        color: #ffb3c6;
+        border-radius: 0 6px 6px 0;
+        color: #7f1d1d;
     }
 
     .mitigator-box {
-        background-color: rgba(11, 163, 96, 0.08);
-        border-left: 3px solid #0ba360;
+        background-color: #f0fdf4;
+        border-left: 4px solid #10b981;
         padding: 12px;
         margin-bottom: 10px;
-        font-family: monospace;
-        color: #a7f3d0;
+        border-radius: 0 6px 6px 0;
+        color: #14532d;
     }
 
     /* ⚡ Action Box */
     .action-box {
-        background: rgba(0, 242, 254, 0.05);
-        border: 1px dashed #00f2fe;
-        border-radius: 4px;
+        background: #f8fafc;
+        border: 1px dashed #cbd5e1;
+        border-radius: 8px;
         padding: 16px;
         margin-top: 15px;
         text-align: center;
         font-weight: 700;
-        color: #00f2fe;
-        text-transform: uppercase;
-        letter-spacing: 1px;
+        color: #334155;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -182,10 +170,17 @@ model = pipeline_bundle['model']
 req_cols = pipeline_bundle['num_features'] + pipeline_bundle['cat_features'] + pipeline_bundle['bin_features']
 
 # --- Header Section ---
-st.title("🛡️ AI Financial Fraud Detection & Risk Analysis System")
-st.caption("Real-Time Machine Learning Pipeline for Financial Transaction Risk Scoring, Class Imbalance Mitigation, & Explainable AI")
-
-st.markdown("**How this works:** This app analyzes transaction patterns (like location, time, and purchase history) to flag potentially fraudulent activity before it is approved.")
+st.markdown("""
+<div style="text-align: center; padding: 30px 0;">
+    <h1 style='font-size: 4rem; font-weight: 800; color: #0f172a; margin-bottom: 0; line-height: 1.1;'>
+        Stop fraud before <br><span style='color: #5f63f2;'>it reaches you.</span>
+    </h1>
+    <p style='font-size: 1.25rem; color: #64748b; margin-top: 20px; max-width: 800px; margin-left: auto; margin-right: auto;'>
+        Real-time ML request analysis in under 3 milliseconds. One model call, instant verdict, zero friction for real users. 
+        Analyze transaction patterns to flag potentially fraudulent activity before it is approved.
+    </p>
+</div>
+""", unsafe_allow_html=True)
 st.markdown("---")
 
 # --- Top Banner Stats ---
@@ -194,7 +189,7 @@ with col_m1:
     st.markdown(f"""
     <div class="metric-card">
         <h3>Primary Model</h3>
-        <div class="value" style="color: #38bdf8;">{best_model_name}</div>
+        <div class="value" style="color: #5f63f2;">{best_model_name}</div>
         <div class="subtext">SMOTE Resampled</div>
     </div>
     """, unsafe_allow_html=True)
