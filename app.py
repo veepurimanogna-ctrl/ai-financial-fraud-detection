@@ -258,12 +258,11 @@ else:
         "🚪 Logout"
     ]
 
-# Use a container for navigation to make it look like a top bar
-st.markdown("<br>", unsafe_allow_html=True)
-selected_page = st.radio(
+# Render Navigation in Sidebar
+st.sidebar.markdown("### 🛡️ Navigation")
+selected_page = st.sidebar.radio(
     "Navigation", 
     nav_options, 
-    horizontal=True, 
     index=nav_options.index(st.session_state.current_page) if st.session_state.current_page in nav_options else 0,
     label_visibility="collapsed"
 )
@@ -278,8 +277,6 @@ if selected_page == "🚪 Logout":
 if selected_page != st.session_state.current_page and selected_page != "🚪 Logout":
     st.session_state.current_page = selected_page
     st.rerun()
-
-st.markdown("---")
 
 # ==========================================
 # TAB OVERVIEW: SYSTEM OVERVIEW
