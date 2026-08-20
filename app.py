@@ -232,7 +232,7 @@ if 'current_page' not in st.session_state:
 
 # --- Full-Page Custom Navigation ---
 if not st.session_state.logged_in:
-    nav_options = ["🏠 System Overview", "🔑 Login / API Access"]
+    nav_options = ["🏠 System Overview", "🔑 Login"]
 else:
     nav_options = [
         "🏠 System Overview",
@@ -288,28 +288,38 @@ if st.session_state.current_page == "🏠 System Overview":
     with col_m2:
         best_pr = metrics_bundle['results'][best_model_name]['pr_auc']
         best_roc = metrics_bundle['results'][best_model_name]['roc_auc']
-        st.markdown(f"""
-        <div class="metric-card" style="margin-bottom: 5px;">
-            <h3>Model PR-AUC</h3>
-            <div class="value" style="color: #10b981;">{best_pr:.3f}</div>
-            <div class="subtext">ROC-AUC: {best_roc:.3f}</div>
-        </div>
-        """, unsafe_allow_html=True)
-        with st.popover("ℹ️ Metrics Info", use_container_width=True):
-            st.markdown("**PR-AUC (Precision-Recall Area Under Curve):** Measures how well the model catches fraud without making false alarms. Higher is better.")
-            st.markdown("**ROC-AUC (Receiver Operating Characteristic):** Overall accuracy of distinguishing fraud from normal.")
+        m2_c1, m2_c2 = st.columns([5, 1])
+        with m2_c1:
+            st.markdown(f"""
+            <div class="metric-card">
+                <h3>Model PR-AUC</h3>
+                <div class="value" style="color: #10b981;">{best_pr:.3f}</div>
+                <div class="subtext">ROC-AUC: {best_roc:.3f}</div>
+            </div>
+            """, unsafe_allow_html=True)
+        with m2_c2:
+            st.write("") # Spacing
+            st.write("")
+            with st.popover("ℹ️"):
+                st.markdown("**PR-AUC (Precision-Recall Area Under Curve):** Measures how well the model catches fraud without making false alarms. Higher is better.")
+                st.markdown("**ROC-AUC (Receiver Operating Characteristic):** Overall accuracy of distinguishing fraud from normal.")
     
     with col_m3:
         best_rec = metrics_bundle['results'][best_model_name]['recall']
-        st.markdown(f"""
-        <div class="metric-card" style="margin-bottom: 5px;">
-            <h3>Fraud Recall Rate</h3>
-            <div class="value" style="color: #f59e0b;">{best_rec*100:.1f}%</div>
-            <div class="subtext">Caught Fraud Cases</div>
-        </div>
-        """, unsafe_allow_html=True)
-        with st.popover("ℹ️ Recall Info", use_container_width=True):
-            st.markdown("**Recall:** The percentage of actual fraud cases the model successfully catches. Higher recall = catches more real fraud.")
+        m3_c1, m3_c2 = st.columns([5, 1])
+        with m3_c1:
+            st.markdown(f"""
+            <div class="metric-card">
+                <h3>Fraud Recall Rate</h3>
+                <div class="value" style="color: #f59e0b;">{best_rec*100:.1f}%</div>
+                <div class="subtext">Caught Fraud Cases</div>
+            </div>
+            """, unsafe_allow_html=True)
+        with m3_c2:
+            st.write("") # Spacing
+            st.write("")
+            with st.popover("ℹ️"):
+                st.markdown("**Recall:** The percentage of actual fraud cases the model successfully catches. Higher recall = catches more real fraud.")
     
     with col_m4:
         total_len = len(df_transactions) if df_transactions is not None else 50000
@@ -354,7 +364,7 @@ if st.session_state.current_page == "🏠 System Overview":
 # ==========================================
 # TAB LOGIN: LOGIN / API ACCESS
 # ==========================================
-if st.session_state.current_page == "🔑 Login / API Access":
+if st.session_state.current_page == "🔑 Login":
     st.markdown('''
     <style>
     /* Target the column containing the anchor */
@@ -362,30 +372,37 @@ if st.session_state.current_page == "🔑 Login / API Access":
     [data-testid="stAppViewContainer"]:has(.login-bg-anchor) {
         background-color: #050505;
         background-image: 
-            url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAxMDAgMTAwJz48cGF0aCBkPSdNNTAgMTAgTDE1IDI1IEwxNSA1NSBDMTUgNzUgNTAgOTAgNTAgOTAgQzUwIDkwIDg1IDc1IDg1IDU1IEw4NSAyNSBaJyBmaWxsPSdub25lJyBzdHJva2U9JyMwMGYyZmUnIHN0cm9rZS13aWR0aD0nMicgb3BhY2l0eT0nMC4xNScvPjxwYXRoIGQ9J00zNSA1MCBMNDUgNjAgTDY1IDM1JyBmaWxsPSdub25lJyBzdHJva2U9JyMwMGYyZmUnIHN0cm9rZS13aWR0aD0nMicgb3BhY2l0eT0nMC4xNScvPjwvc3ZnPg=="),
+            url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAxMDAgMTAwJz48cGF0aCBkPSdNNTAgMTAgTDE1IDI1IEwxNSA1NSBDMTUgNzUgNTAgOTAgNTAgOTAgQzUwIDkwIDg1IDc1IDg1IDU1IEw4NSAyNSBaJyBmaWxsPSdub25lJyBzdHJva2U9JyMwMGYyZmUnIHN0cm9rZS13aWR0aD0nMicgb3BhY2l0eT0nMC4wOCcvPjxwYXRoIGQ9J00zNSA1MCBMNDUgNjAgTDY1IDM1JyBmaWxsPSdub25lJyBzdHJva2U9JyMwMGYyZmUnIHN0cm9rZS13aWR0aD0nMicgb3BhY2l0eT0nMC4wOCcvPjwvc3ZnPg=="),
+            url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAxMDAgMTAwJz48cGF0aCBkPSdNNTAgMTAgTDE1IDI1IEwxNSA1NSBDMTUgNzUgNTAgOTAgNTAgOTAgQzUwIDkwIDg1IDc1IDg1IDU1IEw4NSAyNSBaJyBmaWxsPSdub25lJyBzdHJva2U9JyMwMGYyZmUnIHN0cm9rZS13aWR0aD0nMicgb3BhY2l0eT0nMC4wOCcvPjxwYXRoIGQ9J00zNSA1MCBMNDUgNjAgTDY1IDM1JyBmaWxsPSdub25lJyBzdHJva2U9JyMwMGYyZmUnIHN0cm9rZS13aWR0aD0nMicgb3BhY2l0eT0nMC4wOCcvPjwvc3ZnPg=="),
             url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCA0MDAgMzAwJz48cGF0aCBkPSdNMjAgNDAgTDgwIDQwIEw4MCAxMDAgTDEyMCAxMDAnIGZpbGw9J25vbmUnIHN0cm9rZT0nIzAwZjJmZScgc3Ryb2tlLXdpZHRoPScxLjUnIG9wYWNpdHk9JzAuNCcvPjxjaXJjbGUgY3g9JzIwJyBjeT0nNDAnIHI9JzQnIGZpbGw9JyMwMGYyZmUnIG9wYWNpdHk9JzAuNicvPjxjaXJjbGUgY3g9JzEyMCcgY3k9JzEwMCcgcj0nNCcgZmlsbD0nIzAwZjJmZScgb3BhY2l0eT0nMC42Jy8+PHBhdGggZD0nTTM4MCA2MCBMMzAwIDYwIEwzMDAgMTMwIEwyNjAgMTMwJyBmaWxsPSdub25lJyBzdHJva2U9JyMwMGYyZmUnIHN0cm9rZS13aWR0aD0nMS41JyBvcGFjaXR5PScwLjQnLz48Y2lyY2xlIGN4PSczODAnIGN5PSc2MCcgcj0nNCcgZmlsbD0nIzAwZjJmZScgb3BhY2l0eT0nMC42Jy8+PGNpcmNsZSBjeD0nMjYwJyBjeT0nMTMwJyByPSc0JyBmaWxsPScjMDBmMmZlJyBvcGFjaXR5PScwLjYnLz48cGF0aCBkPSdNMzAgMjQwIEwxMDAgMjQwIEwxMDAgMTYwIEwxNDAgMTYwJyBmaWxsPSdub25lJyBzdHJva2U9JyMwMGYyZmUnIHN0cm9rZS13aWR0aD0nMS41JyBvcGFjaXR5PScwLjQnLz48Y2lyY2xlIGN4PSczMCcgY3k9JzI0MCcgcj0nNCcgZmlsbD0nIzAwZjJmZScgb3BhY2l0eT0nMC42Jy8+PGNpcmNsZSBjeD0nMTQwJyBjeT0nMTYwJyByPSc0JyBmaWxsPScjMDBmMmZlJyBvcGFjaXR5PScwLjYnLz48cGF0aCBkPSdNMzcwIDI2MCBMMjgwIDI2MCBMMjgwIDE4MCBMMjQwIDE4MCcgZmlsbD0nbm9uZScgc3Ryb2tlPScjMDBmMmZlJyBzdHJva2Utd2lkdGg9JzEuNScgb3BhY2l0eT0nMC40Jy8+PGNpcmNsZSBjeD0nMzcwJyBjeT0nMjYwJyByPSc0JyBmaWxsPScjMDBmMmZlJyBvcGFjaXR5PScwLjYnLz48Y2lyY2xlIGN4PScyNDAnIGN5PScxODAnIHI9JzQnIGZpbGw9JyMwMGYyZmUnIG9wYWNpdHk9JzAuNicvPjwvc3ZnPg=="),
             linear-gradient(rgba(14, 42, 56, 0.4) 1px, transparent 1px),
             linear-gradient(90deg, rgba(14, 42, 56, 0.4) 1px, transparent 1px),
             linear-gradient(135deg, #050505, #0a1622);
         background-size: 
             250px 250px, 
+            250px 250px,
             100% 100%, 
             80px 80px, 
             80px 80px, 
             100% 100%;
         background-position: 
-            center center,
+            10% center,
+            90% center,
             center center,
             top left,
             top left,
             center center;
-        background-repeat: no-repeat, no-repeat, repeat, repeat, no-repeat;
-        
-        /* Metric card styling integrated directly into the column */
-        border: 1px solid rgba(0, 255, 255, 0.15);
+        background-repeat: no-repeat, no-repeat, no-repeat, repeat, repeat, no-repeat;
+    }
+    
+    div[data-testid="stColumn"]:has(.login-bg-anchor) {
+        background-color: rgba(10, 15, 20, 0.85);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
         border-radius: 12px;
         padding: 30px;
-        box-shadow: 0 0 15px rgba(0, 255, 255, 0.05);
+        border: 1px solid rgba(0, 255, 255, 0.15);
+        box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
     }
     </style>
     ''', unsafe_allow_html=True)
@@ -400,7 +417,7 @@ if st.session_state.current_page == "🔑 Login / API Access":
         st.text_input("Work Email", placeholder="developer@company.com")
         st.text_input("Password", type="password", placeholder="••••••••")
         st.markdown("<br>", unsafe_allow_html=True)
-        if st.button("Log In / Get API Key", use_container_width=True):
+        if st.button("Log In", use_container_width=True):
             st.session_state.logged_in = True
             st.session_state.current_page = "⚡ Live Risk Simulator"
             st.rerun()
@@ -663,18 +680,29 @@ if st.session_state.current_page == "📊 Model Performance & Metrics":
     for i, (m_name, res) in enumerate(results.items()):
         col = [c1, c2, c3][i]
         with col:
-            st.markdown(f"""
-            <div class="metric-card">
-                <h3>{m_name}</h3>
-                <div class="value" style="color: {'#38bdf8' if m_name==best_model_name else '#94a3b8'};">PR-AUC: {res['pr_auc']:.3f}</div>
-                <div style="margin-top: 10px; text-align: left; font-size: 0.9rem;">
-                    • <strong title="The percentage of actual fraud cases the model successfully catches. Higher recall = catches more real fraud.">Recall ℹ️:</strong> {res['recall']*100:.1f}%<br>
-                    • <strong title="Of the transactions the model flagged as fraud, how many were actually fraud. Higher precision = fewer false alarms.">Precision ℹ️:</strong> {res['precision']*100:.1f}%<br>
-                    • <strong title="A balanced score combining Precision and Recall.">F1-Score ℹ️:</strong> {res['f1']:.3f}<br>
-                    • <strong title="Overall accuracy of distinguishing fraud from normal.">ROC-AUC ℹ️:</strong> {res['roc_auc']:.3f}
+            mc_col, pop_col = st.columns([6, 1])
+            with mc_col:
+                st.markdown(f"""
+                <div class="metric-card">
+                    <h3>{m_name}</h3>
+                    <div class="value" style="color: {'#38bdf8' if m_name==best_model_name else '#94a3b8'};">PR-AUC: {res['pr_auc']:.3f}</div>
+                    <div style="margin-top: 10px; text-align: left; font-size: 0.9rem;">
+                        • <strong>Recall:</strong> {res['recall']*100:.1f}%<br>
+                        • <strong>Precision:</strong> {res['precision']*100:.1f}%<br>
+                        • <strong>F1-Score:</strong> {res['f1']:.3f}<br>
+                        • <strong>ROC-AUC:</strong> {res['roc_auc']:.3f}
+                    </div>
                 </div>
-            </div>
-            """, unsafe_allow_html=True)
+                """, unsafe_allow_html=True)
+            with pop_col:
+                st.write("")
+                st.write("")
+                st.write("")
+                with st.popover("ℹ️"):
+                    st.markdown("**Recall:** The percentage of actual fraud cases the model successfully catches. Higher recall = catches more real fraud.")
+                    st.markdown("**Precision:** Of the transactions the model flagged as fraud, how many were actually fraud? Higher precision = fewer false alarms.")
+                    st.markdown("**F1-Score:** A balanced score combining Precision and Recall.")
+                    st.markdown("**ROC-AUC:** Overall accuracy of distinguishing fraud from normal.")
             
     st.markdown("<br>", unsafe_allow_html=True)
     
