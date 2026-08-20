@@ -289,22 +289,27 @@ if st.session_state.current_page == "🏠 System Overview":
         best_pr = metrics_bundle['results'][best_model_name]['pr_auc']
         best_roc = metrics_bundle['results'][best_model_name]['roc_auc']
         st.markdown(f"""
-        <div class="metric-card">
-            <h3>Model PR-AUC <span title="Precision-Recall Area Under Curve: Measures how well the model catches fraud without making false alarms. Higher is better.">ℹ️</span></h3>
+        <div class="metric-card" style="margin-bottom: 5px;">
+            <h3>Model PR-AUC</h3>
             <div class="value" style="color: #10b981;">{best_pr:.3f}</div>
-            <div class="subtext">ROC-AUC <span title="Receiver Operating Characteristic: Overall accuracy of distinguishing fraud from normal.">ℹ️</span>: {best_roc:.3f}</div>
+            <div class="subtext">ROC-AUC: {best_roc:.3f}</div>
         </div>
         """, unsafe_allow_html=True)
+        with st.popover("ℹ️ Metrics Info", use_container_width=True):
+            st.markdown("**PR-AUC (Precision-Recall Area Under Curve):** Measures how well the model catches fraud without making false alarms. Higher is better.")
+            st.markdown("**ROC-AUC (Receiver Operating Characteristic):** Overall accuracy of distinguishing fraud from normal.")
     
     with col_m3:
         best_rec = metrics_bundle['results'][best_model_name]['recall']
         st.markdown(f"""
-        <div class="metric-card">
-            <h3>Fraud Recall Rate <span title="Recall: The percentage of actual fraud cases the model successfully catches. Higher recall = catches more real fraud.">ℹ️</span></h3>
+        <div class="metric-card" style="margin-bottom: 5px;">
+            <h3>Fraud Recall Rate</h3>
             <div class="value" style="color: #f59e0b;">{best_rec*100:.1f}%</div>
             <div class="subtext">Caught Fraud Cases</div>
         </div>
         """, unsafe_allow_html=True)
+        with st.popover("ℹ️ Recall Info", use_container_width=True):
+            st.markdown("**Recall:** The percentage of actual fraud cases the model successfully catches. Higher recall = catches more real fraud.")
     
     with col_m4:
         total_len = len(df_transactions) if df_transactions is not None else 50000
@@ -353,7 +358,8 @@ if st.session_state.current_page == "🔑 Login / API Access":
     st.markdown('''
     <style>
     /* Target the column containing the anchor */
-    div[data-testid="stColumn"]:has(.login-bg-anchor) {
+    /* Apply SVG background to the entire page behind the login form */
+    [data-testid="stAppViewContainer"]:has(.login-bg-anchor) {
         background-color: #050505;
         background-image: 
             url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAxMDAgMTAwJz48cGF0aCBkPSdNNTAgMTAgTDE1IDI1IEwxNSA1NSBDMTUgNzUgNTAgOTAgNTAgOTAgQzUwIDkwIDg1IDc1IDg1IDU1IEw4NSAyNSBaJyBmaWxsPSdub25lJyBzdHJva2U9JyMwMGYyZmUnIHN0cm9rZS13aWR0aD0nMicgb3BhY2l0eT0nMC4xNScvPjxwYXRoIGQ9J00zNSA1MCBMNDUgNjAgTDY1IDM1JyBmaWxsPSdub25lJyBzdHJva2U9JyMwMGYyZmUnIHN0cm9rZS13aWR0aD0nMicgb3BhY2l0eT0nMC4xNScvPjwvc3ZnPg=="),
@@ -389,7 +395,7 @@ if st.session_state.current_page == "🔑 Login / API Access":
     with col_l2:
         st.markdown("<div class='login-bg-anchor'></div>", unsafe_allow_html=True)
         st.markdown("<h3 style='text-align: center; color: #00f2fe; font-size: 1.5rem; text-transform: uppercase; letter-spacing: 0.1em;'>Developer Login</h3>", unsafe_allow_html=True)
-        st.markdown("<p style='text-align: center; color: #a0aec0; margin-bottom: 20px; font-family: monospace;'>Sign in to access your API keys and production dashboard.</p>", unsafe_allow_html=True)
+        st.markdown("<p style='text-align: center; color: #a0aec0; margin-bottom: 20px; font-family: monospace;'>Sign in to access the fraud detection dashboard.</p>", unsafe_allow_html=True)
         
         st.text_input("Work Email", placeholder="developer@company.com")
         st.text_input("Password", type="password", placeholder="••••••••")
