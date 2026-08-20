@@ -230,57 +230,6 @@ if 'logged_in' not in st.session_state:
 if 'current_page' not in st.session_state:
     st.session_state.current_page = "🏠 System Overview"
 
-# --- Header Section ---
-st.title("🛡️ AI Financial Fraud Detection & Risk Analysis System")
-st.caption("Real-Time Machine Learning Pipeline for Financial Transaction Risk Scoring, Class Imbalance Mitigation, & Explainable AI")
-
-st.markdown("**How this works:** This app analyzes transaction patterns (like location, time, and purchase history) to flag potentially fraudulent activity before it is approved.")
-st.markdown("---")
-
-# --- Top Banner Stats ---
-col_m1, col_m2, col_m3, col_m4 = st.columns(4)
-with col_m1:
-    st.markdown(f"""
-    <div class="metric-card">
-        <h3>Primary Model</h3>
-        <div class="value" style="color: #38bdf8;">{best_model_name}</div>
-        <div class="subtext">SMOTE Resampled</div>
-    </div>
-    """, unsafe_allow_html=True)
-
-with col_m2:
-    best_pr = metrics_bundle['results'][best_model_name]['pr_auc']
-    best_roc = metrics_bundle['results'][best_model_name]['roc_auc']
-    st.markdown(f"""
-    <div class="metric-card">
-        <h3>Model PR-AUC <span title="Precision-Recall Area Under Curve: Measures how well the model catches fraud without making false alarms. Higher is better.">ℹ️</span></h3>
-        <div class="value" style="color: #10b981;">{best_pr:.3f}</div>
-        <div class="subtext">ROC-AUC <span title="Receiver Operating Characteristic: Overall accuracy of distinguishing fraud from normal.">ℹ️</span>: {best_roc:.3f}</div>
-    </div>
-    """, unsafe_allow_html=True)
-
-with col_m3:
-    best_rec = metrics_bundle['results'][best_model_name]['recall']
-    st.markdown(f"""
-    <div class="metric-card">
-        <h3>Fraud Recall Rate <span title="Recall: The percentage of actual fraud cases the model successfully catches. Higher recall = catches more real fraud.">ℹ️</span></h3>
-        <div class="value" style="color: #f59e0b;">{best_rec*100:.1f}%</div>
-        <div class="subtext">Caught Fraud Cases</div>
-    </div>
-    """, unsafe_allow_html=True)
-
-with col_m4:
-    total_len = len(df_transactions) if df_transactions is not None else 50000
-    st.markdown(f"""
-    <div class="metric-card">
-        <h3>Dataset Size</h3>
-        <div class="value" style="color: #c084fc;">{total_len:,}</div>
-        <div class="subtext">Synthetic data matching real Sparkov schema</div>
-    </div>
-    """, unsafe_allow_html=True)
-
-st.markdown("<br>", unsafe_allow_html=True)
-
 # --- Full-Page Custom Navigation ---
 if not st.session_state.logged_in:
     nav_options = ["🏠 System Overview", "🔑 Login / API Access"]
@@ -318,6 +267,57 @@ if selected_page != st.session_state.current_page and selected_page != "🚪 Log
 # TAB OVERVIEW: SYSTEM OVERVIEW
 # ==========================================
 if st.session_state.current_page == "🏠 System Overview":
+    # --- Header Section ---
+    st.title("🛡️ AI Financial Fraud Detection & Risk Analysis System")
+    st.caption("Real-Time Machine Learning Pipeline for Financial Transaction Risk Scoring, Class Imbalance Mitigation, & Explainable AI")
+    
+    st.markdown("**How this works:** This app analyzes transaction patterns (like location, time, and purchase history) to flag potentially fraudulent activity before it is approved.")
+    st.markdown("---")
+    
+    # --- Top Banner Stats ---
+    col_m1, col_m2, col_m3, col_m4 = st.columns(4)
+    with col_m1:
+        st.markdown(f"""
+        <div class="metric-card">
+            <h3>Primary Model</h3>
+            <div class="value" style="color: #38bdf8;">{best_model_name}</div>
+            <div class="subtext">SMOTE Resampled</div>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    with col_m2:
+        best_pr = metrics_bundle['results'][best_model_name]['pr_auc']
+        best_roc = metrics_bundle['results'][best_model_name]['roc_auc']
+        st.markdown(f"""
+        <div class="metric-card">
+            <h3>Model PR-AUC <span title="Precision-Recall Area Under Curve: Measures how well the model catches fraud without making false alarms. Higher is better.">ℹ️</span></h3>
+            <div class="value" style="color: #10b981;">{best_pr:.3f}</div>
+            <div class="subtext">ROC-AUC <span title="Receiver Operating Characteristic: Overall accuracy of distinguishing fraud from normal.">ℹ️</span>: {best_roc:.3f}</div>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    with col_m3:
+        best_rec = metrics_bundle['results'][best_model_name]['recall']
+        st.markdown(f"""
+        <div class="metric-card">
+            <h3>Fraud Recall Rate <span title="Recall: The percentage of actual fraud cases the model successfully catches. Higher recall = catches more real fraud.">ℹ️</span></h3>
+            <div class="value" style="color: #f59e0b;">{best_rec*100:.1f}%</div>
+            <div class="subtext">Caught Fraud Cases</div>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    with col_m4:
+        total_len = len(df_transactions) if df_transactions is not None else 50000
+        st.markdown(f"""
+        <div class="metric-card">
+            <h3>Dataset Size</h3>
+            <div class="value" style="color: #c084fc;">{total_len:,}</div>
+            <div class="subtext">Synthetic data matching real Sparkov schema</div>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    st.markdown("<br>", unsafe_allow_html=True)
+    
     st.markdown("<h1 style='text-align: center; color: #00f2fe; margin-bottom: 30px; font-weight: 800; font-size: 3.8rem; text-shadow: 0 0 20px rgba(0,242,254,0.6); letter-spacing: -1px;'>Stop fraud before it reaches you.</h1>", unsafe_allow_html=True)
     
     col_o1, col_o2 = st.columns([1.2, 1], gap="large")
