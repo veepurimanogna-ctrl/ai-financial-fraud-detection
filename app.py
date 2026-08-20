@@ -353,7 +353,7 @@ if st.session_state.current_page == "🔑 Login / API Access":
     st.markdown('''
     <style>
     /* Target the column containing the anchor */
-    div[data-testid="column"]:has(.login-bg-anchor) {
+    div[data-testid="stColumn"]:has(.login-bg-anchor) {
         background-color: #050505;
         background-image: 
             url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAxMDAgMTAwJz48cGF0aCBkPSdNNTAgMTAgTDE1IDI1IEwxNSA1NSBDMTUgNzUgNTAgOTAgNTAgOTAgQzUwIDkwIDg1IDc1IDg1IDU1IEw4NSAyNSBaJyBmaWxsPSdub25lJyBzdHJva2U9JyMwMGYyZmUnIHN0cm9rZS13aWR0aD0nMicgb3BhY2l0eT0nMC4xNScvPjxwYXRoIGQ9J00zNSA1MCBMNDUgNjAgTDY1IDM1JyBmaWxsPSdub25lJyBzdHJva2U9JyMwMGYyZmUnIHN0cm9rZS13aWR0aD0nMicgb3BhY2l0eT0nMC4xNScvPjwvc3ZnPg=="),
