@@ -350,6 +350,37 @@ if st.session_state.current_page == "🏠 System Overview":
 # TAB LOGIN: LOGIN / API ACCESS
 # ==========================================
 if st.session_state.current_page == "🔑 Login / API Access":
+    st.markdown("""
+    <style>
+    div[data-testid="column"]:nth-child(2) {
+        background-color: #050505;
+        background-image: 
+            url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M50 10 L15 25 L15 55 C15 75 50 90 50 90 C50 90 85 75 85 55 L85 25 Z' fill='none' stroke='%2300f2fe' stroke-width='2' opacity='0.15'/><path d='M35 50 L45 60 L65 35' fill='none' stroke='%2300f2fe' stroke-width='2' opacity='0.15'/></svg>"),
+            url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'><path d='M20 40 L80 40 L80 100 L120 100' fill='none' stroke='%2300f2fe' stroke-width='1.5' opacity='0.4'/><circle cx='20' cy='40' r='4' fill='%2300f2fe' opacity='0.6'/><circle cx='120' cy='100' r='4' fill='%2300f2fe' opacity='0.6'/><path d='M380 60 L300 60 L300 130 L260 130' fill='none' stroke='%2300f2fe' stroke-width='1.5' opacity='0.4'/><circle cx='380' cy='60' r='4' fill='%2300f2fe' opacity='0.6'/><circle cx='260' cy='130' r='4' fill='%2300f2fe' opacity='0.6'/><path d='M30 240 L100 240 L100 160 L140 160' fill='none' stroke='%2300f2fe' stroke-width='1.5' opacity='0.4'/><circle cx='30' cy='240' r='4' fill='%2300f2fe' opacity='0.6'/><circle cx='140' cy='160' r='4' fill='%2300f2fe' opacity='0.6'/><path d='M370 260 L280 260 L280 180 L240 180' fill='none' stroke='%2300f2fe' stroke-width='1.5' opacity='0.4'/><circle cx='370' cy='260' r='4' fill='%2300f2fe' opacity='0.6'/><circle cx='240' cy='180' r='4' fill='%2300f2fe' opacity='0.6'/></svg>"),
+            linear-gradient(rgba(14, 42, 56, 0.4) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(14, 42, 56, 0.4) 1px, transparent 1px),
+            linear-gradient(135deg, #050505, #0a1622);
+        background-size: 
+            250px 250px, 
+            100% 100%, 
+            80px 80px, 
+            80px 80px, 
+            100% 100%;
+        background-position: 
+            center center,
+            center center,
+            top left,
+            top left,
+            center center;
+        background-repeat: no-repeat, no-repeat, repeat, repeat, no-repeat;
+        border-radius: 12px;
+        padding: 30px;
+        border: 1px solid rgba(0, 242, 254, 0.1);
+        box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.5);
+    }
+    </style>
+    """, unsafe_allow_html=True)
+    
     st.markdown("<br>", unsafe_allow_html=True)
     col_l1, col_l2, col_l3 = st.columns([1, 2, 1])
     with col_l2:
