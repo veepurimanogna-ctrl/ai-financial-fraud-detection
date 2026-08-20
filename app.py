@@ -68,9 +68,11 @@ st.markdown("""
     
     .metric-card .value {
         color: #ffffff;
-        font-size: 2.2rem;
+        font-size: 1.6rem;
         font-weight: 800;
         text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+        word-wrap: break-word;
+        line-height: 1.2;
     }
 
     .metric-card .subtext {
