@@ -38,6 +38,39 @@ st.markdown("""
         background-color: transparent !important;
     }
 
+    /* 🔘 Custom Sidebar Navigation Radio Buttons */
+    div[role="radiogroup"] label {
+        padding: 12px 16px !important;
+        border-radius: 8px !important;
+        margin-bottom: 4px !important;
+        transition: all 0.2s ease !important;
+        cursor: pointer !important;
+    }
+
+    /* Hide the circular radio dot completely */
+    div[role="radiogroup"] label > div:first-child {
+        display: none !important;
+    }
+
+    /* Style the Selected Button using the teal accent */
+    div[role="radiogroup"] label:has(input:checked) {
+        background-color: rgba(0, 255, 255, 0.15) !important;
+        border: 1px solid rgba(0, 255, 255, 0.3) !important;
+        box-shadow: 0 0 10px rgba(0, 255, 255, 0.1) !important;
+    }
+
+    /* Make selected text bolder and cyan */
+    div[role="radiogroup"] label:has(input:checked) p {
+        color: #00f2fe !important;
+        font-weight: 800 !important;
+        text-shadow: 0 0 5px rgba(0, 242, 254, 0.3) !important;
+    }
+
+    /* Hover effect for unselected buttons */
+    div[role="radiogroup"] label:not(:has(input:checked)):hover {
+        background-color: rgba(255, 255, 255, 0.05) !important;
+    }
+
     /* 🛡️ Glassmorphism Metric Cards */
     .metric-card {
         background: rgba(10, 15, 20, 0.65);
@@ -68,10 +101,11 @@ st.markdown("""
     
     .metric-card .value {
         color: #ffffff;
-        font-size: 1.6rem;
+        font-size: 1.4rem;
         font-weight: 800;
         text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
-        word-wrap: break-word;
+        word-break: normal;
+        overflow-wrap: break-word;
         line-height: 1.2;
     }
 
