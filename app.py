@@ -350,13 +350,14 @@ if st.session_state.current_page == "🏠 System Overview":
 # TAB LOGIN: LOGIN / API ACCESS
 # ==========================================
 if st.session_state.current_page == "🔑 Login / API Access":
-    st.markdown("""
+    st.markdown('''
     <style>
-    div[data-testid="column"]:nth-child(2) {
+    /* Target the column containing the anchor */
+    div[data-testid="column"]:has(.login-bg-anchor) {
         background-color: #050505;
         background-image: 
-            url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M50 10 L15 25 L15 55 C15 75 50 90 50 90 C50 90 85 75 85 55 L85 25 Z' fill='none' stroke='%2300f2fe' stroke-width='2' opacity='0.15'/><path d='M35 50 L45 60 L65 35' fill='none' stroke='%2300f2fe' stroke-width='2' opacity='0.15'/></svg>"),
-            url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'><path d='M20 40 L80 40 L80 100 L120 100' fill='none' stroke='%2300f2fe' stroke-width='1.5' opacity='0.4'/><circle cx='20' cy='40' r='4' fill='%2300f2fe' opacity='0.6'/><circle cx='120' cy='100' r='4' fill='%2300f2fe' opacity='0.6'/><path d='M380 60 L300 60 L300 130 L260 130' fill='none' stroke='%2300f2fe' stroke-width='1.5' opacity='0.4'/><circle cx='380' cy='60' r='4' fill='%2300f2fe' opacity='0.6'/><circle cx='260' cy='130' r='4' fill='%2300f2fe' opacity='0.6'/><path d='M30 240 L100 240 L100 160 L140 160' fill='none' stroke='%2300f2fe' stroke-width='1.5' opacity='0.4'/><circle cx='30' cy='240' r='4' fill='%2300f2fe' opacity='0.6'/><circle cx='140' cy='160' r='4' fill='%2300f2fe' opacity='0.6'/><path d='M370 260 L280 260 L280 180 L240 180' fill='none' stroke='%2300f2fe' stroke-width='1.5' opacity='0.4'/><circle cx='370' cy='260' r='4' fill='%2300f2fe' opacity='0.6'/><circle cx='240' cy='180' r='4' fill='%2300f2fe' opacity='0.6'/></svg>"),
+            url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAxMDAgMTAwJz48cGF0aCBkPSdNNTAgMTAgTDE1IDI1IEwxNSA1NSBDMTUgNzUgNTAgOTAgNTAgOTAgQzUwIDkwIDg1IDc1IDg1IDU1IEw4NSAyNSBaJyBmaWxsPSdub25lJyBzdHJva2U9JyMwMGYyZmUnIHN0cm9rZS13aWR0aD0nMicgb3BhY2l0eT0nMC4xNScvPjxwYXRoIGQ9J00zNSA1MCBMNDUgNjAgTDY1IDM1JyBmaWxsPSdub25lJyBzdHJva2U9JyMwMGYyZmUnIHN0cm9rZS13aWR0aD0nMicgb3BhY2l0eT0nMC4xNScvPjwvc3ZnPg=="),
+            url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCA0MDAgMzAwJz48cGF0aCBkPSdNMjAgNDAgTDgwIDQwIEw4MCAxMDAgTDEyMCAxMDAnIGZpbGw9J25vbmUnIHN0cm9rZT0nIzAwZjJmZScgc3Ryb2tlLXdpZHRoPScxLjUnIG9wYWNpdHk9JzAuNCcvPjxjaXJjbGUgY3g9JzIwJyBjeT0nNDAnIHI9JzQnIGZpbGw9JyMwMGYyZmUnIG9wYWNpdHk9JzAuNicvPjxjaXJjbGUgY3g9JzEyMCcgY3k9JzEwMCcgcj0nNCcgZmlsbD0nIzAwZjJmZScgb3BhY2l0eT0nMC42Jy8+PHBhdGggZD0nTTM4MCA2MCBMMzAwIDYwIEwzMDAgMTMwIEwyNjAgMTMwJyBmaWxsPSdub25lJyBzdHJva2U9JyMwMGYyZmUnIHN0cm9rZS13aWR0aD0nMS41JyBvcGFjaXR5PScwLjQnLz48Y2lyY2xlIGN4PSczODAnIGN5PSc2MCcgcj0nNCcgZmlsbD0nIzAwZjJmZScgb3BhY2l0eT0nMC42Jy8+PGNpcmNsZSBjeD0nMjYwJyBjeT0nMTMwJyByPSc0JyBmaWxsPScjMDBmMmZlJyBvcGFjaXR5PScwLjYnLz48cGF0aCBkPSdNMzAgMjQwIEwxMDAgMjQwIEwxMDAgMTYwIEwxNDAgMTYwJyBmaWxsPSdub25lJyBzdHJva2U9JyMwMGYyZmUnIHN0cm9rZS13aWR0aD0nMS41JyBvcGFjaXR5PScwLjQnLz48Y2lyY2xlIGN4PSczMCcgY3k9JzI0MCcgcj0nNCcgZmlsbD0nIzAwZjJmZScgb3BhY2l0eT0nMC42Jy8+PGNpcmNsZSBjeD0nMTQwJyBjeT0nMTYwJyByPSc0JyBmaWxsPScjMDBmMmZlJyBvcGFjaXR5PScwLjYnLz48cGF0aCBkPSdNMzcwIDI2MCBMMjgwIDI2MCBMMjgwIDE4MCBMMjQwIDE4MCcgZmlsbD0nbm9uZScgc3Ryb2tlPScjMDBmMmZlJyBzdHJva2Utd2lkdGg9JzEuNScgb3BhY2l0eT0nMC40Jy8+PGNpcmNsZSBjeD0nMzcwJyBjeT0nMjYwJyByPSc0JyBmaWxsPScjMDBmMmZlJyBvcGFjaXR5PScwLjYnLz48Y2lyY2xlIGN4PScyNDAnIGN5PScxODAnIHI9JzQnIGZpbGw9JyMwMGYyZmUnIG9wYWNpdHk9JzAuNicvPjwvc3ZnPg=="),
             linear-gradient(rgba(14, 42, 56, 0.4) 1px, transparent 1px),
             linear-gradient(90deg, rgba(14, 42, 56, 0.4) 1px, transparent 1px),
             linear-gradient(135deg, #050505, #0a1622);
@@ -373,20 +374,22 @@ if st.session_state.current_page == "🔑 Login / API Access":
             top left,
             center center;
         background-repeat: no-repeat, no-repeat, repeat, repeat, no-repeat;
+        
+        /* Metric card styling integrated directly into the column */
+        border: 1px solid rgba(0, 255, 255, 0.15);
         border-radius: 12px;
         padding: 30px;
-        border: 1px solid rgba(0, 242, 254, 0.1);
-        box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.5);
+        box-shadow: 0 0 15px rgba(0, 255, 255, 0.05);
     }
     </style>
-    """, unsafe_allow_html=True)
+    ''', unsafe_allow_html=True)
     
-    st.markdown("<br>", unsafe_allow_html=True)
+    st.markdown("<br><br>", unsafe_allow_html=True)
     col_l1, col_l2, col_l3 = st.columns([1, 2, 1])
     with col_l2:
-        st.markdown("<div class='metric-card'>", unsafe_allow_html=True)
-        st.markdown("<h3 style='text-align: center; color: #00f2fe; font-size: 1.5rem;'>Developer Login</h3>", unsafe_allow_html=True)
-        st.markdown("<p style='text-align: center; color: #a0aec0; margin-bottom: 20px;'>Sign in to access your API keys and production dashboard.</p>", unsafe_allow_html=True)
+        st.markdown("<div class='login-bg-anchor'></div>", unsafe_allow_html=True)
+        st.markdown("<h3 style='text-align: center; color: #00f2fe; font-size: 1.5rem; text-transform: uppercase; letter-spacing: 0.1em;'>Developer Login</h3>", unsafe_allow_html=True)
+        st.markdown("<p style='text-align: center; color: #a0aec0; margin-bottom: 20px; font-family: monospace;'>Sign in to access your API keys and production dashboard.</p>", unsafe_allow_html=True)
         
         st.text_input("Work Email", placeholder="developer@company.com")
         st.text_input("Password", type="password", placeholder="••••••••")
@@ -395,7 +398,6 @@ if st.session_state.current_page == "🔑 Login / API Access":
             st.session_state.logged_in = True
             st.session_state.current_page = "⚡ Live Risk Simulator"
             st.rerun()
-        st.markdown("</div>", unsafe_allow_html=True)
 
 # ==========================================
 # TAB 1: LIVE RISK SIMULATOR
