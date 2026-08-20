@@ -53,30 +53,10 @@ def explain_transaction_risk(txn_dict, pipeline_bundle, risk_score):
             'impact_weight': -0.15
         })
 
-    # 2. Hourly / Daily Velocity Spikes
-    if v1h >= 4:
-        drivers.append({
-            'factor': 'Critical Velocity Spike (Carding Risk)',
-            'detail': f'{v1h} transactions initiated in the last 60 minutes',
-            'impact_weight': 0.40,
-            'category': 'High Impact'
-        })
-    elif v1h >= 2:
-        drivers.append({
-            'factor': 'High Hourly Transaction Frequency',
-            'detail': f'{v1h} transactions initiated in past hour',
-            'impact_weight': 0.18,
-            'category': 'Medium Impact'
-        })
-    else:
-        mitigators.append({
-            'factor': 'Low Transaction Velocity',
-            'detail': 'Single isolated transaction in recent hour',
-            'impact_weight': -0.10
-        })
+    # 2. Hourly / Daily Velocity Spikes (Removed - Not collected in app)
 
     # 3. Night & High Risk Merchant Combination
-    high_risk_merchants = ['Crypto Exchange', 'Money Transfer', 'Gambling', 'Luxury Goods']
+    high_risk_merchants = ['travel', 'shopping_net', 'misc_net']
     if is_night == 1 and merchant in high_risk_merchants:
         drivers.append({
             'factor': 'Late-Night High-Risk Merchant',
@@ -92,57 +72,22 @@ def explain_transaction_risk(txn_dict, pipeline_bundle, risk_score):
             'category': 'Medium Impact'
         })
 
-    # 4. Location & Card Present Factors
-    if location == 'Foreign High Risk' and card_present == 0:
+    # 4. Geographic Distance Rule
+    if dist > 100:
         drivers.append({
-            'factor': 'Overseas Card-Not-Present Transaction',
-            'detail': f'Online/Mobile transaction originating from high-risk jurisdiction ({location})',
-            'impact_weight': 0.35,
-            'category': 'High Impact'
-        })
-    elif location != 'Domestic':
-        drivers.append({
-            'factor': 'Foreign Country Location',
-            'detail': f'Transaction location ({location}) differs from customer home country',
-            'impact_weight': 0.18,
-            'category': 'Medium Impact'
-        })
-    else:
-        mitigators.append({
-            'factor': 'Domestic Location',
-            'detail': 'Transaction matches customer home country',
-            'impact_weight': -0.12
-        })
-
-    if card_present == 1:
-        mitigators.append({
-            'factor': 'Physical Card Present',
-            'detail': f'Terminal authenticated physical card at {device}',
-            'impact_weight': -0.20
-        })
-
-    # 5. IP Risk & Failed Auth Attempts
-    if ip_risk >= 0.75:
-        drivers.append({
-            'factor': 'Suspicious Anonymized IP / Proxy',
-            'detail': f'Network IP risk score is highly suspicious ({ip_risk:.2f})',
+            'factor': 'Long Distance From Home',
+            'detail': f'Transaction occurred {dist:,.1f} km away from customer home',
             'impact_weight': 0.25,
             'category': 'High Impact'
         })
-    elif ip_risk <= 0.20:
+    elif dist < 20:
         mitigators.append({
-            'factor': 'Clean Network Connection',
-            'detail': f'IP risk score is clean ({ip_risk:.2f})',
-            'impact_weight': -0.10
+            'factor': 'Nearby Merchant Location',
+            'detail': f'Transaction occurred locally ({dist:,.1f} km from home)',
+            'impact_weight': -0.15
         })
 
-    if failed >= 3:
-        drivers.append({
-            'factor': 'Multiple Failed Login / Auth Attempts',
-            'detail': f'{failed} failed passcode/PIN attempts recorded in last 24 hours',
-            'impact_weight': 0.30,
-            'category': 'High Impact'
-        })
+    # 5. Location, Card Present, IP Risk, Failed Auth (Removed - Not collected in app)
 
     # Risk Assessment Categorization
     if risk_score >= 0.70:
