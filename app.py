@@ -288,38 +288,28 @@ if st.session_state.current_page == "🏠 System Overview":
     with col_m2:
         best_pr = metrics_bundle['results'][best_model_name]['pr_auc']
         best_roc = metrics_bundle['results'][best_model_name]['roc_auc']
-        m2_c1, m2_c2 = st.columns([5, 1])
-        with m2_c1:
-            st.markdown(f"""
-            <div class="metric-card">
-                <h3>Model PR-AUC</h3>
-                <div class="value" style="color: #10b981;">{best_pr:.3f}</div>
-                <div class="subtext">ROC-AUC: {best_roc:.3f}</div>
-            </div>
-            """, unsafe_allow_html=True)
-        with m2_c2:
-            st.write("") # Spacing
-            st.write("")
-            with st.popover("ℹ️"):
-                st.markdown("**PR-AUC (Precision-Recall Area Under Curve):** Measures how well the model catches fraud without making false alarms. Higher is better.")
-                st.markdown("**ROC-AUC (Receiver Operating Characteristic):** Overall accuracy of distinguishing fraud from normal.")
+        st.markdown(f"""
+        <div class="metric-card">
+            <h3>Model PR-AUC</h3>
+            <div class="value" style="color: #10b981;">{best_pr:.3f}</div>
+            <div class="subtext">ROC-AUC: {best_roc:.3f}</div>
+        </div>
+        """, unsafe_allow_html=True)
+        with st.popover("ℹ️ What is PR-AUC?", use_container_width=True):
+            st.markdown("**PR-AUC (Precision-Recall Area Under Curve):** Measures how well the model catches fraud without making false alarms. Higher is better.")
+            st.markdown("**ROC-AUC (Receiver Operating Characteristic):** Overall accuracy of distinguishing fraud from normal.")
     
     with col_m3:
         best_rec = metrics_bundle['results'][best_model_name]['recall']
-        m3_c1, m3_c2 = st.columns([5, 1])
-        with m3_c1:
-            st.markdown(f"""
-            <div class="metric-card">
-                <h3>Fraud Recall Rate</h3>
-                <div class="value" style="color: #f59e0b;">{best_rec*100:.1f}%</div>
-                <div class="subtext">Caught Fraud Cases</div>
-            </div>
-            """, unsafe_allow_html=True)
-        with m3_c2:
-            st.write("") # Spacing
-            st.write("")
-            with st.popover("ℹ️"):
-                st.markdown("**Recall:** The percentage of actual fraud cases the model successfully catches. Higher recall = catches more real fraud.")
+        st.markdown(f"""
+        <div class="metric-card">
+            <h3>Fraud Recall Rate</h3>
+            <div class="value" style="color: #f59e0b;">{best_rec*100:.1f}%</div>
+            <div class="subtext">Caught Fraud Cases</div>
+        </div>
+        """, unsafe_allow_html=True)
+        with st.popover("ℹ️ What is Recall?", use_container_width=True):
+            st.markdown("**Recall:** The percentage of actual fraud cases the model successfully catches. Higher recall = catches more real fraud.")
     
     with col_m4:
         total_len = len(df_transactions) if df_transactions is not None else 50000
@@ -671,29 +661,23 @@ if st.session_state.current_page == "📊 Model Performance & Metrics":
     for i, (m_name, res) in enumerate(results.items()):
         col = [c1, c2, c3][i]
         with col:
-            mc_col, pop_col = st.columns([6, 1])
-            with mc_col:
-                st.markdown(f"""
-                <div class="metric-card">
-                    <h3>{m_name}</h3>
-                    <div class="value" style="color: {'#38bdf8' if m_name==best_model_name else '#94a3b8'};">PR-AUC: {res['pr_auc']:.3f}</div>
-                    <div style="margin-top: 10px; text-align: left; font-size: 0.9rem;">
-                        • <strong>Recall:</strong> {res['recall']*100:.1f}%<br>
-                        • <strong>Precision:</strong> {res['precision']*100:.1f}%<br>
-                        • <strong>F1-Score:</strong> {res['f1']:.3f}<br>
-                        • <strong>ROC-AUC:</strong> {res['roc_auc']:.3f}
-                    </div>
+            st.markdown(f"""
+            <div class="metric-card">
+                <h3>{m_name}</h3>
+                <div class="value" style="color: {'#38bdf8' if m_name==best_model_name else '#94a3b8'};">PR-AUC: {res['pr_auc']:.3f}</div>
+                <div style="margin-top: 10px; text-align: left; font-size: 0.9rem;">
+                    • <strong>Recall:</strong> {res['recall']*100:.1f}%<br>
+                    • <strong>Precision:</strong> {res['precision']*100:.1f}%<br>
+                    • <strong>F1-Score:</strong> {res['f1']:.3f}<br>
+                    • <strong>ROC-AUC:</strong> {res['roc_auc']:.3f}
                 </div>
-                """, unsafe_allow_html=True)
-            with pop_col:
-                st.write("")
-                st.write("")
-                st.write("")
-                with st.popover("ℹ️"):
-                    st.markdown("**Recall:** The percentage of actual fraud cases the model successfully catches. Higher recall = catches more real fraud.")
-                    st.markdown("**Precision:** Of the transactions the model flagged as fraud, how many were actually fraud? Higher precision = fewer false alarms.")
-                    st.markdown("**F1-Score:** A balanced score combining Precision and Recall.")
-                    st.markdown("**ROC-AUC:** Overall accuracy of distinguishing fraud from normal.")
+            </div>
+            """, unsafe_allow_html=True)
+            with st.popover("ℹ️ Metrics Info", use_container_width=True):
+                st.markdown("**Recall:** The percentage of actual fraud cases the model successfully catches. Higher recall = catches more real fraud.")
+                st.markdown("**Precision:** Of the transactions the model flagged as fraud, how many were actually fraud? Higher precision = fewer false alarms.")
+                st.markdown("**F1-Score:** A balanced score combining Precision and Recall.")
+                st.markdown("**ROC-AUC:** Overall accuracy of distinguishing fraud from normal.")
             
     st.markdown("<br>", unsafe_allow_html=True)
     
