@@ -18,149 +18,109 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# --- Theme Configuration ---
-if "theme_mode" not in st.session_state:
-    st.session_state.theme_mode = "dark"
-
-tm = st.session_state.theme_mode
-
-theme = {
-    'bg_main': '#050505' if tm == 'dark' else '#F0F2F5',
-    'bg_grad': '#112233' if tm == 'dark' else '#e2e8f0',
-    'text_light': '#e0e0e0' if tm == 'dark' else '#1e293b',
-    'cyan_15': 'rgba(0, 255, 255, 0.15)' if tm == 'dark' else 'rgba(0, 242, 254, 0.3)',
-    'cyan_30': 'rgba(0, 255, 255, 0.3)' if tm == 'dark' else 'rgba(0, 242, 254, 0.5)',
-    'cyan_10': 'rgba(0, 255, 255, 0.1)' if tm == 'dark' else 'rgba(0, 242, 254, 0.2)',
-    'text_main': '#ffffff' if tm == 'dark' else '#0f172a',
-    'border': 'rgba(255, 255, 255, 0.1)' if tm == 'dark' else 'rgba(0, 0, 0, 0.1)',
-    'card_bg': 'rgba(20, 25, 35, 0.7)' if tm == 'dark' else 'rgba(255, 255, 255, 0.85)',
-    'text_muted': '#94a3b8' if tm == 'dark' else '#475569',
-    'table_header': '#112233' if tm == 'dark' else '#cbd5e1',
-    'blue': '#38bdf8' if tm == 'dark' else '#0ea5e9',
-    'green': '#10b981' if tm == 'dark' else '#059669',
-    'orange': '#f59e0b' if tm == 'dark' else '#d97706',
-    'purple': '#c084fc' if tm == 'dark' else '#9333ea',
-    'red_bg': '#ffb3c6' if tm == 'dark' else '#fee2e2',
-    'red_border': '#ff0844' if tm == 'dark' else '#ef4444',
-    'red_text': '#ff0844' if tm == 'dark' else '#dc2626',
-    'green_bg': '#a7f3d0' if tm == 'dark' else '#d1fae5',
-    'green_border': '#0ba360' if tm == 'dark' else '#10b981',
-    'green_text': '#0ba360' if tm == 'dark' else '#059669',
-    'orange_text': '#ffaa00' if tm == 'dark' else '#d97706',
-    'plotly_template': 'plotly_dark' if tm == 'dark' else 'plotly_white',
-    'login_bg': 'rgba(10, 15, 20, 0.85)' if tm == 'dark' else 'rgba(255, 255, 255, 0.9)'
-}
-
-# --- Theme Toggle Button ---
-st.markdown('<div class="theme-toggle-anchor"></div>', unsafe_allow_html=True)
-if st.button("☀️" if tm == "dark" else "🌙", key="theme_toggle"):
-    st.session_state.theme_mode = "light" if tm == "dark" else "dark"
-    st.rerun()
-
-
 # --- Custom Dark Theme CSS ---
-st.markdown(f"""
+st.markdown("""
 <style>
     /* 🤖 Cyber-Sec Neon Theme Setup */
     @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;800&display=swap');
 
-    html, body, [class*="css"] {{
+    html, body, [class*="css"] {
         font-family: 'Outfit', sans-serif;
-    }}
+    }
 
-    .main {{
-        background-color: {theme['bg_main']};
-        color: {theme['text_light']};
-        background-image: radial-gradient(circle at 50% 0%, {theme['bg_grad']} 0%, {theme['bg_main']} 70%);
-    }}
+    .main {
+        background-color: #050505;
+        color: #e0e0e0;
+        background-image: radial-gradient(circle at 50% 0%, #112233 0%, #050505 70%);
+    }
     
-    .stAppHeader {{
+    .stAppHeader {
         background-color: transparent !important;
-    }}
+    }
 
     /* 🔘 Custom Sidebar Navigation Radio Buttons */
-    div[role="radiogroup"] label {{
+    div[role="radiogroup"] label {
         padding: 12px 16px !important;
         border-radius: 8px !important;
         margin-bottom: 4px !important;
         transition: all 0.2s ease !important;
         cursor: pointer !important;
-    }}
+    }
 
     /* Hide the circular radio dot completely */
-    div[role="radiogroup"] label > div:first-child {{
+    div[role="radiogroup"] label > div:first-child {
         display: none !important;
-    }}
+    }
 
     /* Style the Selected Button using the teal accent */
-    div[role="radiogroup"] label:has(input:checked) {{
-        background-color: {theme['cyan_15']} !important;
-        border: 1px solid {theme['cyan_30']} !important;
-        box-shadow: 0 0 10px {theme['cyan_10']} !important;
-    }}
+    div[role="radiogroup"] label:has(input:checked) {
+        background-color: rgba(0, 255, 255, 0.15) !important;
+        border: 1px solid rgba(0, 255, 255, 0.3) !important;
+        box-shadow: 0 0 10px rgba(0, 255, 255, 0.1) !important;
+    }
 
     /* Make selected text bolder and cyan */
-    div[role="radiogroup"] label:has(input:checked) p {{
+    div[role="radiogroup"] label:has(input:checked) p {
         color: #00f2fe !important;
         font-weight: 800 !important;
         text-shadow: 0 0 5px rgba(0, 242, 254, 0.3) !important;
-    }}
+    }
 
     /* Hover effect for unselected buttons */
-    div[role="radiogroup"] label:not(:has(input:checked)):hover {{
+    div[role="radiogroup"] label:not(:has(input:checked)):hover {
         background-color: rgba(255, 255, 255, 0.05) !important;
-    }}
+    }
 
     /* 🛡️ Glassmorphism Metric Cards */
-    .metric-card {{
+    .metric-card {
         background: rgba(10, 15, 20, 0.65);
         backdrop-filter: blur(12px);
         -webkit-backdrop-filter: blur(12px);
-        border: 1px solid {theme['cyan_15']};
+        border: 1px solid rgba(0, 255, 255, 0.15);
         border-radius: 12px;
         padding: 20px;
         text-align: center;
         box-shadow: 0 0 15px rgba(0, 255, 255, 0.05);
         transition: transform 0.2s, box-shadow 0.2s;
-    }}
+    }
     
-    .metric-card:hover {{
+    .metric-card:hover {
         transform: translateY(-2px);
-        box-shadow: 0 0 20px {theme['cyan_15']};
-        border: 1px solid {theme['cyan_30']};
-    }}
+        box-shadow: 0 0 20px rgba(0, 255, 255, 0.15);
+        border: 1px solid rgba(0, 255, 255, 0.3);
+    }
     
-    .metric-card h3 {{
+    .metric-card h3 {
         color: #00f2fe;
         font-size: 0.9rem;
         margin-bottom: 8px;
         text-transform: uppercase;
         letter-spacing: 0.1em;
         text-shadow: 0 0 8px rgba(0, 242, 254, 0.3);
-    }}
+    }
     
-    .metric-card .value {{
-        color: {theme['text_main']};
+    .metric-card .value {
+        color: #ffffff;
         font-size: 1.4rem;
         font-weight: 800;
         text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
         word-break: normal;
         overflow-wrap: break-word;
         line-height: 1.2;
-    }}
+    }
 
-    .metric-card .subtext {{
+    .metric-card .subtext {
         color: #a0aec0;
         font-size: 0.85rem;
         margin-top: 4px;
         font-family: monospace;
-    }}
+    }
 
     /* 🚨 Neon Risk Badges */
-    .badge-high {{
+    .badge-high {
         background-color: rgba(255, 8, 68, 0.15);
-        color: {theme['red_text']};
-        border: 1px solid {theme['red_border']};
+        color: #ff0844;
+        border: 1px solid #ff0844;
         padding: 8px 18px;
         border-radius: 4px;
         font-weight: 800;
@@ -170,11 +130,11 @@ st.markdown(f"""
         letter-spacing: 2px;
         box-shadow: 0 0 15px rgba(255, 8, 68, 0.4);
         text-shadow: 0 0 8px rgba(255, 8, 68, 0.5);
-    }}
+    }
     
-    .badge-medium {{
+    .badge-medium {
         background-color: rgba(255, 170, 0, 0.15);
-        color: {theme['orange_text']};
+        color: #ffaa00;
         border: 1px solid #ffaa00;
         padding: 8px 18px;
         border-radius: 4px;
@@ -184,12 +144,12 @@ st.markdown(f"""
         text-transform: uppercase;
         letter-spacing: 2px;
         box-shadow: 0 0 15px rgba(255, 170, 0, 0.3);
-    }}
+    }
 
-    .badge-low {{
+    .badge-low {
         background-color: rgba(11, 163, 96, 0.15);
-        color: {theme['green_text']};
-        border: 1px solid {theme['green_border']};
+        color: #0ba360;
+        border: 1px solid #0ba360;
         padding: 8px 18px;
         border-radius: 4px;
         font-weight: 800;
@@ -198,29 +158,29 @@ st.markdown(f"""
         text-transform: uppercase;
         letter-spacing: 2px;
         box-shadow: 0 0 15px rgba(11, 163, 96, 0.3);
-    }}
+    }
 
     /* 📊 Explanation & Terminal Boxes */
-    .driver-box {{
+    .driver-box {
         background-color: rgba(255, 8, 68, 0.08);
         border-left: 3px solid #ff0844;
         padding: 12px;
         margin-bottom: 10px;
         font-family: monospace;
         color: #ffb3c6;
-    }}
+    }
 
-    .mitigator-box {{
+    .mitigator-box {
         background-color: rgba(11, 163, 96, 0.08);
         border-left: 3px solid #0ba360;
         padding: 12px;
         margin-bottom: 10px;
         font-family: monospace;
         color: #a7f3d0;
-    }}
+    }
 
     /* ⚡ Action Box */
-    .action-box {{
+    .action-box {
         background: rgba(0, 242, 254, 0.05);
         border: 1px dashed #00f2fe;
         border-radius: 4px;
@@ -231,34 +191,7 @@ st.markdown(f"""
         color: #00f2fe;
         text-transform: uppercase;
         letter-spacing: 1px;
-    }}
-    
-    /* 🌓 Floating Theme Toggle */
-    [data-testid="stVerticalBlock"]:has(> .theme-toggle-anchor), div:has(> .theme-toggle-anchor) {{
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        z-index: 99999;
-    }}
-    
-    /* Target the button itself inside the anchor's container */
-    [data-testid="stVerticalBlock"]:has(> .theme-toggle-anchor) button, div:has(> .theme-toggle-anchor) button {{
-        background-color: {theme['card_bg']};
-        border: 1px solid {theme['cyan_30']};
-        border-radius: 50%;
-        width: 50px;
-        height: 50px;
-        font-size: 24px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-        transition: all 0.3s ease;
-    }}
-    
-    [data-testid="stVerticalBlock"]:has(> .theme-toggle-anchor) button:hover, div:has(> .theme-toggle-anchor) button:hover {{
-        transform: scale(1.1);
-        box-shadow: 0 0 20px {theme['cyan_30']};
-        border-color: #00f2fe;
-    }}
-    
+    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -347,7 +280,7 @@ if st.session_state.current_page == "🏠 System Overview":
         st.markdown(f"""
         <div class="metric-card">
             <h3>Primary Model</h3>
-            <div class="value" style="color: {theme['blue']};">{best_model_name}</div>
+            <div class="value" style="color: #38bdf8;">{best_model_name}</div>
             <div class="subtext">SMOTE Resampled</div>
         </div>
         """, unsafe_allow_html=True)
@@ -358,7 +291,7 @@ if st.session_state.current_page == "🏠 System Overview":
         st.markdown(f"""
         <div class="metric-card">
             <h3>Model PR-AUC</h3>
-            <div class="value" style="color: {theme['green']};">{best_pr:.3f}</div>
+            <div class="value" style="color: #10b981;">{best_pr:.3f}</div>
             <div class="subtext">ROC-AUC: {best_roc:.3f}</div>
         </div>
         """, unsafe_allow_html=True)
@@ -371,7 +304,7 @@ if st.session_state.current_page == "🏠 System Overview":
         st.markdown(f"""
         <div class="metric-card">
             <h3>Fraud Recall Rate</h3>
-            <div class="value" style="color: {theme['orange']};">{best_rec*100:.1f}%</div>
+            <div class="value" style="color: #f59e0b;">{best_rec*100:.1f}%</div>
             <div class="subtext">Caught Fraud Cases</div>
         </div>
         """, unsafe_allow_html=True)
@@ -383,7 +316,7 @@ if st.session_state.current_page == "🏠 System Overview":
         st.markdown(f"""
         <div class="metric-card">
             <h3>Dataset Size</h3>
-            <div class="value" style="color: {theme['purple']};">{total_len:,}</div>
+            <div class="value" style="color: #c084fc;">{total_len:,}</div>
             <div class="subtext">Synthetic data matching real Sparkov schema</div>
         </div>
         """, unsafe_allow_html=True)
@@ -731,7 +664,7 @@ if st.session_state.current_page == "📊 Model Performance & Metrics":
             st.markdown(f"""
             <div class="metric-card">
                 <h3>{m_name}</h3>
-                <div class="value" style="color: {theme['blue'] if m_name==best_model_name else theme['text_muted']};">PR-AUC: {res['pr_auc']:.3f}</div>
+                <div class="value" style="color: {'#38bdf8' if m_name==best_model_name else '#94a3b8'};">PR-AUC: {res['pr_auc']:.3f}</div>
                 <div style="margin-top: 10px; text-align: left; font-size: 0.9rem;">
                     • <strong>Recall:</strong> {res['recall']*100:.1f}%<br>
                     • <strong>Precision:</strong> {res['precision']*100:.1f}%<br>
@@ -765,7 +698,7 @@ if st.session_state.current_page == "📊 Model Performance & Metrics":
             title="Precision vs Recall Trade-off Curve",
             xaxis_title="Recall (Sensitivity)",
             yaxis_title="Precision (Positive Predictive Value)",
-            template=theme["plotly_template"],
+            template="plotly_dark",
             paper_bgcolor='rgba(0,0,0,0)',
             plot_bgcolor='rgba(0,0,0,0)',
             height=350
@@ -809,7 +742,7 @@ if st.session_state.current_page == "📊 Model Performance & Metrics":
             title=f"Confusion Matrix (Threshold = {threshold:.2f})"
         )
         fig_cm.update_layout(
-            template=theme["plotly_template"],
+            template="plotly_dark",
             paper_bgcolor='rgba(0,0,0,0)',
             plot_bgcolor='rgba(0,0,0,0)',
             height=280
@@ -850,7 +783,7 @@ if st.session_state.current_page == "🔍 Fraud Insights & Analytics (EDA)":
                 color='fraud_rate',
                 color_continuous_scale='Reds'
             )
-            fig_hour.update_layout(template=theme["plotly_template"], paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', height=320)
+            fig_hour.update_layout(template="plotly_dark", paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', height=320)
             st.plotly_chart(fig_hour, use_container_width=True)
             st.caption("Takeaway: Fraud is highest in the late night / early morning hours (1 AM - 5 AM).")
 
@@ -870,7 +803,7 @@ if st.session_state.current_page == "🔍 Fraud Insights & Analytics (EDA)":
                 color='fraud_rate',
                 color_continuous_scale='Oranges'
             )
-            fig_cat.update_layout(template=theme["plotly_template"], paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', height=320)
+            fig_cat.update_layout(template="plotly_dark", paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', height=320)
             st.plotly_chart(fig_cat, use_container_width=True)
             st.caption("Takeaway: Fraud is highly concentrated in online shopping and grocery transactions.")
 
@@ -889,6 +822,6 @@ if st.session_state.current_page == "🔍 Fraud Insights & Analytics (EDA)":
                 color='Importance',
                 color_continuous_scale='Viridis'
             )
-            fig_fi.update_layout(template=theme["plotly_template"], paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', height=350)
+            fig_fi.update_layout(template="plotly_dark", paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', height=350)
             st.plotly_chart(fig_fi, use_container_width=True)
             st.caption("Takeaway: The amount of the transaction and geographical distance are the strongest predictors of fraud risk.")
