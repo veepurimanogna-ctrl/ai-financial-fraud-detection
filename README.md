@@ -1,6 +1,6 @@
 # 🛡️ AI-Powered Financial Fraud Detection & Risk Analysis System
 
-An end-to-end Machine Learning pipeline and interactive Streamlit web application for real-time credit card and digital wallet fraud detection, addressing class imbalance using **SMOTE** and providing Explainable AI (XAI) risk attributions.
+An end-to-end Machine Learning pipeline and interactive Streamlit web application for real-time credit card and digital wallet fraud detection. This system addresses severe class imbalance using **SMOTE** and provides human-readable Explainable AI (XAI) risk attributions.
 
 ---
 
@@ -9,9 +9,8 @@ An end-to-end Machine Learning pipeline and interactive Streamlit web applicatio
 - **⚡ Real-Time Transaction Risk Engine**: Predicts instant fraud risk probabilities (0-100%) and provides automated business recommendations (`AUTO-APPROVE`, `2FA PASSCODE`, `BLOCK & ALERT`).
 - **📂 Sparkov Kaggle Dataset Schema**: Synthesizes and models transactions following the official Sparkov Credit Card Fraud schema (`kartik2112/fraud-detection`).
 - **⚖️ Class Imbalance Mitigation (SMOTE)**: Solves the severe 98.3% / 1.67% class imbalance using Synthetic Minority Over-sampling Technique (SMOTE) and cost-sensitive class weighting.
-- **🧠 Explainable AI (XAI)**: Generates human-readable local risk driver breakdowns explaining *why* a transaction was flagged.
-- **📂 Batch CSV Fraud Scanner**: Processes bulk CSV transaction logs, calculates total financial dollar losses prevented, and exports scored CSV files.
-- **📊 Precision-Recall & Threshold Analytics**: Features interactive Precision-Recall curve trade-off analysis and dynamic classification threshold tuning.
+- **🧠 Explainable AI (XAI)**: Generates human-readable local risk driver breakdowns explaining *why* a transaction was flagged, syncing perfectly with the inputs provided.
+- **🎨 Premium UI/UX**: Features a highly polished, dark-mode glassmorphism UI with interactive popovers, sidebar navigation, and a blurred cyber-network background.
 
 ---
 
@@ -27,6 +26,18 @@ Models evaluated on a 20% stratified test set (10,000 transactions) using **PR-A
 
 ---
 
+## 🖥️ Streamlit Web Application Tabs
+
+The dashboard is navigated via a clean sidebar menu:
+1. **🏠 System Overview**: Top-level KPI metrics (PR-AUC, Recall) with interactive tooltips and system architecture details.
+2. **🔑 Login**: Secure developer login portal granting access to the fraud analysis tools.
+3. **⚡ Live Risk Simulator**: Test single transactions or choose demo presets (*Normal Morning Grocery*, *Suspicious Midnight Shopping*, *High Value Overseas Travel*).
+4. **📂 Batch CSV Fraud Scanner**: Drag-and-drop CSV batch upload, real-time risk predictions, summary KPIs (Flagged Count, Fraud Dollars Saved), and filterable CSV export.
+5. **📊 Model Performance & Metrics**: Precision-Recall & ROC curves, dynamic threshold slider (0.10 - 0.90), and confusion matrix heatmaps.
+6. **🔍 Fraud Insights & Analytics (EDA)**: Interactive Plotly charts of fraud by hour of day (night spikes), merchant category, and feature importances.
+
+---
+
 ## 🛠️ Feature Engineering Pipeline
 
 1. **Haversine Distance (`distance_km`)**: Calculates great-circle geographical distance between cardholder `(lat, long)` and merchant `(merch_lat, merch_long)`.
@@ -36,48 +47,37 @@ Models evaluated on a 20% stratified test set (10,000 transactions) using **PR-A
 
 ---
 
-## 🖥️ Streamlit Web Application Tabs
-
-1. **⚡ Live Risk Simulator**: Test single transactions or choose demo presets (*Normal Morning Grocery*, *Suspicious Midnight Shopping*, *High Value Overseas Travel*).
-2. **📂 Batch CSV Fraud Scanner**: Drag-and-drop CSV batch upload, real-time risk predictions, summary KPIs (Flagged Count, Fraud Dollars Saved), and filterable CSV export.
-3. **📊 Model Performance & Metrics**: Precision-Recall & ROC curves, dynamic threshold slider (0.10 - 0.90), and confusion matrix heatmaps.
-4. **🔍 Fraud Insights & Analytics (EDA)**: Interactive Plotly charts of fraud by hour of day (night spikes), merchant category, and feature importances.
-
----
-
 ## 💻 Local Installation & Setup
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/YOUR_USERNAME/ai-financial-fraud-detection.git
+   git clone https://github.com/veepurimanogna-ctrl/ai-financial-fraud-detection.git
    cd ai-financial-fraud-detection
+   ```
 
+2. **Install dependencies**:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
+3. **Generate synthetic dataset & train ML models**:
+   ```bash
+   python data_generator.py
+   python model_pipeline.py
+   ```
 
-   Install dependencies:
+4. **Launch Streamlit Dashboard**:
+   ```bash
+   streamlit run app.py
+   ```
 
-bash
+---
 
+## 📜 Project Structure
 
-pip install -r requirements.txt
-Generate synthetic dataset & train ML models:
-
-bash
-
-
-python data_generator.py
-python model_pipeline.py
-Launch Streamlit Dashboard:
-
-bash
-
-
-streamlit run app.py
-
-📜 Project Structure
-text
-
-
+```text
+├── assets/
+│   └── world_map.png             # UI Background assets
 ├── data/
 │   ├── sparkov_fraudTrain.csv    # 50,000 transaction dataset (Kaggle Sparkov schema)
 │   └── preset_scenarios.csv      # Demo test scenarios for UI simulator
@@ -91,3 +91,4 @@ text
 ├── Run_App.bat                   # 1-click Windows batch file launcher
 ├── requirements.txt              # Required Python packages list
 └── README.md                     # Documentation
+```
