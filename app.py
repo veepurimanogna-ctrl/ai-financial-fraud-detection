@@ -54,16 +54,16 @@ st.markdown("""
 
     /* Style the Selected Button using the teal accent */
     div[role="radiogroup"] label:has(input:checked) {
-        background-color: rgba(0, 255, 255, 0.15) !important;
-        border: 1px solid rgba(0, 255, 255, 0.3) !important;
-        box-shadow: 0 0 10px rgba(0, 255, 255, 0.1) !important;
+        background-color: rgba(217, 164, 65, 0.15) !important;
+        border: 1px solid rgba(217, 164, 65, 0.3) !important;
+        box-shadow: 0 0 10px rgba(217, 164, 65, 0.1) !important;
     }
 
     /* Make selected text bolder and cyan */
     div[role="radiogroup"] label:has(input:checked) p {
-        color: #00f2fe !important;
+        color: #D9A441 !important;
         font-weight: 800 !important;
-        text-shadow: 0 0 5px rgba(0, 242, 254, 0.3) !important;
+        text-shadow: 0 0 5px rgba(217, 164, 65, 0.3) !important;
     }
 
     /* Hover effect for unselected buttons */
@@ -76,27 +76,27 @@ st.markdown("""
         background: rgba(10, 15, 20, 0.65);
         backdrop-filter: blur(12px);
         -webkit-backdrop-filter: blur(12px);
-        border: 1px solid rgba(0, 255, 255, 0.15);
+        border: 1px solid rgba(217, 164, 65, 0.15);
         border-radius: 12px;
         padding: 20px;
         text-align: center;
-        box-shadow: 0 0 15px rgba(0, 255, 255, 0.05);
+        box-shadow: 0 0 15px rgba(217, 164, 65, 0.05);
         transition: transform 0.2s, box-shadow 0.2s;
     }
     
     .metric-card:hover {
         transform: translateY(-2px);
-        box-shadow: 0 0 20px rgba(0, 255, 255, 0.15);
-        border: 1px solid rgba(0, 255, 255, 0.3);
+        box-shadow: 0 0 20px rgba(217, 164, 65, 0.15);
+        border: 1px solid rgba(217, 164, 65, 0.3);
     }
     
     .metric-card h3 {
-        color: #00f2fe;
+        color: #D9A441;
         font-size: 0.9rem;
         margin-bottom: 8px;
         text-transform: uppercase;
         letter-spacing: 0.1em;
-        text-shadow: 0 0 8px rgba(0, 242, 254, 0.3);
+        text-shadow: 0 0 8px rgba(217, 164, 65, 0.3);
     }
     
     .metric-card .value {
@@ -181,14 +181,14 @@ st.markdown("""
 
     /* ⚡ Action Box */
     .action-box {
-        background: rgba(0, 242, 254, 0.05);
-        border: 1px dashed #00f2fe;
+        background: rgba(217, 164, 65, 0.05);
+        border: 1px dashed #D9A441;
         border-radius: 4px;
         padding: 16px;
         margin-top: 15px;
         text-align: center;
         font-weight: 700;
-        color: #00f2fe;
+        color: #D9A441;
         text-transform: uppercase;
         letter-spacing: 1px;
     }
@@ -280,7 +280,7 @@ if st.session_state.current_page == "🏠 System Overview":
         st.markdown(f"""
         <div class="metric-card">
             <h3>Primary Model</h3>
-            <div class="value" style="color: #38bdf8;">{best_model_name}</div>
+            <div class="value" style="color: #D9A441;">{best_model_name}</div>
             <div class="subtext">SMOTE Resampled</div>
         </div>
         """, unsafe_allow_html=True)
@@ -323,7 +323,7 @@ if st.session_state.current_page == "🏠 System Overview":
     
     st.markdown("<br>", unsafe_allow_html=True)
     
-    st.markdown("<h1 style='text-align: center; color: #00f2fe; margin-bottom: 30px; font-weight: 800; font-size: 3.8rem; text-shadow: 0 0 20px rgba(0,242,254,0.6); letter-spacing: -1px;'>Stop fraud before it reaches you.</h1>", unsafe_allow_html=True)
+    st.markdown("<h1 style='text-align: center; color: #D9A441; margin-bottom: 30px; font-weight: 800; font-size: 3.8rem; text-shadow: 0 0 20px rgba(217, 164, 65, 0.6); letter-spacing: -1px;'>Stop fraud before it reaches you.</h1>", unsafe_allow_html=True)
     
     col_o1, col_o2 = st.columns([1.2, 1], gap="large")
     with col_o1:
@@ -382,8 +382,8 @@ if st.session_state.current_page == "🔑 Login":
         -webkit-backdrop-filter: blur(12px);
         border-radius: 12px;
         padding: 30px;
-        border: 1px solid rgba(0, 255, 255, 0.15);
-        box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+        border: 1px solid rgba(217, 164, 65, 0.15);
+        box-shadow: 0 0 20px rgba(217, 164, 65, 0.1);
     }
     </style>
     ''', unsafe_allow_html=True)
@@ -392,7 +392,7 @@ if st.session_state.current_page == "🔑 Login":
     col_l1, col_l2, col_l3 = st.columns([1, 2, 1])
     with col_l2:
         st.markdown("<div class='login-bg-anchor'></div>", unsafe_allow_html=True)
-        st.markdown("<h3 style='text-align: center; color: #00f2fe; font-size: 1.5rem; text-transform: uppercase; letter-spacing: 0.1em;'>Developer Login</h3>", unsafe_allow_html=True)
+        st.markdown("<h3 style='text-align: center; color: #D9A441; font-size: 1.5rem; text-transform: uppercase; letter-spacing: 0.1em;'>Developer Login</h3>", unsafe_allow_html=True)
         st.markdown("<p style='text-align: center; color: #a0aec0; margin-bottom: 20px; font-family: monospace;'>Sign in to access the fraud detection dashboard.</p>", unsafe_allow_html=True)
         
         st.text_input("Work Email", placeholder="developer@company.com")
@@ -664,7 +664,7 @@ if st.session_state.current_page == "📊 Model Performance & Metrics":
             st.markdown(f"""
             <div class="metric-card">
                 <h3>{m_name}</h3>
-                <div class="value" style="color: {'#38bdf8' if m_name==best_model_name else '#94a3b8'};">PR-AUC: {res['pr_auc']:.3f}</div>
+                <div class="value" style="color: {'#D9A441' if m_name==best_model_name else '#94a3b8'};">PR-AUC: {res['pr_auc']:.3f}</div>
                 <div style="margin-top: 10px; text-align: left; font-size: 0.9rem;">
                     • <strong>Recall:</strong> {res['recall']*100:.1f}%<br>
                     • <strong>Precision:</strong> {res['precision']*100:.1f}%<br>
