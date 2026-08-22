@@ -10,10 +10,10 @@ An end-to-end Machine Learning pipeline and interactive Streamlit web applicatio
 
 This project was built by a 4-member team:
 
-| Name | Focus Area |
+| Name |  Focus Area |
 |------|------------|
-| **[Veepuri Manogna]** | Data Collection & Cleaning |
-| **[Tanuja Neela Devi]** | EDA & Visualization |
+| **[Tanuja Neela Devi]** | Data Collection & Cleaning |
+| **[Veepuri Manogna]** | EDA & Visualization |
 | **[Ajay Kumar]** | Feature Engineering & Model Training |
 | **[Sravani]** | Model Evaluation & Dashboard |
 
