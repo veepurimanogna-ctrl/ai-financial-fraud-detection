@@ -23,8 +23,44 @@ if 'welcome_shown' not in st.session_state:
     st.session_state.welcome_shown = False
 
 if not st.session_state.welcome_shown:
-    @st.dialog("Welcome")
-    def welcome_dialog():
+    st.markdown('''
+    <style>
+        [data-testid="stSidebar"] { display: none !important; }
+        [data-testid="collapsedControl"] { display: none !important; }
+        .stAppHeader { display: none !important; }
+        .splash-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 80vh;
+            text-align: center;
+            animation: fadeIn 0.8s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+    <div class="splash-container">
+        <h1 style="color: #D9A441; font-weight: 800; font-size: 4rem; margin-bottom: 0; text-shadow: 0 0 20px rgba(217, 164, 65, 0.4);">🛡️ AUREVIA SHIELD</h1>
+        <h3 style="color: #a0aec0; margin-top: 0; margin-bottom: 40px; font-weight: 400;">AI Financial Fraud Detection & Risk Analysis System</h3>
+        <p style="max-width: 700px; margin: 0 auto 20px auto; font-size: 1.1rem; line-height: 1.6; color: #e0e0e0;">
+            Welcome to the Aurevia Shield dashboard. This interface provides real-time fraud monitoring, high-accuracy model performance metrics, and deep behavioral risk insights.
+        </p>
+        <div style="max-width: 700px; margin: 0 auto 40px auto; background: rgba(217, 164, 65, 0.05); border: 1px solid rgba(217, 164, 65, 0.2); padding: 15px; border-radius: 8px; color: #a0aec0; font-size: 0.95rem;">
+            <strong>Data Disclosure:</strong> This project uses a synthetic dataset generated to match the schema of the real-world Sparkov Credit Card Transactions Fraud Detection dataset on Kaggle. It contains 50,000 transactions preserving a realistic class imbalance (~1.6% fraud).
+        </div>
+    </div>
+    ''', unsafe_allow_html=True)
+    
+    col1, col2, col3 = st.columns([1, 1, 1])
+    with col2:
+        if st.button("Let's Start", use_container_width=True):
+            st.session_state.welcome_shown = True
+            st.rerun()
+            
+    st.stop():
         st.markdown("<h1 style='text-align: center; color: #D9A441; font-weight: 800; font-size: 2.5rem; margin-bottom: 0;'>🛡️ AUREVIA SHIELD</h1>", unsafe_allow_html=True)
         st.markdown("<h4 style='text-align: center; color: #a0aec0; margin-top: 0;'>AI Financial Fraud Detection & Risk Analysis System</h4>", unsafe_allow_html=True)
         st.write("")
