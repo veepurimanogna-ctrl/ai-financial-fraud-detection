@@ -18,6 +18,44 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
+# --- Splash Screen & Persistent Branding ---
+if 'welcome_shown' not in st.session_state:
+    st.session_state.welcome_shown = False
+
+if not st.session_state.welcome_shown:
+    @st.dialog("Welcome")
+    def welcome_dialog():
+        st.markdown("<h1 style='text-align: center; color: #D9A441; font-weight: 800; font-size: 2.5rem; margin-bottom: 0;'>🛡️ AUREVIA SHIELD</h1>", unsafe_allow_html=True)
+        st.markdown("<h4 style='text-align: center; color: #a0aec0; margin-top: 0;'>AI Financial Fraud Detection & Risk Analysis System</h4>", unsafe_allow_html=True)
+        st.write("")
+        st.write("Welcome to the Aurevia Shield dashboard. This interface provides real-time fraud monitoring, high-accuracy model performance metrics, and deep behavioral risk insights.")
+        st.info("**Data Disclosure:** This project uses a synthetic dataset generated to match the schema of the real-world Sparkov Credit Card Transactions Fraud Detection dataset on Kaggle. It contains 50,000 transactions preserving a realistic class imbalance (~1.6% fraud).")
+        st.write("")
+        if st.button("Got it", use_container_width=True):
+            st.session_state.welcome_shown = True
+            st.rerun()
+            
+    welcome_dialog()
+
+# Top-Left Persistent Brand Mark
+st.markdown('''
+<style>
+    .top-left-brand {
+        position: fixed;
+        top: 10px;
+        left: 60px;
+        z-index: 1000;
+        color: #D9A441;
+        font-weight: 800;
+        font-size: 1.1rem;
+        letter-spacing: 1px;
+        pointer-events: none;
+        text-shadow: 0 0 10px rgba(217, 164, 65, 0.3);
+    }
+</style>
+<div class="top-left-brand">🛡️ AUREVIA SHIELD</div>
+''', unsafe_allow_html=True)
+
 # --- Custom Dark Theme CSS ---
 st.markdown("""
 <style>
