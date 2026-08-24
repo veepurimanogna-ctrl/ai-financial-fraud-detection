@@ -7,4 +7,4 @@ textColor="#e0e0e0"
 font="monospace"
 
 [server]
-maxUploadSize = 1000
+maxUploadSize = 50
