@@ -639,11 +639,9 @@ if st.session_state.current_page == "📂 Batch CSV Fraud Scanner":
     if uploaded_file is not None:
         try:
             file_size_mb = uploaded_file.size / (1024 * 1024)
-            if file_size_mb > 150:
-                st.warning(f"⚠️ Large file detected ({file_size_mb:.1f} MB). To prevent server memory crashes, analysis is limited to the first 250,000 transactions.")
-                scan_df = pd.read_csv(uploaded_file, nrows=250000)
-            else:
-                scan_df = pd.read_csv(uploaded_file)
+            if file_size_mb > 5:
+                st.warning(f"⚠️ File size: {file_size_mb:.1f} MB. To ensure real-time performance and prevent server Out-of-Memory crashes, analysis is strictly limited to the first 50,000 transactions.")
+            scan_df = pd.read_csv(uploaded_file, nrows=50000)
             st.success(f"Uploaded batch CSV containing {len(scan_df):,} records!")
         except Exception as e:
             st.error(f"Error reading CSV file: {e}")
