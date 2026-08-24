@@ -575,14 +575,14 @@ if st.session_state.current_page == "⚡ Live Risk Simulator":
                 'borderwidth': 2,
                 'bordercolor': "#334155",
                 'steps': [
-                    {'range': [0, 30], 'color': 'rgba(16, 185, 129, 0.2)'},
-                    {'range': [30, 70], 'color': 'rgba(245, 158, 11, 0.2)'},
-                    {'range': [70, 100], 'color': 'rgba(239, 68, 68, 0.2)'}
+                    {'range': [0, 10], 'color': 'rgba(16, 185, 129, 0.2)'},
+                    {'range': [10, 20], 'color': 'rgba(245, 158, 11, 0.2)'},
+                    {'range': [20, 100], 'color': 'rgba(239, 68, 68, 0.2)'}
                 ],
                 'threshold': {
                     'line': {'color': "red", 'width': 4},
                     'thickness': 0.75,
-                    'value': 70
+                    'value': 20
                 }
             }
         ))
@@ -664,8 +664,8 @@ if st.session_state.current_page == "📂 Batch CSV Fraud Scanner":
                         
                         scored_df = scan_df.copy()
                         scored_df['fraud_risk_probability'] = np.round(batch_probs, 4)
-                        scored_df['predicted_risk_level'] = np.where(batch_probs >= 0.70, 'HIGH RISK - FLAGGED',
-                                                            np.where(batch_probs >= 0.30, 'MEDIUM RISK - 2FA', 'LOW RISK'))
+                        scored_df['predicted_risk_level'] = np.where(batch_probs >= 0.20, 'HIGH RISK - FLAGGED',
+                                                            np.where(batch_probs >= 0.10, 'MEDIUM RISK - 2FA', 'LOW RISK'))
                         st.session_state['batch_scored_df'] = scored_df
                     except Exception as e:
                         st.error(f"Error executing batch predictions: {e}")

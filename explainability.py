@@ -90,11 +90,11 @@ def explain_transaction_risk(txn_dict, pipeline_bundle, risk_score):
     # 5. Location, Card Present, IP Risk, Failed Auth (Removed - Not collected in app)
 
     # Risk Assessment Categorization
-    if risk_score >= 0.70:
+    if risk_score >= 0.20:
         risk_level = "HIGH RISK - FLAGGED"
         risk_color = "red"
         action = "🛑 BLOCK TRANSACTION & ALERT FRAUD INVESTIGATION TEAM"
-    elif risk_score >= 0.30:
+    elif risk_score >= 0.10:
         risk_level = "MEDIUM RISK - REVIEW"
         risk_color = "orange"
         action = "⚠️ PROMPT SECOND-FACTOR AUTHENTICATION (2FA / OTP)"
