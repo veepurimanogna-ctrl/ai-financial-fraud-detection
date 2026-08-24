@@ -60,18 +60,7 @@ if not st.session_state.welcome_shown:
             st.session_state.welcome_shown = True
             st.rerun()
             
-    st.stop():
-        st.markdown("<h1 style='text-align: center; color: #D9A441; font-weight: 800; font-size: 2.5rem; margin-bottom: 0;'>🛡️ AUREVIA SHIELD</h1>", unsafe_allow_html=True)
-        st.markdown("<h4 style='text-align: center; color: #a0aec0; margin-top: 0;'>AI Financial Fraud Detection & Risk Analysis System</h4>", unsafe_allow_html=True)
-        st.write("")
-        st.write("Welcome to the Aurevia Shield dashboard. This interface provides real-time fraud monitoring, high-accuracy model performance metrics, and deep behavioral risk insights.")
-        st.info("**Data Disclosure:** This project uses a synthetic dataset generated to match the schema of the real-world Sparkov Credit Card Transactions Fraud Detection dataset on Kaggle. It contains 50,000 transactions preserving a realistic class imbalance (~1.6% fraud).")
-        st.write("")
-        if st.button("Got it", use_container_width=True):
-            st.session_state.welcome_shown = True
-            st.rerun()
-            
-    welcome_dialog()
+    st.stop()
 
 # Top-Left Persistent Brand Mark
 st.markdown('''
