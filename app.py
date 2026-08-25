@@ -930,7 +930,8 @@ if st.session_state.current_page == "🔑 Login":
         st.text_input("PASSWORD", type="password", placeholder="Enter password")
         
         import streamlit.components.v1 as components
-        components.iframe("/app/static/auth.html", height=80)
+        firebase_login_btn = components.declare_component("firebase_login", path="firebase_auth_component")
+        firebase_login_btn()
 
 # ==========================================
 # TAB 1: LIVE RISK SIMULATOR
