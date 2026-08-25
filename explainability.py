@@ -35,21 +35,21 @@ def explain_transaction_risk(txn_dict, pipeline_bundle, risk_score):
     if ratio >= 4.0:
         drivers.append({
             'factor': 'Unusual Transaction Amount',
-            'detail': f'Amount (${amount:,.2f}) is {ratio:.1f}x higher than customer 30-day baseline (${avg_amt:,.2f})',
+            'detail': f'Amount (₹{amount:,.2f}) is {ratio:.1f}x higher than customer 30-day baseline (₹{avg_amt:,.2f})',
             'impact_weight': 0.35,
             'category': 'High Impact'
         })
     elif ratio >= 2.5:
         drivers.append({
             'factor': 'Elevated Transaction Amount',
-            'detail': f'Amount (${amount:,.2f}) is {ratio:.1f}x customer 30-day average (${avg_amt:,.2f})',
+            'detail': f'Amount (₹{amount:,.2f}) is {ratio:.1f}x customer 30-day average (₹{avg_amt:,.2f})',
             'impact_weight': 0.20,
             'category': 'Medium Impact'
         })
     elif ratio <= 1.2:
         mitigators.append({
             'factor': 'Normal Purchase Amount',
-            'detail': f'Amount is consistent with customer 30-day baseline (${avg_amt:,.2f})',
+            'detail': f'Amount is consistent with customer 30-day baseline (₹{avg_amt:,.2f})',
             'impact_weight': -0.15
         })
 

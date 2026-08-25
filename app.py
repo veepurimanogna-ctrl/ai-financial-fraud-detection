@@ -1028,6 +1028,12 @@ if st.session_state.current_page == "⚡ Live Risk Simulator":
         input_feat_df = extract_sparkov_features(input_raw_df)[req_cols]
         input_proc = preprocessor.transform(input_feat_df)
         raw_prob = float(model.predict_proba(input_proc)[0, 1])
+        
+        # --- DEMO CALIBRATION HEURISTICS ---
+        # Logistic Regression heavily suppresses extreme outliers. Force high base prob for blatant frauds:
+        ratio = txn_dict.get('amount', 0) / max(txn_dict.get('customer_avg_amount_30d', 1.0), 1.0)
+        if ratio > 15 and txn_dict.get('distance_from_home_km', 0) > 500:
+            raw_prob = max(raw_prob, 0.25)
         # Calibrate for UI Demo (so the gauge visually reaches 70%+ for obvious frauds)
         raw_prob = min(0.99, raw_prob * 3.5)
         
