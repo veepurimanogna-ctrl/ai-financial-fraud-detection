@@ -1126,6 +1126,11 @@ if st.session_state.current_page == "📂 Batch CSV Fraud Scanner":
     if uploaded_file is not None:
         try:
             file_size_mb = uploaded_file.size / (1024 * 1024)
+            
+            if file_size_mb > 150:
+                st.error(f"🛑 Security & Stability Lock: The uploaded file ({file_size_mb:.1f} MB) exceeds the safe memory threshold for real-time processing. To protect the server from Out-Of-Memory crashes, the file was rejected. Please upload a file smaller than 150MB.")
+                st.stop()
+                
             if file_size_mb > 5:
                 st.warning(f"⚠️ File size: {file_size_mb:.1f} MB. To ensure real-time performance and prevent server Out-of-Memory crashes, analysis is strictly limited to the first 50,000 transactions.")
             scan_df = pd.read_csv(uploaded_file, nrows=50000)
