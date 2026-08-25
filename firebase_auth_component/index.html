@@ -27,6 +27,22 @@
         box-shadow: 0 4px 15px rgba(255,255,255,0.2);
       }
     </style>
+    <script>
+      // Streamlit Component Handshake Protocol
+      function sendMessageToStreamlitClient(type, data) {
+        const outData = Object.assign({
+          isStreamlitMessage: true,
+          type: type,
+        }, data);
+        window.parent.postMessage(outData, "*");
+      }
+      
+      // Notify Streamlit that the component is fully loaded and set its height
+      window.addEventListener('load', () => {
+        sendMessageToStreamlitClient("streamlit:componentReady", {apiVersion: 1});
+        sendMessageToStreamlitClient("streamlit:setFrameHeight", {height: 80});
+      });
+    </script>
 </head>
 <body>
 
