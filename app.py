@@ -987,8 +987,8 @@ if st.session_state.current_page == "⚡ Live Risk Simulator":
         with st.form("risk_engine_form"):
             c1, c2 = st.columns(2)
             with c1:
-                amt = st.number_input("Transaction Amount ($)", min_value=1.0, max_value=50000.0, value=default_amt, step=10.0, key=f"amt_{preset_choice}")
-                customer_avg_amount_30d = st.number_input("Customer 30-Day Avg Amount ($)", min_value=1.0, max_value=10000.0, value=default_avg_amt, step=5.0, key=f"avg_{preset_choice}")
+                amt = st.number_input("Transaction Amount (₹)", min_value=1.0, max_value=50000.0, value=default_amt, step=10.0, key=f"amt_{preset_choice}")
+                customer_avg_amount_30d = st.number_input("Customer 30-Day Avg Amount (₹)", min_value=1.0, max_value=10000.0, value=default_avg_amt, step=5.0, key=f"avg_{preset_choice}")
                 category = st.selectbox("Merchant Category", ['grocery_pos', 'entertainment', 'gas_transport', 'shopping_net', 'shopping_pos', 'food_dining', 'personal_care', 'health_fitness', 'travel', 'kids_pets', 'home', 'misc_net', 'misc_pos'], index=['grocery_pos', 'entertainment', 'gas_transport', 'shopping_net', 'shopping_pos', 'food_dining', 'personal_care', 'health_fitness', 'travel', 'kids_pets', 'home', 'misc_net', 'misc_pos'].index(default_cat) if default_cat in ['grocery_pos', 'entertainment', 'gas_transport', 'shopping_net', 'shopping_pos', 'food_dining', 'personal_care', 'health_fitness', 'travel', 'kids_pets', 'home', 'misc_net', 'misc_pos'] else 0, key=f"cat_{preset_choice}")
                 gender = st.selectbox("Cardholder Gender", ['M', 'F'], index=0 if default_gender == 'M' else 1, key=f"gen_{preset_choice}")
                 
@@ -1162,7 +1162,7 @@ if st.session_state.current_page == "📂 Batch CSV Fraud Scanner":
                 with c3:
                     st.metric("Medium Risk (2FA)", f"{medium_count:,}")
                 with c4:
-                    st.metric("Prevented Fraud Loss ($)", f"${fraud_val_at_risk:,.2f}")
+                    st.metric("Prevented Fraud Loss (₹)", f"₹{fraud_val_at_risk:,.2f}")
                     
                 st.markdown("### 📋 Filtered Scored Batch Table")
                 filter_level = st.radio("Filter by Risk Category:", ["All Transactions", "HIGH RISK - FLAGGED", "MEDIUM RISK - 2FA", "LOW RISK"], horizontal=True)
