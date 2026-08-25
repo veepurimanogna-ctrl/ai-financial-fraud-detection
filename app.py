@@ -43,10 +43,10 @@ if not st.session_state.welcome_shown:
     [data-testid="stSidebar"] { display: none !important; }
     [data-testid="collapsedControl"] { display: none !important; }
     .stAppHeader { display: none !important; }
-    body, .stApp { background-color: #0F2740 !important; }
+    body, .stApp { background-color: #1A242F !important; }
     .splash-starfield { position: fixed; top: -25%; left: -25%; width: 150%; height: 150%; z-index: 0; pointer-events: none; animation: swirl 180s linear infinite; }
     @keyframes swirl { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-    .splash-star { position: absolute; background: #D4A72C; border-radius: 50%; box-shadow: 0 0 4px 1px rgba(212, 167, 44,0.7); animation: twinkle linear infinite; }
+    .splash-star { position: absolute; background: #FFD700; border-radius: 50%; box-shadow: 0 0 4px 1px rgba(255, 215, 0, 0.7); animation: twinkle linear infinite; }
     @keyframes twinkle { 0%, 100% { opacity: 0.15; } 50% { opacity: 1; } }
     @keyframes zi { from { opacity:0; transform:scale(0.85); } to { opacity:1; transform:scale(1); } }
     .splash-container { position: relative; z-index: 10; display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 75vh; text-align: center; animation: zi 0.7s cubic-bezier(0.2,0.8,0.3,1) both; }
@@ -588,7 +588,7 @@ if st.session_state.current_page == "💠 Overview":
     font-family: 'JetBrains Mono', monospace !important;
     }
     .page-starfield { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 0; pointer-events: none; }
-    .splash-star { position: absolute; background: #D4A72C; border-radius: 50%; box-shadow: 0 0 4px 1px rgba(212, 167, 44,0.7); animation: twinkle linear infinite; }
+    .splash-star { position: absolute; background: #FFD700; border-radius: 50%; box-shadow: 0 0 4px 1px rgba(255, 215, 0, 0.7); animation: twinkle linear infinite; }
     @keyframes twinkle { 0%, 100% { opacity: 0.15; } 50% { opacity: 1; } }
     
 </style>
@@ -692,7 +692,7 @@ if st.session_state.current_page == "🔑 Login":
     font-family: 'JetBrains Mono', monospace !important;
     }
     .page-starfield { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 0; pointer-events: none; }
-    .splash-star { position: absolute; background: #D4A72C; border-radius: 50%; box-shadow: 0 0 4px 1px rgba(212, 167, 44,0.7); animation: twinkle linear infinite; }
+    .splash-star { position: absolute; background: #FFD700; border-radius: 50%; box-shadow: 0 0 4px 1px rgba(255, 215, 0, 0.7); animation: twinkle linear infinite; }
     @keyframes twinkle { 0%, 100% { opacity: 0.15; } 50% { opacity: 1; } }
     
 </style>
@@ -718,13 +718,13 @@ if st.session_state.current_page == "🔑 Login":
     /* Target the column containing the anchor */
     /* Apply SVG background to the entire page behind the login form */
     [data-testid="stAppViewContainer"]:has(.login-bg-anchor) {
-    background-color: #1a2c3a !important;
-    background-image: linear-gradient(135deg, #1d2f3d 0%, #111e29 100%) !important;
+    background-color: #1A242F !important;
+    background-image: linear-gradient(135deg, #1A242F 0%, #141C24 100%) !important;
     }
     
     .page-starfield { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 0; pointer-events: none; }
     
-    .splash-star { position: absolute; background: #D4A72C; border-radius: 50%; box-shadow: 0 0 4px 1px rgba(212, 167, 44,0.7); animation: twinkle linear infinite; }
+    .splash-star { position: absolute; background: #FFD700; border-radius: 50%; box-shadow: 0 0 4px 1px rgba(255, 215, 0, 0.7); animation: twinkle linear infinite; }
     @keyframes twinkle { 0%, 100% { opacity: 0.15; } 50% { opacity: 1; } }
     
     div[data-testid="stColumn"]:has(.login-bg-anchor) {
