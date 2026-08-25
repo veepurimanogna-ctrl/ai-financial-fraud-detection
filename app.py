@@ -73,7 +73,7 @@ if not st.session_state.welcome_shown:
     </linearGradient>
   </defs>
 </svg>
-<h1 style="color: #FCEBB8; font-weight: 800; font-size: 5.5rem; margin-bottom: 0; margin-top: 0; text-shadow: 0 0 30px rgba(212,167,44,0.8); line-height: 1.1;">AUREVIA SHIELD</h1>
+<h1 style="color: #FFD700; font-weight: 800; font-size: 5.5rem; margin-bottom: 0; margin-top: 0; text-shadow: 0 0 30px rgba(212,167,44,0.8); line-height: 1.1;">AUREVIA SHIELD</h1>
 </div>
 <div class="gradient-divider"></div>
 <h3 style="color: #FFFFFF; margin-top: 0; margin-bottom: 40px; font-weight: 400; font-size: 1.6rem;">AI Financial Fraud Detection & Risk Analysis System</h3>
