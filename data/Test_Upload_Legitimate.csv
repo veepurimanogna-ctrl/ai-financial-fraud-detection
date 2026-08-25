@@ -1,0 +1,11 @@
+transaction_id,amount,customer_avg_amount_30d,distance_from_home_km,hour_of_day,category,gender,city_pop
+LEGIT_001,45.5,50.0,2.1,14,grocery_pos,F,120000
+LEGIT_002,12.0,50.0,1.5,8,food_dining,M,120000
+LEGIT_003,89.9,75.0,12.0,17,shopping_pos,F,500000
+LEGIT_004,15.0,50.0,3.4,19,entertainment,M,850000
+LEGIT_005,112.5,120.0,8.5,13,health_fitness,F,250000
+LEGIT_006,5.5,10.0,0.5,9,gas_transport,M,15000
+LEGIT_007,250.0,300.0,15.0,11,shopping_net,F,120000
+LEGIT_008,45.0,50.0,4.2,18,grocery_pos,M,400000
+LEGIT_009,12.5,15.0,1.2,20,entertainment,F,120000
+LEGIT_010,8.0,10.0,2.0,7,food_dining,M,850000
