@@ -136,12 +136,16 @@ st.markdown("""
     [data-testid="stSidebar"] * { color: #E2E8F0 !important; }
     /* Sidebar UI Overhaul */
     [data-testid="stSidebar"] {
-    background-color: #061626 !important; /* Very dark navy to match reference */
+    background-color: #061626 !important; 
     border-right: 1px solid rgba(255,255,255,0.05) !important;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23D4A72C" fill-opacity="0.15" d="M0,160L48,165.3C96,171,192,181,288,170.7C384,160,480,128,576,133.3C672,139,768,181,864,208C960,235,1056,245,1152,229.3C1248,213,1344,171,1392,149.3L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') !important;
+    background-position: bottom !important;
+    background-repeat: no-repeat !important;
+    background-size: 100% 30% !important;
     }
     [data-testid="stSidebar"]::before {
-    content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 500px;
-    background: radial-gradient(circle at bottom right, rgba(212,167,44,0.15) 0%, transparent 70%);
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 300px;
+    background: radial-gradient(circle at bottom, rgba(212,167,44,0.1) 0%, transparent 70%);
     pointer-events: none; z-index: 1;
     }
     [data-testid="stSidebarNav"] { display: none !important; }
@@ -156,7 +160,10 @@ st.markdown("""
     border: none !important;
     box-shadow: none !important;
     }
-    div[role="radiogroup"] label > div:first-child { display: none !important; }
+    div[role="radiogroup"] label > div:first-of-type,
+    div[role="radiogroup"] label input { 
+        display: none !important; 
+    }
     div[role="radiogroup"] label p {
     color: #E2E8F0 !important;
     font-weight: 600 !important;
@@ -166,7 +173,7 @@ st.markdown("""
     background: linear-gradient(90deg, #D4A72C 0%, #B9862A 100%) !important;
     box-shadow: 0 4px 15px rgba(212, 167, 44, 0.2) !important;
     }
-    div[role="radiogroup"] label:has(input:checked) p {
+    div[role="radiogroup"] label:has(input:checked) * {
     color: #FFFFFF !important;
     text-shadow: 0 1px 2px rgba(0,0,0,0.2) !important;
     }
