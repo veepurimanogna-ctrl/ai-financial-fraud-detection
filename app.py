@@ -955,7 +955,11 @@ if st.session_state.current_page == "🔑 Login":
                 window.parent.location.href = window.parent.location.pathname + "?auth_success=true&email=" + encodeURIComponent(user.email);
               }).catch((error) => {
                 console.error("Firebase Auth Error:", error);
-                alert("Authentication failed: " + error.message);
+                if (error.code === 'auth/unauthorized-domain') {
+                    alert("Authentication failed: Unauthorized domain.\\n\\nBecause Streamlit runs this button inside an iframe, you need to add THIS EXACT DOMAIN to your Firebase Authorized Domains:\\n\\n" + window.location.hostname);
+                } else {
+                    alert("Authentication failed: " + error.message);
+                }
               });
           });
         </script>
