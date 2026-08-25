@@ -134,11 +134,45 @@ st.markdown("""
 <style>
     /* Fix Sidebar text colors */
     [data-testid="stSidebar"] * { color: #E2E8F0 !important; }
-    [data-testid="stSidebar"] [data-testid="stMarkdownContainer"] h1, 
-    [data-testid="stSidebar"] [data-testid="stMarkdownContainer"] h2, 
-    [data-testid="stSidebar"] [data-testid="stMarkdownContainer"] h3 { color: #FFFFFF !important; }
-    div[role="radiogroup"] label p { color: #E2E8F0 !important; }
-    div[role="radiogroup"] label:has(input:checked) p { color: #D4A72C !important; font-weight: 700 !important; }
+    /* Sidebar UI Overhaul */
+    [data-testid="stSidebar"] {
+    background-color: #061626 !important; /* Very dark navy to match reference */
+    border-right: 1px solid rgba(255,255,255,0.05) !important;
+    }
+    [data-testid="stSidebar"]::before {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 500px;
+    background: radial-gradient(circle at bottom right, rgba(212,167,44,0.15) 0%, transparent 70%);
+    pointer-events: none; z-index: 1;
+    }
+    [data-testid="stSidebarNav"] { display: none !important; }
+    div[role="radiogroup"] { gap: 4px !important; position: relative; z-index: 10; padding: 0 10px; }
+    div[role="radiogroup"] label {
+    padding: 14px 20px !important;
+    border-radius: 8px !important;
+    margin-bottom: 2px !important;
+    transition: all 0.2s ease !important;
+    cursor: pointer !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    }
+    div[role="radiogroup"] label > div:first-child { display: none !important; }
+    div[role="radiogroup"] label p {
+    color: #E2E8F0 !important;
+    font-weight: 600 !important;
+    font-size: 0.95rem !important;
+    }
+    div[role="radiogroup"] label:has(input:checked) {
+    background: linear-gradient(90deg, #D4A72C 0%, #B9862A 100%) !important;
+    box-shadow: 0 4px 15px rgba(212, 167, 44, 0.2) !important;
+    }
+    div[role="radiogroup"] label:has(input:checked) p {
+    color: #FFFFFF !important;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.2) !important;
+    }
+    div[role="radiogroup"] label:not(:has(input:checked)):hover {
+    background-color: rgba(255, 255, 255, 0.08) !important;
+    }
     /* Global Typography Reset */
     html, body, [class*="css"], .stApp {
     font-family: 'Inter', sans-serif !important;
@@ -194,16 +228,14 @@ st.markdown("""
     div[role="radiogroup"] label:not(:has(input:checked)):hover {
     background-color: rgba(255, 255, 255, 0.05) !important;
     }
-    
     .metric-card .text-value {
-        font-family: 'Inter', sans-serif !important;
-        font-size: 1.3rem !important;
-        font-weight: 800 !important;
-        color: #142B44 !important;
-        word-break: normal !important;
-        line-height: 1.2 !important;
+    font-family: 'Inter', sans-serif !important;
+    font-size: 1.3rem !important;
+    font-weight: 800 !important;
+    color: #142B44 !important;
+    word-break: normal !important;
+    line-height: 1.2 !important;
     }
-
     /* 🛡️ Premium Elevated Metric Cards */
     .metric-card {
     background: rgba(255, 255, 255, 0.9) !important;
@@ -215,7 +247,6 @@ st.markdown("""
     text-align: center !important;
     box-shadow: 0 8px 30px rgba(15, 39, 64, 0.06) !important;
     transition: transform 0.3s cubic-bezier(0.2,0.8,0.2,1), box-shadow 0.3s ease !important;
-    
     /* Force all cards to be the exact same size and vertically center content */
     display: flex !important;
     flex-direction: column !important;
@@ -356,14 +387,14 @@ req_cols = pipeline_bundle['num_features'] + pipeline_bundle['cat_features'] + p
 if 'logged_in' not in st.session_state:
     st.session_state.logged_in = False
 if 'current_page' not in st.session_state:
-    st.session_state.current_page = "🏠 System Overview"
+    st.session_state.current_page = "💠 Dashboard"
 
 # --- Full-Page Custom Navigation ---
 if not st.session_state.logged_in:
-    nav_options = ["🏠 System Overview", "🔑 Login"]
+    nav_options = ["💠 Dashboard", "🔑 Login"]
 else:
     nav_options = [
-        "🏠 System Overview",
+        "💠 Dashboard",
         "⚡ Live Risk Simulator", 
         "📂 Batch CSV Fraud Scanner", 
         "📊 Model Performance & Metrics", 
@@ -372,7 +403,30 @@ else:
     ]
 
 # Render Navigation in Sidebar
-st.sidebar.markdown("### 🛡️ Navigation")
+st.sidebar.markdown("""
+<div style="text-align: center; padding: 10px 0 30px 0; border-bottom: 1px solid rgba(255,255,255,0.05); margin-bottom: 20px; z-index: 10; position: relative;">
+    <div style="margin-bottom: 15px;">
+        <svg width="65" height="75" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="filter: drop-shadow(0 0 10px rgba(212,167,44,0.3));">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" fill="url(#sidebar-shield)" stroke="#FCEBB8" stroke-width="0.5"/>
+            <rect x="9.5" y="9.5" width="5" height="4.5" rx="1" fill="#0F2740"/>
+            <path d="M10.5 9.5V8a1.5 1.5 0 013 0v1.5" stroke="#0F2740" stroke-width="1.2"/>
+            <defs>
+                <linearGradient id="sidebar-shield" x1="12" y1="2" x2="12" y2="22" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#F4D879"/>
+                <stop offset="1" stop-color="#B9862A"/>
+                </linearGradient>
+            </defs>
+        </svg>
+    </div>
+    <div style="font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 900; line-height: 1.15; letter-spacing: 1px;">
+        <span style="color: #FFFFFF;">AUREVIA</span><br>
+        <span style="color: #D4A72C;">SHIELD</span>
+    </div>
+    <div style="color: #94a3b8; font-size: 0.75rem; margin-top: 15px; font-weight: 500; max-width: 220px; margin-left: auto; margin-right: auto; line-height: 1.5;">
+        AI Financial Fraud Detection &<br>Risk Analysis System
+    </div>
+</div>
+""", unsafe_allow_html=True)
 selected_page = st.sidebar.radio(
     "Navigation", 
     nav_options, 
@@ -383,18 +437,35 @@ selected_page = st.sidebar.radio(
 # Handle Logout immediately
 if selected_page == "🚪 Logout":
     st.session_state.logged_in = False
-    st.session_state.current_page = "🏠 System Overview"
+    st.session_state.current_page = "💠 Dashboard"
     st.rerun()
+
 
 # Update page state if changed
 if selected_page != st.session_state.current_page and selected_page != "🚪 Logout":
     st.session_state.current_page = selected_page
     st.rerun()
 
+# --- Custom Bottom Security Card ---
+st.sidebar.markdown('''
+<div style="margin-top: 50px; margin-bottom: 30px; padding: 25px 20px; border: 1px solid rgba(212, 167, 44, 0.3); border-radius: 12px; background: rgba(15, 39, 64, 0.4); text-align: center; position: relative; z-index: 10; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+    <div style="margin-bottom: 12px;">
+        <svg width="24" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="#D4A72C" stroke-width="1.5"/>
+            <rect x="9" y="10" width="6" height="5" rx="1" stroke="#D4A72C" stroke-width="1.2"/>
+            <path d="M10 10V8a2 2 0 014 0v2" stroke="#D4A72C" stroke-width="1.2"/>
+        </svg>
+    </div>
+    <div style="color: #D4A72C; font-weight: 800; font-size: 1.15rem; line-height: 1.3; margin-bottom: 15px; font-family: 'Inter', sans-serif;">Stop fraud before<br>it reaches you.</div>
+    <div style="color: #E2E8F0; font-size: 0.75rem; line-height: 1.6; font-weight: 400; opacity: 0.9;">Real-time detection.<br>Smart decisions.<br>Secure future.</div>
+</div>
+''', unsafe_allow_html=True)
+
+
 # ==========================================
 # TAB OVERVIEW: SYSTEM OVERVIEW
 # ==========================================
-if st.session_state.current_page == "🏠 System Overview":
+if st.session_state.current_page == "💠 Dashboard":
 
     st.markdown('''<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 <style>
