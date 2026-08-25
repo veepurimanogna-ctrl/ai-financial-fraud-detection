@@ -1141,14 +1141,17 @@ if st.session_state.current_page == "📂 Batch CSV Fraud Scanner":
         try:
             file_size_mb = uploaded_file.size / (1024 * 1024)
             
-            if file_size_mb > 150:
-                st.error(f"🛑 Security & Stability Lock: The uploaded file ({file_size_mb:.1f} MB) exceeds the safe memory threshold for real-time processing. To protect the server from Out-Of-Memory crashes, the file was rejected. Please upload a file smaller than 150MB.")
+            if file_size_mb > 2500:
+                st.error(f"Security & Stability Lock: The uploaded file ({file_size_mb:.1f} MB) exceeds the extreme memory threshold (2.5 GB). To protect the server from Out-Of-Memory crashes, the file was rejected.")
                 st.stop()
                 
-            if file_size_mb > 5:
-                st.warning(f"⚠️ File size: {file_size_mb:.1f} MB. To ensure real-time performance and prevent server Out-of-Memory crashes, analysis is strictly limited to the first 50,000 transactions.")
-            scan_df = pd.read_csv(uploaded_file, nrows=50000)
-            st.success(f"Uploaded batch CSV containing {len(scan_df):,} records!")
+            if file_size_mb > 50:
+                st.warning(f"Massive File Detected ({file_size_mb:.1f} MB): To ensure real-time dashboard performance and prevent browser freezing, the AI will sample and analyze the first 500,000 transactions from your file.")
+                scan_df = pd.read_csv(uploaded_file, nrows=500000)
+            else:
+                scan_df = pd.read_csv(uploaded_file)
+                
+            st.success(f"Successfully processed {len(scan_df):,} records!")
         except Exception as e:
             st.error(f"Error reading CSV file: {e}")
     elif df_transactions is not None:
