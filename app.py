@@ -60,6 +60,14 @@ if not st.session_state.welcome_shown:
     .splash-container h1 { color: #FFD700 !important; }
     .splash-container h3 { color: #FFFFFF !important; }
     
+    /* Sidebar Starfield */
+    [data-testid="stSidebarContent"] { position: relative; overflow: hidden; }
+    .sidebar-starfield {
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        z-index: 0;
+        pointer-events: none;
+    }
 </style>
 <div class="splash-starfield"><div class="splash-star" style="width: 1.8px; height: 1.8px; top: 4.4%; left: 28.4%; animation-duration: 2.33s; animation-delay: 1.1s;"></div><div class="splash-star" style="width: 1.8px; height: 1.8px; top: 87.6%; left: 10.3%; animation-duration: 2.63s; animation-delay: 0.04s;"></div><div class="splash-star" style="width: 1.6px; height: 1.6px; top: 50.5%; left: 4.5%; animation-duration: 2.3s; animation-delay: 0.97s;"></div><div class="splash-star" style="width: 1.8px; height: 1.8px; top: 23.2%; left: 58.6%; animation-duration: 3.21s; animation-delay: 0.01s;"></div><div class="splash-star" style="width: 1.9px; height: 1.9px; top: 69.0%; left: 34.7%; animation-duration: 2.23s; animation-delay: 1.44s;"></div><div class="splash-star" style="width: 1.7px; height: 1.7px; top: 10.9%; left: 11.3%; animation-duration: 3.27s; animation-delay: 0.91s;"></div><div class="splash-star" style="width: 1.9px; height: 1.9px; top: 72.1%; left: 53.5%; animation-duration: 3.46s; animation-delay: 0.57s;"></div><div class="splash-star" style="width: 1.8px; height: 1.8px; top: 81.6%; left: 61.4%; animation-duration: 3.29s; animation-delay: 0.87s;"></div><div class="splash-star" style="width: 1.9px; height: 1.9px; top: 6.4%; left: 23.9%; animation-duration: 2.43s; animation-delay: 0.12s;"></div><div class="splash-star" style="width: 1.6px; height: 1.6px; top: 11.7%; left: 28.7%; animation-duration: 2.95s; animation-delay: 0.55s;"></div><div class="splash-star" style="width: 1.7px; height: 1.7px; top: 22.1%; left: 27.6%; animation-duration: 3.4s; animation-delay: 0.97s;"></div><div class="splash-star" style="width: 1.8px; height: 1.8px; top: 18.4%; left: 72.0%; animation-duration: 2.25s; animation-delay: 0.57s;"></div><div class="splash-star" style="width: 2.0px; height: 2.0px; top: 63.4%; left: 55.5%; animation-duration: 3.03s; animation-delay: 1.26s;"></div><div class="splash-star" style="width: 1.9px; height: 1.9px; top: 24.0%; left: 5.1%; animation-duration: 2.47s; animation-delay: 0.4s;"></div><div class="splash-star" style="width: 1.6px; height: 1.6px; top: 92.5%; left: 86.1%; animation-duration: 2.47s; animation-delay: 0.98s;"></div><div class="splash-star" style="width: 1.7px; height: 1.7px; top: 89.8%; left: 46.0%; animation-duration: 2.4s; animation-delay: 0.37s;"></div><div class="splash-star" style="width: 1.8px; height: 1.8px; top: 27.2%; left: 58.1%; animation-duration: 3.35s; animation-delay: 0.6s;"></div><div class="splash-star" style="width: 1.6px; height: 1.6px; top: 97.8%; left: 50.9%; animation-duration: 2.14s; animation-delay: 0.07s;"></div><div class="splash-star" style="width: 1.6px; height: 1.6px; top: 62.2%; left: 78.0%; animation-duration: 2.63s; animation-delay: 0.1s;"></div><div class="splash-star" style="width: 1.7px; height: 1.7px; top: 97.6%; left: 52.8%; animation-duration: 3.46s; animation-delay: 1.29s;"></div></div>
 <div class="splash-container">
@@ -409,6 +417,28 @@ else:
 
 # Render Navigation in Sidebar
 st.sidebar.markdown("""
+<div class="sidebar-starfield">
+    <div class="splash-star" style="width: 1.8px; height: 1.8px; top: 4.4%; left: 28.4%; animation-duration: 2.33s; animation-delay: 1.1s;"></div>
+    <div class="splash-star" style="width: 1.8px; height: 1.8px; top: 87.6%; left: 10.3%; animation-duration: 2.63s; animation-delay: 0.04s;"></div>
+    <div class="splash-star" style="width: 1.6px; height: 1.6px; top: 50.5%; left: 4.5%; animation-duration: 2.3s; animation-delay: 0.97s;"></div>
+    <div class="splash-star" style="width: 1.8px; height: 1.8px; top: 23.2%; left: 58.6%; animation-duration: 3.21s; animation-delay: 0.01s;"></div>
+    <div class="splash-star" style="width: 1.9px; height: 1.9px; top: 69.0%; left: 34.7%; animation-duration: 2.23s; animation-delay: 1.44s;"></div>
+    <div class="splash-star" style="width: 1.7px; height: 1.7px; top: 10.9%; left: 11.3%; animation-duration: 3.27s; animation-delay: 0.91s;"></div>
+    <div class="splash-star" style="width: 1.9px; height: 1.9px; top: 72.1%; left: 53.5%; animation-duration: 3.46s; animation-delay: 0.57s;"></div>
+    <div class="splash-star" style="width: 1.8px; height: 1.8px; top: 81.6%; left: 61.4%; animation-duration: 3.29s; animation-delay: 0.87s;"></div>
+    <div class="splash-star" style="width: 1.9px; height: 1.9px; top: 6.4%; left: 23.9%; animation-duration: 2.43s; animation-delay: 0.12s;"></div>
+    <div class="splash-star" style="width: 1.6px; height: 1.6px; top: 11.7%; left: 28.7%; animation-duration: 2.95s; animation-delay: 0.55s;"></div>
+    <div class="splash-star" style="width: 1.7px; height: 1.7px; top: 22.1%; left: 27.6%; animation-duration: 3.4s; animation-delay: 0.97s;"></div>
+    <div class="splash-star" style="width: 1.8px; height: 1.8px; top: 18.4%; left: 72.0%; animation-duration: 2.25s; animation-delay: 0.57s;"></div>
+    <div class="splash-star" style="width: 2.0px; height: 2.0px; top: 63.4%; left: 55.5%; animation-duration: 3.03s; animation-delay: 1.26s;"></div>
+    <div class="splash-star" style="width: 1.9px; height: 1.9px; top: 24.0%; left: 5.1%; animation-duration: 2.47s; animation-delay: 0.4s;"></div>
+    <div class="splash-star" style="width: 1.6px; height: 1.6px; top: 92.5%; left: 86.1%; animation-duration: 2.47s; animation-delay: 0.98s;"></div>
+    <div class="splash-star" style="width: 1.7px; height: 1.7px; top: 89.8%; left: 46.0%; animation-duration: 2.4s; animation-delay: 0.37s;"></div>
+    <div class="splash-star" style="width: 1.8px; height: 1.8px; top: 27.2%; left: 58.1%; animation-duration: 3.35s; animation-delay: 0.6s;"></div>
+    <div class="splash-star" style="width: 1.6px; height: 1.6px; top: 97.8%; left: 50.9%; animation-duration: 2.14s; animation-delay: 0.07s;"></div>
+    <div class="splash-star" style="width: 1.6px; height: 1.6px; top: 62.2%; left: 78.0%; animation-duration: 2.63s; animation-delay: 0.1s;"></div>
+    <div class="splash-star" style="width: 1.7px; height: 1.7px; top: 97.6%; left: 52.8%; animation-duration: 3.46s; animation-delay: 1.29s;"></div>
+</div>
 <div style="text-align: center; padding: 10px 0 30px 0; border-bottom: 1px solid rgba(255,255,255,0.05); margin-bottom: 20px; z-index: 10; position: relative;">
     <div style="margin-bottom: 15px;">
         <svg width="65" height="75" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="filter: drop-shadow(0 0 10px rgba(212,167,44,0.3));">
