@@ -343,6 +343,10 @@ st.markdown("""
     letter-spacing: 0.1em !important;
     font-family: 'Inter', sans-serif !important;
     font-weight: 700 !important;
+      min-height: 2.8em !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
     }
     .metric-card .value {
     color: #FFFFFF !important;
