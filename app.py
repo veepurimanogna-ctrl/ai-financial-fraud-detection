@@ -138,11 +138,11 @@ st.markdown("""
 <style>
     
     /* Fix Sidebar text colors */
-    [data-testid="stSidebar"] * { color: #142B44 !important; }
+    [data-testid="stSidebar"] * { color: #E2E8F0 !important; }
     /* Sidebar UI Overhaul */
     [data-testid="stSidebar"] {
-    background-color: #F5F8F7 !important; /* User requested light color */
-    border-right: 1px solid rgba(0,0,0,0.1) !important;
+    background-color: #0F2740 !important; /* Lighter Navy Blue to match reference */
+    border-right: 1px solid rgba(255,255,255,0.05) !important;
     }
     [data-testid="stSidebarNav"] { display: none !important; }
     div[role="radiogroup"] { gap: 4px !important; position: relative; z-index: 10; padding: 0 10px; }
@@ -162,7 +162,7 @@ st.markdown("""
         display: none !important; 
     }
     div[role="radiogroup"] label p {
-    color: #142B44 !important;
+    color: #E2E8F0 !important;
     font-weight: 600 !important;
     font-size: 0.95rem !important;
     }
@@ -175,7 +175,7 @@ st.markdown("""
     text-shadow: 0 1px 2px rgba(0,0,0,0.2) !important;
     }
     div[role="radiogroup"] label:not(:has(input:checked)):hover {
-    background-color: rgba(0, 0, 0, 0.05) !important;
+    background-color: rgba(255, 255, 255, 0.08) !important;
     }
     /* Global Typography Reset */
     html, body, [class*="css"], .stApp {
