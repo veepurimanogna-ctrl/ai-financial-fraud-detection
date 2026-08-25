@@ -327,6 +327,7 @@ st.markdown("""
     font-weight: 700 !important;
     }
     .metric-card .value {
+    color: #FFFFFF !important;
     font-size: 1.3rem !important;
     font-weight: 800 !important;
     word-break: normal !important;
