@@ -215,6 +215,13 @@ st.markdown("""
     text-align: center !important;
     box-shadow: 0 8px 30px rgba(15, 39, 64, 0.06) !important;
     transition: transform 0.3s cubic-bezier(0.2,0.8,0.2,1), box-shadow 0.3s ease !important;
+    
+    /* Force all cards to be the exact same size and vertically center content */
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    height: 190px !important;
     }
     .metric-card:hover {
     transform: translateY(-5px) !important;
