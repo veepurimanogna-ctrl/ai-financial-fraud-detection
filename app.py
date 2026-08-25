@@ -106,23 +106,23 @@ st.markdown('''
     font-family: 'JetBrains Mono', monospace !important;
     }
     .top-left-brand {
-    position: fixed;
-    top: 15px;
-    left: 70px;
-    z-index: 1000;
-    color: #142B44;
-    font-family: 'Playfair Display', serif;
-    font-weight: 800;
-    font-size: 1.8rem;
-    letter-spacing: 1.5px;
-    pointer-events: none;
-    text-shadow: 2px 2px 4px rgba(20, 43, 68, 0.1);
-    display: flex;
-    align-items: center;
-    gap: 8px;
+    position: fixed !important;
+    top: 15px !important;
+    left: 70px !important;
+    z-index: 9999 !important;
+    color: #142B44 !important;
+    font-family: 'Playfair Display', serif !important;
+    font-weight: 900 !important;
+    font-size: 2.2rem !important;
+    letter-spacing: 1.5px !important;
+    pointer-events: none !important;
+    text-shadow: 2px 2px 4px rgba(20, 43, 68, 0.1) !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
     }
     .top-left-brand span {
-    font-size: 2.2rem;
+    font-size: 2.8rem !important;
     }
 </style>
 <div class="top-left-brand"><span>🛡️</span> AUREVIA SHIELD</div>
