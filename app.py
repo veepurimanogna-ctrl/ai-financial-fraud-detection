@@ -272,9 +272,13 @@ st.markdown("""
     [data-testid="stSidebar"] div[role="radiogroup"] label:not(:has(input:checked)):hover {
     background-color: rgba(255, 255, 255, 0.05) !important;
     }
+    [data-testid="stSidebar"] div[role="radiogroup"] label:not(:has(input:checked)) p {
+    color: #F8FAFC !important;
+    font-weight: 500 !important;
+    }
     
     /* Main Page Radio Buttons & DataFrames (High Visibility) */
-    div[role="radiogroup"] label p {
+    [data-testid="stAppViewContainer"] div[role="radiogroup"] label p {
         color: #0F2740 !important;
         font-weight: 600 !important;
     }
