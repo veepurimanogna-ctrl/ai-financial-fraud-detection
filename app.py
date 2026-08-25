@@ -185,6 +185,16 @@ st.markdown("""
     div[role="radiogroup"] label:not(:has(input:checked)):hover {
     background-color: rgba(255, 255, 255, 0.05) !important;
     }
+    
+    .metric-card .text-value {
+        font-family: 'Inter', sans-serif !important;
+        font-size: 1.3rem !important;
+        font-weight: 800 !important;
+        color: #142B44 !important;
+        word-break: normal !important;
+        line-height: 1.2 !important;
+    }
+
     /* 🛡️ Premium Elevated Metric Cards */
     .metric-card {
     background: rgba(255, 255, 255, 0.9) !important;
@@ -404,7 +414,7 @@ if st.session_state.current_page == "🏠 System Overview":
         st.markdown(f"""
         <div class="metric-card">
             <div class="card-title">Primary Model</div>
-            <div class="value" style="color: #D4A72C;">{best_model_name}</div>
+            <div class="text-value" style="color: #D4A72C;">{best_model_name}</div>
             <div class="subtext">SMOTE Resampled</div>
         </div>
         """, unsafe_allow_html=True)
