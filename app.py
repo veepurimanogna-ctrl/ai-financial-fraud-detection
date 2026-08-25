@@ -278,8 +278,8 @@ st.markdown("""
     }
     
     /* Main Page Radio Buttons (Batch Filter Pills) */
-    [data-testid="stAppViewContainer"] div[role="radiogroup"] { flex-wrap: wrap; gap: 10px; }
-    [data-testid="stAppViewContainer"] div[role="radiogroup"] label {
+    [data-testid="stMain"] div[role="radiogroup"] { flex-wrap: wrap; gap: 10px; }
+    [data-testid="stMain"] div[role="radiogroup"] label {
         padding: 8px 16px !important;
         border-radius: 6px !important;
         margin-right: 0 !important;
@@ -289,17 +289,17 @@ st.markdown("""
     }
     
     /* Only color the SELECTED radio button Gold */
-    [data-testid="stAppViewContainer"] div[role="radiogroup"] label:has(input:checked) {
+    [data-testid="stMain"] div[role="radiogroup"] label:has(input:checked) {
         background-color: #D4A72C !important;
         border-color: #A88222 !important;
     }
-    [data-testid="stAppViewContainer"] div[role="radiogroup"] label:has(input:checked) * {
+    [data-testid="stMain"] div[role="radiogroup"] label:has(input:checked) * {
         color: #142B44 !important;
         font-weight: 700 !important;
     }
     
     /* Unselected radio buttons text color */
-    [data-testid="stAppViewContainer"] div[role="radiogroup"] label:not(:has(input:checked)) * {
+    [data-testid="stMain"] div[role="radiogroup"] label:not(:has(input:checked)) * {
         color: #0F2740 !important;
         font-weight: 600 !important;
     }
