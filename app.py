@@ -721,6 +721,9 @@ if st.session_state.current_page == "🔑 Login":
     
     .page-starfield { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 0; pointer-events: none; }
     
+    .splash-star { position: absolute; background: #D4A72C; border-radius: 50%; box-shadow: 0 0 4px 1px rgba(212, 167, 44,0.7); animation: twinkle linear infinite; }
+    @keyframes twinkle { 0%, 100% { opacity: 0.15; } 50% { opacity: 1; } }
+    
     div[data-testid="stColumn"]:has(.login-bg-anchor) {
     background-color: #FDF7E2 !important;
     border-radius: 12px;
