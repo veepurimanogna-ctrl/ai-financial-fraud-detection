@@ -1315,7 +1315,7 @@ if st.session_state.current_page == "📊 Model Performance & Metrics":
     st.markdown("<hr style='border: none; border-top: 1px solid rgba(0,0,0,0.1); margin: 30px 0;'>", unsafe_allow_html=True)
     st.markdown("<h4 style='color: #142B44; text-align: center; margin-bottom: 20px;'>Confusion Matrix Analysis</h4>", unsafe_allow_html=True)
     
-    col_cm1, col_cm2, col_cm3 = st.columns([1, 2, 1])
+    col_cm1, col_cm2, col_cm3 = st.columns([1, 4, 1])
     with col_cm2:
         # Confusion Matrix Heatmap
         z_text = [[f"{tn:,}<br>(True Negatives)", f"{fp:,}<br>(False Positives)"],
@@ -1324,9 +1324,10 @@ if st.session_state.current_page == "📊 Model Performance & Metrics":
         fig_cm = px.imshow(
             cm_t, 
             labels=dict(x="Predicted Diagnosis", y="Actual Ground Truth"),
-            x=['Predicted: Legitimate', 'Predicted: Fraud'],
-            y=['Actual: Legitimate', 'Actual: Fraud'],
+            x=['Legitimate', 'Fraud'],
+            y=['Legitimate', 'Fraud'],
             text_auto=False,
+            aspect="auto",
             color_continuous_scale="Blues"
         )
         fig_cm.update_traces(
