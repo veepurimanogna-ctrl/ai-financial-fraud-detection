@@ -724,7 +724,7 @@ if st.session_state.current_page == "🔑 Login":
     div[data-testid="stColumn"]:has(.login-bg-anchor) {
     background-color: #FDF7E2 !important;
     border-radius: 12px;
-    padding: 40px 35px;
+    padding: 25px 35px;
     border: 2px solid #D4A72C;
     box-shadow: 10px 10px 0px #D4A72C;
     }
@@ -734,7 +734,7 @@ if st.session_state.current_page == "🔑 Login":
     
     st.markdown("<br>", unsafe_allow_html=True)
     st.markdown("<div class=\"page-starfield\"><div class=\"splash-star\" style=\"width: 1.8px; height: 1.8px; top: 4.4%; left: 28.4%; animation-duration: 2.33s; animation-delay: 1.1s;\"></div><div class=\"splash-star\" style=\"width: 1.8px; height: 1.8px; top: 87.6%; left: 10.3%; animation-duration: 2.63s; animation-delay: 0.04s;\"></div><div class=\"splash-star\" style=\"width: 1.6px; height: 1.6px; top: 50.5%; left: 4.5%; animation-duration: 2.3s; animation-delay: 0.97s;\"></div><div class=\"splash-star\" style=\"width: 1.8px; height: 1.8px; top: 23.2%; left: 58.6%; animation-duration: 3.21s; animation-delay: 0.01s;\"></div><div class=\"splash-star\" style=\"width: 1.9px; height: 1.9px; top: 69.0%; left: 34.7%; animation-duration: 2.23s; animation-delay: 1.44s;\"></div><div class=\"splash-star\" style=\"width: 1.7px; height: 1.7px; top: 10.9%; left: 11.3%; animation-duration: 3.27s; animation-delay: 0.91s;\"></div><div class=\"splash-star\" style=\"width: 1.9px; height: 1.9px; top: 72.1%; left: 53.5%; animation-duration: 3.46s; animation-delay: 0.57s;\"></div><div class=\"splash-star\" style=\"width: 1.8px; height: 1.8px; top: 81.6%; left: 61.4%; animation-duration: 3.29s; animation-delay: 0.87s;\"></div><div class=\"splash-star\" style=\"width: 1.9px; height: 1.9px; top: 6.4%; left: 23.9%; animation-duration: 2.43s; animation-delay: 0.12s;\"></div><div class=\"splash-star\" style=\"width: 1.6px; height: 1.6px; top: 11.7%; left: 28.7%; animation-duration: 2.95s; animation-delay: 0.55s;\"></div><div class=\"splash-star\" style=\"width: 1.7px; height: 1.7px; top: 22.1%; left: 27.6%; animation-duration: 3.4s; animation-delay: 0.97s;\"></div><div class=\"splash-star\" style=\"width: 1.8px; height: 1.8px; top: 18.4%; left: 72.0%; animation-duration: 2.25s; animation-delay: 0.57s;\"></div><div class=\"splash-star\" style=\"width: 2.0px; height: 2.0px; top: 63.4%; left: 55.5%; animation-duration: 3.03s; animation-delay: 1.26s;\"></div><div class=\"splash-star\" style=\"width: 1.9px; height: 1.9px; top: 24.0%; left: 5.1%; animation-duration: 2.47s; animation-delay: 0.4s;\"></div><div class=\"splash-star\" style=\"width: 1.6px; height: 1.6px; top: 92.5%; left: 86.1%; animation-duration: 2.47s; animation-delay: 0.98s;\"></div><div class=\"splash-star\" style=\"width: 1.7px; height: 1.7px; top: 89.8%; left: 46.0%; animation-duration: 2.4s; animation-delay: 0.37s;\"></div><div class=\"splash-star\" style=\"width: 1.8px; height: 1.8px; top: 27.2%; left: 58.1%; animation-duration: 3.35s; animation-delay: 0.6s;\"></div><div class=\"splash-star\" style=\"width: 1.6px; height: 1.6px; top: 97.8%; left: 50.9%; animation-duration: 2.14s; animation-delay: 0.07s;\"></div><div class=\"splash-star\" style=\"width: 1.6px; height: 1.6px; top: 62.2%; left: 78.0%; animation-duration: 2.63s; animation-delay: 0.1s;\"></div><div class=\"splash-star\" style=\"width: 1.7px; height: 1.7px; top: 97.6%; left: 52.8%; animation-duration: 3.46s; animation-delay: 1.29s;\"></div></div>", unsafe_allow_html=True)
-    col_l1, col_l2, col_l3 = st.columns([1.5, 1.7, 1.5])
+    col_l1, col_l2, col_l3 = st.columns([0.8, 2.8, 0.8])
     with col_l2:
         st.markdown("<div class='login-bg-anchor'></div>", unsafe_allow_html=True)
         st.markdown('''
@@ -748,17 +748,17 @@ if st.session_state.current_page == "🔑 Login":
                 font-family: 'Inter', sans-serif;
             }
             .login-logo {
-                margin-bottom: 15px;
+                margin-bottom: 5px;
                 filter: drop-shadow(0 0 15px rgba(59, 130, 246, 0.4));
                 background: linear-gradient(135deg, #60A5FA 0%, #2563EB 100%);
                 border-radius: 12px;
-                padding: 12px;
+                padding: 10px;
             }
             .login-title {
                 color: #0F2740;
-                font-size: 1.9rem;
+                font-size: 1.8rem;
                 font-weight: 800;
-                margin-bottom: 5px;
+                margin-bottom: 0px;
             }
             .login-subtitle {
                 color: #475569;
@@ -920,8 +920,6 @@ if st.session_state.current_page == "🔑 Login":
 
 </div>
         ''', unsafe_allow_html=True)
-        
-        st.markdown("<div style='height: 10px;'></div>", unsafe_allow_html=True)
         
         import streamlit.components.v1 as components
         firebase_login_btn = components.declare_component("firebase_login", path="firebase_auth_component")
