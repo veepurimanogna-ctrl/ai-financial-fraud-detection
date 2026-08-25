@@ -1041,19 +1041,19 @@ if st.session_state.current_page == "⚡ Live Risk Simulator":
             number = {'suffix': "%", 'font': {'size': 36, 'color': exp['risk_color']}},
             gauge = {
                 'axis': {'range': [0, 100], 'tickwidth': 1, 'tickcolor': "#94a3b8"},
-                'bar': {'color': exp['risk_color']},
+                'bar': {'color': 'rgba(0,0,0,0)'},
                 'bgcolor': "#F5F8FC",
-                'borderwidth': 2,
+                'borderwidth': 0,
                 'bordercolor': "#E2E8F0",
                 'steps': [
-                    {'range': [0, 30], 'color': 'rgba(21, 148, 71, 0.2)'},
-                    {'range': [30, 70], 'color': 'rgba(212, 167, 44, 0.2)'},
-                    {'range': [70, 100], 'color': 'rgba(220, 53, 69, 0.2)'}
+                    {'range': [0, 30], 'color': '#159447'},
+                    {'range': [30, 70], 'color': '#D4A72C'},
+                    {'range': [70, 100], 'color': '#DC3545'}
                 ],
                 'threshold': {
-                    'line': {'color': "#DC3545", 'width': 4},
-                    'thickness': 0.75,
-                    'value': 20
+                    'line': {'color': "#0F2740", 'width': 6},
+                    'thickness': 0.85,
+                    'value': exp['risk_score_pct']
                 }
             }
         ))
