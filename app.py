@@ -126,7 +126,7 @@ text-shadow: 0 0 10px rgba(212, 167, 44, 0.3);
 ''', unsafe_allow_html=True)
 
 # --- Premium Light Dashboard Theme ---
-st.markdown('''
+st.markdown("""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap');
 
