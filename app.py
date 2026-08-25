@@ -127,7 +127,9 @@ st.markdown("""
 <style>
     /* Fix Sidebar text colors */
     [data-testid="stSidebar"] * { color: #E2E8F0 !important; }
-    [data-testid="stSidebar"] h1, [data-testid="stSidebar"] h2, [data-testid="stSidebar"] h3 { color: #D4A72C !important; }
+    [data-testid="stSidebar"] [data-testid="stMarkdownContainer"] h1, 
+    [data-testid="stSidebar"] [data-testid="stMarkdownContainer"] h2, 
+    [data-testid="stSidebar"] [data-testid="stMarkdownContainer"] h3 { color: #FFFFFF !important; }
     div[role="radiogroup"] label p { color: #E2E8F0 !important; }
     div[role="radiogroup"] label:has(input:checked) p { color: #D4A72C !important; font-weight: 700 !important; }
     /* Global Typography Reset */
