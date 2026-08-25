@@ -198,6 +198,17 @@ st.markdown("""
     html, body, [class*="css"], .stApp {
     font-family: 'Inter', sans-serif !important;
     }
+    /* Fix Input Field Visibility */
+    div[data-testid="stNumberInput"] div[data-baseweb="input"],
+    div[data-testid="stSelectbox"] > div > div {
+        background-color: #FFFFFF !important;
+        border: 1px solid #CBD5E1 !important;
+        border-radius: 6px !important;
+    }
+    div[data-testid="stNumberInput"] input,
+    div[data-testid="stSelectbox"] * {
+        color: #142B44 !important;
+    }
     /* Beautiful Dashboard Background */
     .stApp {
     background: linear-gradient(135deg, #FDFDFD 0%, #FDF7E2 100%) !important;
