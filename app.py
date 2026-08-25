@@ -837,7 +837,18 @@ Sign in with Google Account
         st.text_input("EMAIL ADDRESS", placeholder="you@example.com")
         st.text_input("PASSWORD", type="password", placeholder="Enter password")
         
-        if st.button("Sign In & Enter Dashboard →"):
+        st.markdown('''
+            <style>
+                button:has(p:contains("hidden_login_trigger")) { display: none !important; }
+            </style>
+        ''', unsafe_allow_html=True)
+        
+        btn_main = st.button("Sign In & Enter Dashboard →")
+        st.markdown("<div style='display: none;'>", unsafe_allow_html=True)
+        btn_hidden = st.button("hidden_login_trigger")
+        st.markdown("</div>", unsafe_allow_html=True)
+        
+        if btn_main or btn_hidden:
             st.session_state.logged_in = True
             st.session_state.current_page = "⚡ Live Risk Simulator"
             st.rerun()
@@ -845,10 +856,33 @@ Sign in with Google Account
         st.markdown('''
 <div style="text-align: center; color: #94A3B8; font-size: 0.8rem; margin: 35px 0 15px 0; font-family: 'Inter', sans-serif;">Fast Sign-In</div>
 <div style="display: flex; gap: 15px; width: 100%;">
-    <div style="flex: 1; text-align: center; padding: 12px; border: 1px solid #1E293B; border-radius: 20px; color: #F8FAFC; cursor: pointer; font-size: 0.9rem; font-weight: 700; font-family: 'Inter', sans-serif; transition: background 0.2s;"><span style="color:#D4A72C;">⚡</span> Operator</div>
-    <div style="flex: 1; text-align: center; padding: 12px; border: 1px solid #1E293B; border-radius: 20px; color: #F8FAFC; cursor: pointer; font-size: 0.9rem; font-weight: 700; font-family: 'Inter', sans-serif; transition: background 0.2s;"><span style="color:#9333EA;">👤</span> User</div>
+<div class="fast-op-btn" style="flex: 1; text-align: center; padding: 12px; border: 1px solid #1E293B; border-radius: 20px; color: #F8FAFC; cursor: pointer; font-size: 0.9rem; font-weight: 700; font-family: 'Inter', sans-serif; transition: background 0.2s;"><span style="color:#D4A72C;">⚡</span> Operator</div>
+<div class="fast-user-btn" style="flex: 1; text-align: center; padding: 12px; border: 1px solid #1E293B; border-radius: 20px; color: #F8FAFC; cursor: pointer; font-size: 0.9rem; font-weight: 700; font-family: 'Inter', sans-serif; transition: background 0.2s;"><span style="color:#9333EA;">👤</span> User</div>
 </div>
         ''', unsafe_allow_html=True)
+        
+        import streamlit.components.v1 as components
+        components.html('''
+        <script>
+            setTimeout(() => {
+                const doc = window.parent.document;
+                const googleBtn = doc.querySelector('.google-btn');
+                const operatorBtn = doc.querySelector('.fast-op-btn');
+                const userBtn = doc.querySelector('.fast-user-btn');
+                
+                let hiddenBtn = null;
+                doc.querySelectorAll('button').forEach(btn => {
+                    if(btn.innerText.includes('hidden_login_trigger')) hiddenBtn = btn;
+                });
+                
+                if (hiddenBtn) {
+                    if (googleBtn) googleBtn.onclick = () => hiddenBtn.click();
+                    if (operatorBtn) operatorBtn.onclick = () => hiddenBtn.click();
+                    if (userBtn) userBtn.onclick = () => hiddenBtn.click();
+                }
+            }, 500);
+        </script>
+        ''', height=0)
 
 # ==========================================
 # TAB 1: LIVE RISK SIMULATOR
