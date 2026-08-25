@@ -107,18 +107,25 @@ st.markdown('''
     }
     .top-left-brand {
     position: fixed;
-    top: 10px;
-    left: 60px;
+    top: 15px;
+    left: 70px;
     z-index: 1000;
-    color: #D4A72C;
+    color: #142B44;
+    font-family: 'Playfair Display', serif;
     font-weight: 800;
-    font-size: 1.1rem;
-    letter-spacing: 1px;
+    font-size: 1.8rem;
+    letter-spacing: 1.5px;
     pointer-events: none;
-    text-shadow: 0 0 10px rgba(212, 167, 44, 0.3);
+    text-shadow: 2px 2px 4px rgba(20, 43, 68, 0.1);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    }
+    .top-left-brand span {
+    font-size: 2.2rem;
     }
 </style>
-<div class="top-left-brand">🛡️ AUREVIA SHIELD</div>
+<div class="top-left-brand"><span>🛡️</span> AUREVIA SHIELD</div>
 ''', unsafe_allow_html=True)
 
 # --- Premium Light Dashboard Theme ---
@@ -431,9 +438,7 @@ if st.session_state.current_page == "🏠 System Overview":
             <div class="subtext">ROC-AUC: {best_roc:.3f}</div>
         </div>
         """, unsafe_allow_html=True)
-        with st.popover("ℹ️ What is PR-AUC?", use_container_width=True):
-            st.markdown("**PR-AUC (Precision-Recall Area Under Curve):** Measures how well the model catches fraud without making false alarms. Higher is better.")
-            st.markdown("**ROC-AUC (Receiver Operating Characteristic):** Overall accuracy of distinguishing fraud from normal.")
+
     
     with col_m3:
         best_rec = metrics_bundle['results'][best_model_name]['recall']
@@ -444,8 +449,7 @@ if st.session_state.current_page == "🏠 System Overview":
             <div class="subtext">Caught Fraud Cases</div>
         </div>
         """, unsafe_allow_html=True)
-        with st.popover("ℹ️ What is Recall?", use_container_width=True):
-            st.markdown("**Recall:** The percentage of actual fraud cases the model successfully catches. Higher recall = catches more real fraud.")
+
     
     with col_m4:
         total_len = len(df_transactions) if df_transactions is not None else 50000
