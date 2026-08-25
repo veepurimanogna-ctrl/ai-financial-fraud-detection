@@ -655,6 +655,663 @@ if st.session_state.current_page == "🔑 Login":
     /* Target the column containing the anchor */
     /* Apply SVG background to the entire page behind the login form */
     [data-testid="stAppViewContainer"]:has(.login-bg-anchor) {
+    background-color: #F5F8FC !important;
+    } joblib
+import pandas as pd
+import numpy as np
+import streamlit as st
+import plotly.express as px
+import plotly.graph_objects as go
+from sklearn.metrics import precision_score, recall_score, f1_score, confusion_matrix
+
+from model_pipeline import extract_sparkov_features
+from explainability import explain_transaction_risk
+
+# --- Page Configuration ---
+st.set_page_config(
+    page_title="AI Financial Fraud Detection System",
+    page_icon="🛡️",
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
+
+# --- Splash Screen & Persistent Branding ---
+if 'welcome_shown' not in st.session_state:
+    st.session_state.welcome_shown = False
+
+if not st.session_state.welcome_shown:
+    st.markdown('''<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+    
+    html, body, [class*="css"] {
+    font-family: 'Inter', sans-serif;
+    }
+    h1, h2, h3, h4, h5, h6, .stMarkdown h1, .stMarkdown h2, .stMarkdown h3 {
+    font-family: 'Playfair Display', serif !important;
+    color: #142B44 !important;
+    }
+    p, span, div, label {
+    font-family: 'Inter', sans-serif;
+    }
+    [data-testid="stMetricValue"] > div, .metric-card .value, .stMetric [data-testid="stMetricValue"] {
+    font-family: 'JetBrains Mono', monospace !important;
+    }
+    [data-testid="stSidebar"] * { color: #F5F8FC !important; }
+    [data-testid="stSidebar"] { display: none !important; }
+    [data-testid="collapsedControl"] { display: none !important; }
+    .stAppHeader { display: none !important; }
+    body, .stApp { background-color: #0F2740 !important; }
+    .splash-starfield { position: fixed; top: -25%; left: -25%; width: 150%; height: 150%; z-index: 0; pointer-events: none; animation: swirl 180s linear infinite; }
+    @keyframes swirl { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    .splash-star { position: absolute; background: #D4A72C; border-radius: 50%; box-shadow: 0 0 4px 1px rgba(212, 167, 44,0.7); animation: twinkle linear infinite; }
+    @keyframes twinkle { 0%, 100% { opacity: 0.15; } 50% { opacity: 1; } }
+    @keyframes zi { from { opacity:0; transform:scale(0.85); } to { opacity:1; transform:scale(1); } }
+    .splash-container { position: relative; z-index: 10; display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 75vh; text-align: center; animation: zi 0.7s cubic-bezier(0.2,0.8,0.3,1) both; }
+    /* Animate the start button below as well */
+    .stButton > button { animation: zi 0.7s cubic-bezier(0.2,0.8,0.3,1) both; }
+    .shield-glow-container { position: relative; display: inline-block; }
+    .shield-glow { position: absolute; width: 700px; height: 700px; background: radial-gradient(circle, rgba(212, 167, 44, 0.3) 0%, rgba(212, 167, 44, 0.1) 30%, transparent 70%); top: 50%; left: 50%; transform: translate(-50%, -50%); border-radius: 50%; animation: pulseGlow 6s infinite ease-in-out; z-index: -1; pointer-events: none; }
+    @keyframes pulseGlow { 0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.7; } 50% { transform: translate(-50%, -50%) scale(1.15); opacity: 1; } }
+    .gradient-divider { width: 60%; height: 2px; background: linear-gradient(90deg, transparent 0%, #FFD700 50%, transparent 100%); margin: 20px auto; opacity: 1.0; box-shadow: 0 0 10px rgba(255,215,0,0.8); }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .splash-container h1 { color: #FFD700 !important; }
+    .splash-container h3 { color: #FFFFFF !important; }
+    
+    /* Sidebar Starfield */
+    [data-testid="stSidebarContent"] { position: relative; overflow: hidden; }
+    .sidebar-starfield {
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        z-index: 0;
+        pointer-events: none;
+    }
+</style>
+<div class="splash-starfield"><div class="splash-star" style="width: 1.8px; height: 1.8px; top: 4.4%; left: 28.4%; animation-duration: 2.33s; animation-delay: 1.1s;"></div><div class="splash-star" style="width: 1.8px; height: 1.8px; top: 87.6%; left: 10.3%; animation-duration: 2.63s; animation-delay: 0.04s;"></div><div class="splash-star" style="width: 1.6px; height: 1.6px; top: 50.5%; left: 4.5%; animation-duration: 2.3s; animation-delay: 0.97s;"></div><div class="splash-star" style="width: 1.8px; height: 1.8px; top: 23.2%; left: 58.6%; animation-duration: 3.21s; animation-delay: 0.01s;"></div><div class="splash-star" style="width: 1.9px; height: 1.9px; top: 69.0%; left: 34.7%; animation-duration: 2.23s; animation-delay: 1.44s;"></div><div class="splash-star" style="width: 1.7px; height: 1.7px; top: 10.9%; left: 11.3%; animation-duration: 3.27s; animation-delay: 0.91s;"></div><div class="splash-star" style="width: 1.9px; height: 1.9px; top: 72.1%; left: 53.5%; animation-duration: 3.46s; animation-delay: 0.57s;"></div><div class="splash-star" style="width: 1.8px; height: 1.8px; top: 81.6%; left: 61.4%; animation-duration: 3.29s; animation-delay: 0.87s;"></div><div class="splash-star" style="width: 1.9px; height: 1.9px; top: 6.4%; left: 23.9%; animation-duration: 2.43s; animation-delay: 0.12s;"></div><div class="splash-star" style="width: 1.6px; height: 1.6px; top: 11.7%; left: 28.7%; animation-duration: 2.95s; animation-delay: 0.55s;"></div><div class="splash-star" style="width: 1.7px; height: 1.7px; top: 22.1%; left: 27.6%; animation-duration: 3.4s; animation-delay: 0.97s;"></div><div class="splash-star" style="width: 1.8px; height: 1.8px; top: 18.4%; left: 72.0%; animation-duration: 2.25s; animation-delay: 0.57s;"></div><div class="splash-star" style="width: 2.0px; height: 2.0px; top: 63.4%; left: 55.5%; animation-duration: 3.03s; animation-delay: 1.26s;"></div><div class="splash-star" style="width: 1.9px; height: 1.9px; top: 24.0%; left: 5.1%; animation-duration: 2.47s; animation-delay: 0.4s;"></div><div class="splash-star" style="width: 1.6px; height: 1.6px; top: 92.5%; left: 86.1%; animation-duration: 2.47s; animation-delay: 0.98s;"></div><div class="splash-star" style="width: 1.7px; height: 1.7px; top: 89.8%; left: 46.0%; animation-duration: 2.4s; animation-delay: 0.37s;"></div><div class="splash-star" style="width: 1.8px; height: 1.8px; top: 27.2%; left: 58.1%; animation-duration: 3.35s; animation-delay: 0.6s;"></div><div class="splash-star" style="width: 1.6px; height: 1.6px; top: 97.8%; left: 50.9%; animation-duration: 2.14s; animation-delay: 0.07s;"></div><div class="splash-star" style="width: 1.6px; height: 1.6px; top: 62.2%; left: 78.0%; animation-duration: 2.63s; animation-delay: 0.1s;"></div><div class="splash-star" style="width: 1.7px; height: 1.7px; top: 97.6%; left: 52.8%; animation-duration: 3.46s; animation-delay: 1.29s;"></div></div>
+<div class="splash-container">
+<div class="shield-glow-container" style="display:flex; flex-direction:column; align-items:center;">
+<div class="shield-glow"></div>
+<svg width="100" height="100" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-bottom: 10px; z-index: 1;">
+  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" fill="url(#shield-grad)" stroke="#FCEBB8" stroke-width="0.5"/>
+  <path d="M9 12l2 2 4-4" stroke="#0F2740" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <defs>
+    <linearGradient id="shield-grad" x1="12" y1="2" x2="12" y2="22" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F4D879"/>
+      <stop offset="1" stop-color="#B9862A"/>
+    </linearGradient>
+  </defs>
+</svg>
+<h1 style="color: #FFD700; font-weight: 800; font-size: 5.5rem; margin-bottom: 0; margin-top: 0; text-shadow: 0 0 30px rgba(212,167,44,0.8); line-height: 1.1;">AUREVIA SHIELD</h1>
+</div>
+<div class="gradient-divider"></div>
+<h3 style="color: #FFFFFF; margin-top: 0; margin-bottom: 40px; font-weight: 400; font-size: 1.6rem;">AI Financial Fraud Detection & Risk Analysis System</div>
+</div>''', unsafe_allow_html=True)
+    
+    col1, col2, col3 = st.columns([1, 1, 1])
+    with col2:
+        if st.button("Let's Start", use_container_width=True, type="primary"):
+            st.session_state.welcome_shown = True
+            st.rerun()
+            
+    st.stop()
+
+# Top-Left Persistent Brand Mark
+st.markdown('''
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+    
+    /* :wght@600&family=Inter:wght@400;500&family=JetBrains+Mono:wght@500&display=swap');
+    html, body, [class*="css"] {
+    font-family: 'Inter', sans-serif;
+    }
+    h1, h2, h3, h4, h5, h6, .stMarkdown h1, .stMarkdown h2, .stMarkdown h3 {
+    font-family: 'Playfair Display', serif !important;
+    color: #142B44 !important;
+    }
+    p, span, div, label {
+    font-family: 'Inter', sans-serif;
+    }
+    [data-testid="stMetricValue"] > div, .metric-card .value, .stMetric [data-testid="stMetricValue"] {
+    font-family: 'JetBrains Mono', monospace !important;
+    }
+    .top-left-brand {
+    position: fixed !important;
+    top: 15px !important;
+    left: 70px !important;
+    z-index: 9999 !important;
+    color: #142B44 !important;
+    font-family: 'Playfair Display', serif !important;
+    font-weight: 900 !important;
+    font-size: 2.2rem !important;
+    letter-spacing: 1.5px !important;
+    pointer-events: none !important;
+    text-shadow: 2px 2px 4px rgba(20, 43, 68, 0.1) !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    }
+    .top-left-brand span {
+    font-size: 2.8rem !important;
+    }
+    
+</style>
+<div class="top-left-brand"><span>🛡️</span> AUREVIA SHIELD</div>
+''', unsafe_allow_html=True)
+
+# --- Premium Light Dashboard Theme ---
+st.markdown("""
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+    
+    /* Fix Sidebar text colors */
+    [data-testid="stSidebar"] * { color: #E2E8F0 !important; }
+    /* Sidebar UI Overhaul */
+    [data-testid="stSidebar"] {
+    background-color: #0F2740 !important; /* Lighter Navy Blue to match reference */
+    border-right: 1px solid rgba(255,255,255,0.05) !important;
+    }
+    [data-testid="stSidebarNav"] { display: none !important; }
+    div[role="radiogroup"] { gap: 4px !important; position: relative; z-index: 10; padding: 0 10px; }
+    div[role="radiogroup"] label {
+    padding: 14px 20px !important;
+    border-radius: 8px !important;
+    margin-bottom: 2px !important;
+    transition: all 0.2s ease !important;
+    cursor: pointer !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    }
+    /* Safely hide the Streamlit radio circles and inputs without hiding the text container */
+    div[role="radiogroup"] label input,
+    div[role="radiogroup"] label > div:not(:has(p)) { 
+        display: none !important; 
+    }
+    div[role="radiogroup"] label p {
+    color: #E2E8F0 !important;
+    font-weight: 600 !important;
+    font-size: 0.95rem !important;
+    }
+    div[role="radiogroup"] label:has(input:checked) {
+    background: linear-gradient(90deg, #A88222 0%, #8A6413 100%) !important;
+    box-shadow: 0 4px 10px rgba(168, 130, 34, 0.15) !important;
+    }
+    div[role="radiogroup"] label:has(input:checked) * {
+    color: #FFFFFF !important;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.2) !important;
+    }
+    div[role="radiogroup"] label:not(:has(input:checked)):hover {
+    background-color: rgba(255, 255, 255, 0.08) !important;
+    }
+    /* Global Typography Reset */
+    html, body, [class*="css"], .stApp {
+    font-family: 'Inter', sans-serif !important;
+    }
+    /* Beautiful Dashboard Background */
+    .stApp {
+    background: #F5F8FC !important;
+    }
+    /* Elegant Serif Headings */
+    h1, h2, h3, h4, h5, h6,
+    [data-testid="stMarkdownContainer"] h1,
+    [data-testid="stMarkdownContainer"] h2,
+    [data-testid="stMarkdownContainer"] h3 {
+    font-family: 'Playfair Display', serif !important;
+    color: #142B44 !important;
+    }
+    /* Gradient Main Dashboard Title */
+    [data-testid="stHeader"] { background-color: transparent !important; }
+    div.block-container > div:first-child [data-testid="stMarkdownContainer"] h1 {
+    background: linear-gradient(90deg, #142B44, #D4A72C);
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+    color: transparent !important;
+    text-shadow: 0 4px 15px rgba(212, 167, 44, 0.15);
+    }
+    p, span, div, label {
+    font-family: 'Inter', sans-serif;
+    }
+    /* Numeric Font for Metrics */
+    [data-testid="stMetricValue"] > div, .metric-card .value, .stMetric [data-testid="stMetricValue"] {
+    font-family: 'JetBrains Mono', monospace !important;
+    color: #142B44 !important;
+    }
+    /* 🔘 Premium Sidebar Navigation Radio Buttons */
+    div[role="radiogroup"] label {
+    padding: 12px 16px !important;
+    border-radius: 8px !important;
+    margin-bottom: 4px !important;
+    transition: all 0.2s ease !important;
+    cursor: pointer !important;
+    }
+    div[role="radiogroup"] label > div:first-child { display: none !important; }
+    div[role="radiogroup"] label:has(input:checked) {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid rgba(212, 167, 44, 0.4) !important;
+    box-shadow: 0 4px 12px rgba(212, 167, 44, 0.15) !important;
+    }
+    div[role="radiogroup"] label:has(input:checked) p {
+    color: #D4A72C !important;
+    font-weight: 700 !important;
+    }
+    div[role="radiogroup"] label:not(:has(input:checked)):hover {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    }
+    .metric-card .text-value {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 1.3rem !important;
+    font-weight: 800 !important;
+    color: #142B44 !important;
+    word-break: normal !important;
+    line-height: 1.2 !important;
+    }
+    /* 🛡️ Premium Elevated Metric Cards */
+    .metric-card {
+    background: rgba(255, 255, 255, 0.9) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.6) !important;
+    border-radius: 12px !important;
+    padding: 24px !important;
+    text-align: center !important;
+    box-shadow: 0 8px 30px rgba(15, 39, 64, 0.06) !important;
+    transition: transform 0.3s cubic-bezier(0.2,0.8,0.2,1), box-shadow 0.3s ease !important;
+    /* Force all cards to be the exact same size and vertically center content */
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    height: 190px !important;
+    }
+    .metric-card:hover {
+    transform: translateY(-5px) !important;
+    box-shadow: 0 15px 40px rgba(15, 39, 64, 0.12) !important;
+    border: 1px solid rgba(212, 167, 44, 0.5) !important;
+    }
+    .metric-card .card-title {
+    color: #D4A72C !important;
+    font-size: 0.95rem !important;
+    margin-bottom: 12px !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.1em !important;
+    font-family: 'Inter', sans-serif !important;
+    font-weight: 700 !important;
+    }
+    .metric-card .value {
+    font-size: 1.3rem !important;
+    font-weight: 800 !important;
+    word-break: normal !important;
+    line-height: 1.2 !important;
+    }
+    .metric-card .subtext {
+    color: #64748B !important;
+    font-size: 0.9rem !important;
+    margin-top: 8px !important;
+    font-family: 'Inter', sans-serif !important;
+    }
+    /* 🚨 Neon Risk Badges */
+    .badge-high {
+    background-color: rgba(220, 53, 69, 0.15);
+    color: #DC3545;
+    border: 1px solid #DC3545;
+    padding: 8px 18px;
+    border-radius: 4px;
+    font-weight: 800;
+    font-size: 1.2rem;
+    display: inline-block;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    box-shadow: 0 0 15px rgba(220, 53, 69, 0.4);
+    text-shadow: 0 0 8px rgba(220, 53, 69, 0.5);
+    }
+    .badge-medium {
+    background-color: rgba(255, 170, 0, 0.15);
+    color: #ffaa00;
+    border: 1px solid #ffaa00;
+    padding: 8px 18px;
+    border-radius: 4px;
+    font-weight: 800;
+    font-size: 1.2rem;
+    display: inline-block;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    box-shadow: 0 0 15px rgba(255, 170, 0, 0.3);
+    }
+    .badge-low {
+    background-color: rgba(21, 148, 71, 0.15);
+    color: #159447;
+    border: 1px solid #159447;
+    padding: 8px 18px;
+    border-radius: 4px;
+    font-weight: 800;
+    font-size: 1.2rem;
+    display: inline-block;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    box-shadow: 0 0 15px rgba(21, 148, 71, 0.3);
+    }
+    /* 📊 Explanation & Terminal Boxes */
+    .driver-box {
+    background-color: rgba(220, 53, 69, 0.08);
+    border-left: 3px solid #DC3545;
+    padding: 12px;
+    margin-bottom: 10px;
+    font-family: monospace;
+    color: #ffb3c6;
+    }
+    .mitigator-box {
+    background-color: rgba(21, 148, 71, 0.08);
+    border-left: 3px solid #159447;
+    padding: 12px;
+    margin-bottom: 10px;
+    font-family: monospace;
+    color: #a7f3d0;
+    }
+    /* ⚡ Action Box */
+    .action-box {
+    background: rgba(212, 167, 44, 0.05);
+    border: 1px dashed #D4A72C;
+    border-radius: 4px;
+    padding: 16px;
+    margin-top: 15px;
+    text-align: center;
+    font-weight: 700;
+    color: #D4A72C;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    }
+    
+</style>
+""", unsafe_allow_html=True)
+
+# --- Load Pipeline & Models ---
+@st.cache_resource
+def load_models_and_data():
+    model_path = "models/fraud_model_pipeline.pkl"
+    metrics_path = "models/metrics.joblib"
+    sparkov_data_path = "data/sparkov_fraudTrain.csv"
+    data_path = "data/transactions.csv"
+    preset_path = "data/preset_scenarios.csv"
+    
+    if not (os.path.exists(model_path) and os.path.exists(metrics_path)):
+        st.error("Model files not found! Running model training pipeline...")
+        from model_pipeline import train_and_evaluate_fraud_models
+        train_and_evaluate_fraud_models()
+        
+    pipeline_bundle = joblib.load(model_path)
+    metrics_bundle = joblib.load(metrics_path)
+    
+    df = pd.read_csv(sparkov_data_path) if os.path.exists(sparkov_data_path) else (pd.read_csv(data_path) if os.path.exists(data_path) else None)
+    presets = pd.read_csv(preset_path) if os.path.exists(preset_path) else None
+    
+    return pipeline_bundle, metrics_bundle, df, presets
+
+pipeline_bundle, metrics_bundle, df_transactions, df_presets = load_models_and_data()
+best_model_name = pipeline_bundle['model_name']
+preprocessor = pipeline_bundle['preprocessor']
+model = pipeline_bundle['model']
+req_cols = pipeline_bundle['num_features'] + pipeline_bundle['cat_features'] + pipeline_bundle['bin_features']
+
+
+# --- Session State ---
+if 'logged_in' not in st.session_state:
+    st.session_state.logged_in = False
+if 'current_page' not in st.session_state:
+    st.session_state.current_page = "💠 Dashboard"
+
+# --- Full-Page Custom Navigation ---
+if not st.session_state.logged_in:
+    nav_options = ["💠 Dashboard", "🔑 Login"]
+else:
+    nav_options = [
+        "💠 Dashboard",
+        "⚡ Live Risk Simulator", 
+        "📂 Batch CSV Fraud Scanner", 
+        "📊 Model Performance & Metrics", 
+        "🔍 Fraud Insights & Analytics (EDA)",
+        "🚪 Logout"
+    ]
+
+# Render Navigation in Sidebar
+st.sidebar.markdown("""
+<div class="sidebar-starfield">
+    <div class="splash-star" style="width: 1.8px; height: 1.8px; top: 4.4%; left: 28.4%; animation-duration: 2.33s; animation-delay: 1.1s;"></div>
+    <div class="splash-star" style="width: 1.8px; height: 1.8px; top: 87.6%; left: 10.3%; animation-duration: 2.63s; animation-delay: 0.04s;"></div>
+    <div class="splash-star" style="width: 1.6px; height: 1.6px; top: 50.5%; left: 4.5%; animation-duration: 2.3s; animation-delay: 0.97s;"></div>
+    <div class="splash-star" style="width: 1.8px; height: 1.8px; top: 23.2%; left: 58.6%; animation-duration: 3.21s; animation-delay: 0.01s;"></div>
+    <div class="splash-star" style="width: 1.9px; height: 1.9px; top: 69.0%; left: 34.7%; animation-duration: 2.23s; animation-delay: 1.44s;"></div>
+    <div class="splash-star" style="width: 1.7px; height: 1.7px; top: 10.9%; left: 11.3%; animation-duration: 3.27s; animation-delay: 0.91s;"></div>
+    <div class="splash-star" style="width: 1.9px; height: 1.9px; top: 72.1%; left: 53.5%; animation-duration: 3.46s; animation-delay: 0.57s;"></div>
+    <div class="splash-star" style="width: 1.8px; height: 1.8px; top: 81.6%; left: 61.4%; animation-duration: 3.29s; animation-delay: 0.87s;"></div>
+    <div class="splash-star" style="width: 1.9px; height: 1.9px; top: 6.4%; left: 23.9%; animation-duration: 2.43s; animation-delay: 0.12s;"></div>
+    <div class="splash-star" style="width: 1.6px; height: 1.6px; top: 11.7%; left: 28.7%; animation-duration: 2.95s; animation-delay: 0.55s;"></div>
+    <div class="splash-star" style="width: 1.7px; height: 1.7px; top: 22.1%; left: 27.6%; animation-duration: 3.4s; animation-delay: 0.97s;"></div>
+    <div class="splash-star" style="width: 1.8px; height: 1.8px; top: 18.4%; left: 72.0%; animation-duration: 2.25s; animation-delay: 0.57s;"></div>
+    <div class="splash-star" style="width: 2.0px; height: 2.0px; top: 63.4%; left: 55.5%; animation-duration: 3.03s; animation-delay: 1.26s;"></div>
+    <div class="splash-star" style="width: 1.9px; height: 1.9px; top: 24.0%; left: 5.1%; animation-duration: 2.47s; animation-delay: 0.4s;"></div>
+    <div class="splash-star" style="width: 1.6px; height: 1.6px; top: 92.5%; left: 86.1%; animation-duration: 2.47s; animation-delay: 0.98s;"></div>
+    <div class="splash-star" style="width: 1.7px; height: 1.7px; top: 89.8%; left: 46.0%; animation-duration: 2.4s; animation-delay: 0.37s;"></div>
+    <div class="splash-star" style="width: 1.8px; height: 1.8px; top: 27.2%; left: 58.1%; animation-duration: 3.35s; animation-delay: 0.6s;"></div>
+    <div class="splash-star" style="width: 1.6px; height: 1.6px; top: 97.8%; left: 50.9%; animation-duration: 2.14s; animation-delay: 0.07s;"></div>
+    <div class="splash-star" style="width: 1.6px; height: 1.6px; top: 62.2%; left: 78.0%; animation-duration: 2.63s; animation-delay: 0.1s;"></div>
+    <div class="splash-star" style="width: 1.7px; height: 1.7px; top: 97.6%; left: 52.8%; animation-duration: 3.46s; animation-delay: 1.29s;"></div>
+</div>
+<div style="text-align: center; padding: 10px 0 30px 0; border-bottom: 1px solid rgba(255,255,255,0.05); margin-bottom: 20px; z-index: 10; position: relative;">
+    <div style="margin-bottom: 15px;">
+        <svg width="65" height="75" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="filter: drop-shadow(0 0 10px rgba(212,167,44,0.3));">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" fill="url(#sidebar-shield)" stroke="#FCEBB8" stroke-width="0.5"/>
+            <rect x="9.5" y="9.5" width="5" height="4.5" rx="1" fill="#0F2740"/>
+            <path d="M10.5 9.5V8a1.5 1.5 0 013 0v1.5" stroke="#0F2740" stroke-width="1.2"/>
+            <defs>
+                <linearGradient id="sidebar-shield" x1="12" y1="2" x2="12" y2="22" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#F4D879"/>
+                <stop offset="1" stop-color="#B9862A"/>
+                </linearGradient>
+            </defs>
+        </svg>
+    </div>
+    <div style="font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 900; line-height: 1.15; letter-spacing: 1px;">
+        <span style="color: #FFFFFF;">AUREVIA</span><br>
+        <span style="color: #D4A72C;">SHIELD</span>
+    </div>
+    <div style="color: #94a3b8; font-size: 0.75rem; margin-top: 15px; font-weight: 500; max-width: 220px; margin-left: auto; margin-right: auto; line-height: 1.5;">
+        AI Financial Fraud Detection &<br>Risk Analysis System
+    </div>
+</div>
+""", unsafe_allow_html=True)
+selected_page = st.sidebar.radio(
+    "Navigation", 
+    nav_options, 
+    index=nav_options.index(st.session_state.current_page) if st.session_state.current_page in nav_options else 0,
+    label_visibility="collapsed"
+)
+
+# Handle Logout immediately
+if selected_page == "🚪 Logout":
+    st.session_state.logged_in = False
+    st.session_state.current_page = "💠 Dashboard"
+    st.rerun()
+
+
+# Update page state if changed
+if selected_page != st.session_state.current_page and selected_page != "🚪 Logout":
+    st.session_state.current_page = selected_page
+    st.rerun()
+
+# --- Custom Bottom Security Card ---
+st.sidebar.markdown('''
+<div style="margin-top: 50px; margin-bottom: 30px; padding: 25px 20px; border: 1px solid rgba(212, 167, 44, 0.3); border-radius: 12px; background: rgba(15, 39, 64, 0.4); text-align: center; position: relative; z-index: 10; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+    <div style="margin-bottom: 12px;">
+        <svg width="24" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="#D4A72C" stroke-width="1.5"/>
+            <rect x="9" y="10" width="6" height="5" rx="1" stroke="#D4A72C" stroke-width="1.2"/>
+            <path d="M10 10V8a2 2 0 014 0v2" stroke="#D4A72C" stroke-width="1.2"/>
+        </svg>
+    </div>
+    <div style="color: #D4A72C; font-weight: 800; font-size: 1.15rem; line-height: 1.3; margin-bottom: 15px; font-family: 'Inter', sans-serif;">Stop fraud before<br>it reaches you.</div>
+    <div style="color: #E2E8F0; font-size: 0.75rem; line-height: 1.6; font-weight: 400; opacity: 0.9;">Real-time detection.<br>Smart decisions.<br>Secure future.</div>
+</div>
+''', unsafe_allow_html=True)
+
+
+# ==========================================
+# TAB OVERVIEW: SYSTEM OVERVIEW
+# ==========================================
+if st.session_state.current_page == "💠 Dashboard":
+
+    st.markdown('''<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+    
+    /* :wght@600&family=Inter:wght@400;500&family=JetBrains+Mono:wght@500&display=swap');
+    html, body, [class*="css"] {
+    font-family: 'Inter', sans-serif;
+    }
+    h1, h2, h3, h4, h5, h6, .stMarkdown h1, .stMarkdown h2, .stMarkdown h3 {
+    font-family: 'Playfair Display', serif !important;
+    color: #142B44 !important;
+    }
+    p, span, div, label {
+    font-family: 'Inter', sans-serif;
+    }
+    [data-testid="stMetricValue"] > div, .metric-card .value, .stMetric [data-testid="stMetricValue"] {
+    font-family: 'JetBrains Mono', monospace !important;
+    }
+    .page-starfield { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 0; pointer-events: none; }
+    .splash-star { position: absolute; background: #D4A72C; border-radius: 50%; box-shadow: 0 0 4px 1px rgba(212, 167, 44,0.7); animation: twinkle linear infinite; }
+    @keyframes twinkle { 0%, 100% { opacity: 0.15; } 50% { opacity: 1; } }
+    
+</style>
+<div class="page-starfield"><div class="splash-star" style="width: 1.8px; height: 1.8px; top: 4.4%; left: 28.4%; animation-duration: 2.33s; animation-delay: 1.1s;"></div><div class="splash-star" style="width: 1.8px; height: 1.8px; top: 87.6%; left: 10.3%; animation-duration: 2.63s; animation-delay: 0.04s;"></div><div class="splash-star" style="width: 1.6px; height: 1.6px; top: 50.5%; left: 4.5%; animation-duration: 2.3s; animation-delay: 0.97s;"></div><div class="splash-star" style="width: 1.8px; height: 1.8px; top: 23.2%; left: 58.6%; animation-duration: 3.21s; animation-delay: 0.01s;"></div><div class="splash-star" style="width: 1.9px; height: 1.9px; top: 69.0%; left: 34.7%; animation-duration: 2.23s; animation-delay: 1.44s;"></div><div class="splash-star" style="width: 1.7px; height: 1.7px; top: 10.9%; left: 11.3%; animation-duration: 3.27s; animation-delay: 0.91s;"></div><div class="splash-star" style="width: 1.9px; height: 1.9px; top: 72.1%; left: 53.5%; animation-duration: 3.46s; animation-delay: 0.57s;"></div><div class="splash-star" style="width: 1.8px; height: 1.8px; top: 81.6%; left: 61.4%; animation-duration: 3.29s; animation-delay: 0.87s;"></div><div class="splash-star" style="width: 1.9px; height: 1.9px; top: 6.4%; left: 23.9%; animation-duration: 2.43s; animation-delay: 0.12s;"></div><div class="splash-star" style="width: 1.6px; height: 1.6px; top: 11.7%; left: 28.7%; animation-duration: 2.95s; animation-delay: 0.55s;"></div><div class="splash-star" style="width: 1.7px; height: 1.7px; top: 22.1%; left: 27.6%; animation-duration: 3.4s; animation-delay: 0.97s;"></div><div class="splash-star" style="width: 1.8px; height: 1.8px; top: 18.4%; left: 72.0%; animation-duration: 2.25s; animation-delay: 0.57s;"></div><div class="splash-star" style="width: 2.0px; height: 2.0px; top: 63.4%; left: 55.5%; animation-duration: 3.03s; animation-delay: 1.26s;"></div><div class="splash-star" style="width: 1.9px; height: 1.9px; top: 24.0%; left: 5.1%; animation-duration: 2.47s; animation-delay: 0.4s;"></div><div class="splash-star" style="width: 1.6px; height: 1.6px; top: 92.5%; left: 86.1%; animation-duration: 2.47s; animation-delay: 0.98s;"></div><div class="splash-star" style="width: 1.7px; height: 1.7px; top: 89.8%; left: 46.0%; animation-duration: 2.4s; animation-delay: 0.37s;"></div><div class="splash-star" style="width: 1.8px; height: 1.8px; top: 27.2%; left: 58.1%; animation-duration: 3.35s; animation-delay: 0.6s;"></div><div class="splash-star" style="width: 1.6px; height: 1.6px; top: 97.8%; left: 50.9%; animation-duration: 2.14s; animation-delay: 0.07s;"></div><div class="splash-star" style="width: 1.6px; height: 1.6px; top: 62.2%; left: 78.0%; animation-duration: 2.63s; animation-delay: 0.1s;"></div><div class="splash-star" style="width: 1.7px; height: 1.7px; top: 97.6%; left: 52.8%; animation-duration: 3.46s; animation-delay: 1.29s;"></div></div>''', unsafe_allow_html=True)
+    # --- Header Section ---
+    st.title("AI Financial Fraud Detection & Risk Analysis System")
+    st.caption("Real-Time Machine Learning Pipeline for Financial Transaction Risk Scoring, Class Imbalance Mitigation, & Explainable AI")
+    
+    st.markdown("**How this works:** This app analyzes transaction patterns (like location, time, and purchase history) to flag potentially fraudulent activity before it is approved.")
+    st.markdown("---")
+    
+    # --- Top Banner Stats ---
+    col_m1, col_m2, col_m3, col_m4 = st.columns(4)
+    with col_m1:
+        st.markdown(f"""
+        <div class="metric-card">
+            <div class="card-title">Primary Model</div>
+            <div class="text-value" style="color: #D4A72C;">{best_model_name}</div>
+            <div class="subtext">SMOTE Resampled</div>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    with col_m2:
+        best_pr = metrics_bundle['results'][best_model_name]['pr_auc']
+        best_roc = metrics_bundle['results'][best_model_name]['roc_auc']
+        st.markdown(f"""
+        <div class="metric-card">
+            <div class="card-title">Model PR-AUC</div>
+            <div class="value" style="color: #10b981;">{best_pr:.3f}</div>
+            <div class="subtext">ROC-AUC: {best_roc:.3f}</div>
+        </div>
+        """, unsafe_allow_html=True)
+
+    
+    with col_m3:
+        best_rec = metrics_bundle['results'][best_model_name]['recall']
+        st.markdown(f"""
+        <div class="metric-card">
+            <div class="card-title">Fraud Recall Rate</div>
+            <div class="value" style="color: #f59e0b;">{best_rec*100:.1f}%</div>
+            <div class="subtext">Caught Fraud Cases</div>
+        </div>
+        """, unsafe_allow_html=True)
+
+    
+    with col_m4:
+        total_len = len(df_transactions) if df_transactions is not None else 50000
+        st.markdown(f"""
+        <div class="metric-card">
+            <div class="card-title">Dataset Size</div>
+            <div class="value" style="color: #c084fc;">{total_len:,}</div>
+            <div class="subtext">Synthetic data matching real Sparkov schema</div>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    st.markdown("<br>", unsafe_allow_html=True)
+    
+    st.markdown("<h1 style='text-align: center; color: #D4A72C; margin-bottom: 30px; font-weight: 800; font-size: 3.8rem; text-shadow: 0 0 20px rgba(212, 167, 44, 0.6); letter-spacing: -1px;'>Stop fraud before it reaches you.</h1>", unsafe_allow_html=True)
+    
+    col_o1, col_o2 = st.columns([1.2, 1], gap="large")
+    with col_o1:
+        st.markdown("### 🛡️ Why Our System?")
+        st.markdown("""
+        **Real-time request analysis in under 3 milliseconds.**  
+        One API call, instant verdict, zero friction for real users. 
+        Drop it in today, stop the bleeding tomorrow.
+        
+        <br>
+        
+        #### Stops at the Edge:
+        - **Account Takeover:** Prevents unauthorized logins.
+        - **Card Testing:** Blocks mass automated transaction trials.
+        - **Promo Abuse:** Identifies synthetic identities.
+        """, unsafe_allow_html=True)
+        
+    with col_o2:
+        st.markdown("### ⚡ Live Verdict Stream (Simulation)")
+        st.code("""
+12:42:58  ALLOW    US POST /login      1.2ms
+12:42:43  ALERT    IN POST /otp        1.4ms
+12:42:45  ALLOW    CA POST /payment    1.3ms
+12:42:47  BLOCK    RU POST /signup     0.8ms
+12:42:49  ALLOW    GB POST /login      1.0ms
+        """, language="shell")
+
+# ==========================================
+# TAB LOGIN: LOGIN / API ACCESS
+# ==========================================
+if st.session_state.current_page == "🔑 Login":
+
+    st.markdown('''<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+    
+    /* :wght@600&family=Inter:wght@400;500&family=JetBrains+Mono:wght@500&display=swap');
+    html, body, [class*="css"] {
+    font-family: 'Inter', sans-serif;
+    }
+    h1, h2, h3, h4, h5, h6, .stMarkdown h1, .stMarkdown h2, .stMarkdown h3 {
+    font-family: 'Playfair Display', serif !important;
+    color: #142B44 !important;
+    }
+    p, span, div, label {
+    font-family: 'Inter', sans-serif;
+    }
+    [data-testid="stMetricValue"] > div, .metric-card .value, .stMetric [data-testid="stMetricValue"] {
+    font-family: 'JetBrains Mono', monospace !important;
+    }
+    .page-starfield { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 0; pointer-events: none; }
+    .splash-star { position: absolute; background: #D4A72C; border-radius: 50%; box-shadow: 0 0 4px 1px rgba(212, 167, 44,0.7); animation: twinkle linear infinite; }
+    @keyframes twinkle { 0%, 100% { opacity: 0.15; } 50% { opacity: 1; } }
+    
+</style>
+<div class="page-starfield"><div class="splash-star" style="width: 1.8px; height: 1.8px; top: 4.4%; left: 28.4%; animation-duration: 2.33s; animation-delay: 1.1s;"></div><div class="splash-star" style="width: 1.8px; height: 1.8px; top: 87.6%; left: 10.3%; animation-duration: 2.63s; animation-delay: 0.04s;"></div><div class="splash-star" style="width: 1.6px; height: 1.6px; top: 50.5%; left: 4.5%; animation-duration: 2.3s; animation-delay: 0.97s;"></div><div class="splash-star" style="width: 1.8px; height: 1.8px; top: 23.2%; left: 58.6%; animation-duration: 3.21s; animation-delay: 0.01s;"></div><div class="splash-star" style="width: 1.9px; height: 1.9px; top: 69.0%; left: 34.7%; animation-duration: 2.23s; animation-delay: 1.44s;"></div><div class="splash-star" style="width: 1.7px; height: 1.7px; top: 10.9%; left: 11.3%; animation-duration: 3.27s; animation-delay: 0.91s;"></div><div class="splash-star" style="width: 1.9px; height: 1.9px; top: 72.1%; left: 53.5%; animation-duration: 3.46s; animation-delay: 0.57s;"></div><div class="splash-star" style="width: 1.8px; height: 1.8px; top: 81.6%; left: 61.4%; animation-duration: 3.29s; animation-delay: 0.87s;"></div><div class="splash-star" style="width: 1.9px; height: 1.9px; top: 6.4%; left: 23.9%; animation-duration: 2.43s; animation-delay: 0.12s;"></div><div class="splash-star" style="width: 1.6px; height: 1.6px; top: 11.7%; left: 28.7%; animation-duration: 2.95s; animation-delay: 0.55s;"></div><div class="splash-star" style="width: 1.7px; height: 1.7px; top: 22.1%; left: 27.6%; animation-duration: 3.4s; animation-delay: 0.97s;"></div><div class="splash-star" style="width: 1.8px; height: 1.8px; top: 18.4%; left: 72.0%; animation-duration: 2.25s; animation-delay: 0.57s;"></div><div class="splash-star" style="width: 2.0px; height: 2.0px; top: 63.4%; left: 55.5%; animation-duration: 3.03s; animation-delay: 1.26s;"></div><div class="splash-star" style="width: 1.9px; height: 1.9px; top: 24.0%; left: 5.1%; animation-duration: 2.47s; animation-delay: 0.4s;"></div><div class="splash-star" style="width: 1.6px; height: 1.6px; top: 92.5%; left: 86.1%; animation-duration: 2.47s; animation-delay: 0.98s;"></div><div class="splash-star" style="width: 1.7px; height: 1.7px; top: 89.8%; left: 46.0%; animation-duration: 2.4s; animation-delay: 0.37s;"></div><div class="splash-star" style="width: 1.8px; height: 1.8px; top: 27.2%; left: 58.1%; animation-duration: 3.35s; animation-delay: 0.6s;"></div><div class="splash-star" style="width: 1.6px; height: 1.6px; top: 97.8%; left: 50.9%; animation-duration: 2.14s; animation-delay: 0.07s;"></div><div class="splash-star" style="width: 1.6px; height: 1.6px; top: 62.2%; left: 78.0%; animation-duration: 2.63s; animation-delay: 0.1s;"></div><div class="splash-star" style="width: 1.7px; height: 1.7px; top: 97.6%; left: 52.8%; animation-duration: 3.46s; animation-delay: 1.29s;"></div></div>''', unsafe_allow_html=True)
+    st.markdown('''
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+    
+    /* :wght@600&family=Inter:wght@400;500&family=JetBrains+Mono:wght@500&display=swap');
+    html, body, [class*="css"] {
+    font-family: 'Inter', sans-serif;
+    }
+    h1, h2, h3, h4, h5, h6, .stMarkdown h1, .stMarkdown h2, .stMarkdown h3 {
+    font-family: 'Playfair Display', serif !important;
+    color: #142B44 !important;
+    }
+    p, span, div, label {
+    font-family: 'Inter', sans-serif;
+    }
+    [data-testid="stMetricValue"] > div, .metric-card .value, .stMetric [data-testid="stMetricValue"] {
+    font-family: 'JetBrains Mono', monospace !important;
+    }
+    /* Target the column containing the anchor */
+    /* Apply SVG background to the entire page behind the login form */
+    [data-testid="stAppViewContainer"]:has(.login-bg-anchor) {
     background-color: #050505;
     }
     [data-testid="stAppViewContainer"]:has(.login-bg-anchor)::before {
@@ -695,6 +1352,10 @@ if st.session_state.current_page == "🔑 Login":
                 align-items: center;
                 margin-top: -10px;
                 font-family: 'Inter', sans-serif;
+                background-color: #0B1221;
+                padding: 40px;
+                border-radius: 20px;
+                box-shadow: 0 10px 40px rgba(0,0,0,0.2);
             }
             .login-logo {
                 margin-bottom: 15px;
