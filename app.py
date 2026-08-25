@@ -136,7 +136,7 @@ st.markdown("""
     [data-testid="stSidebar"] * { color: #E2E8F0 !important; }
     /* Sidebar UI Overhaul */
     [data-testid="stSidebar"] {
-    background-color: #0A192F !important; /* True Navy Blue */
+    background-color: #0F2740 !important; /* Lighter Navy Blue to match reference */
     border-right: 1px solid rgba(255,255,255,0.05) !important;
     }
     [data-testid="stSidebarNav"] { display: none !important; }
@@ -151,14 +151,10 @@ st.markdown("""
     border: none !important;
     box-shadow: none !important;
     }
-    div[role="radiogroup"] label input { 
+    /* Safely hide the Streamlit radio circles and inputs without hiding the text container */
+    div[role="radiogroup"] label input,
+    div[role="radiogroup"] label > div:not(:has(p)) { 
         display: none !important; 
-    }
-    div[role="radiogroup"] label svg {
-        display: none !important;
-    }
-    div[role="radiogroup"] label div:empty {
-        display: none !important;
     }
     div[role="radiogroup"] label p {
     color: #E2E8F0 !important;
