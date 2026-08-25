@@ -83,10 +83,10 @@ if not st.session_state.welcome_shown:
     </linearGradient>
   </defs>
 </svg>
-<h1 style="color: #FFD700; font-weight: 800; font-size: 5.5rem; margin-bottom: 0; margin-top: 0; text-shadow: 0 0 30px rgba(212,167,44,0.8); line-height: 1.1;">AUREVIA SHIELD</h1>
+<h1 style="color: #FFD700; font-weight: 800; font-size: 6.5rem; margin-bottom: 0; margin-top: 0; text-shadow: 0 0 30px rgba(212,167,44,0.8); line-height: 1.1;">AUREVIA SHIELD</h1>
 </div>
 <div class="gradient-divider"></div>
-<h3 style="color: #FFFFFF; margin-top: 0; margin-bottom: 40px; font-weight: 400; font-size: 1.6rem;">AI Financial Fraud Detection & Risk Analysis System</div>
+<h3 style="color: #FFFFFF; margin-top: 0; margin-bottom: 40px; font-weight: 400; font-size: 2rem;">AI Financial Fraud Detection & Risk Analysis System</div>
 </div>''', unsafe_allow_html=True)
     
     col1, col2, col3 = st.columns([1, 1, 1])
@@ -124,7 +124,7 @@ st.markdown('''
     color: #142B44 !important;
     font-family: 'Playfair Display', serif !important;
     font-weight: 900 !important;
-    font-size: 2.2rem !important;
+    font-size: 2.5rem !important;
     letter-spacing: 1.5px !important;
     pointer-events: none !important;
     text-shadow: 2px 2px 4px rgba(20, 43, 68, 0.1) !important;
@@ -133,7 +133,7 @@ st.markdown('''
     gap: 12px !important;
     }
     .top-left-brand span {
-    font-size: 2.8rem !important;
+    font-size: 3.2rem !important;
     }
     
 </style>
@@ -172,7 +172,7 @@ st.markdown("""
     div[role="radiogroup"] label p {
     color: #E2E8F0 !important;
     font-weight: 600 !important;
-    font-size: 0.95rem !important;
+    font-size: 1.15rem !important;
     }
     div[role="radiogroup"] label:has(input:checked) {
     background: linear-gradient(90deg, #A88222 0%, #8A6413 100%) !important;
@@ -242,7 +242,7 @@ st.markdown("""
     }
     .metric-card .text-value {
     font-family: 'Inter', sans-serif !important;
-    font-size: 1.3rem !important;
+    font-size: 1.5rem !important;
     font-weight: 800 !important;
     color: #142B44 !important;
     word-break: normal !important;
@@ -273,7 +273,7 @@ st.markdown("""
     }
     .metric-card .card-title {
     color: #D4A72C !important;
-    font-size: 0.95rem !important;
+    font-size: 1.15rem !important;
     margin-bottom: 12px !important;
     text-transform: uppercase !important;
     letter-spacing: 0.1em !important;
@@ -281,14 +281,14 @@ st.markdown("""
     font-weight: 700 !important;
     }
     .metric-card .value {
-    font-size: 1.3rem !important;
+    font-size: 1.5rem !important;
     font-weight: 800 !important;
     word-break: normal !important;
     line-height: 1.2 !important;
     }
     .metric-card .subtext {
     color: #64748B !important;
-    font-size: 0.9rem !important;
+    font-size: 1.25rem !important;
     margin-top: 8px !important;
     font-family: 'Inter', sans-serif !important;
     }
@@ -300,7 +300,7 @@ st.markdown("""
     padding: 8px 18px;
     border-radius: 4px;
     font-weight: 800;
-    font-size: 1.2rem;
+    font-size: 1.35rem;
     display: inline-block;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -314,7 +314,7 @@ st.markdown("""
     padding: 8px 18px;
     border-radius: 4px;
     font-weight: 800;
-    font-size: 1.2rem;
+    font-size: 1.35rem;
     display: inline-block;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -327,7 +327,7 @@ st.markdown("""
     padding: 8px 18px;
     border-radius: 4px;
     font-weight: 800;
-    font-size: 1.2rem;
+    font-size: 1.35rem;
     display: inline-block;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -453,11 +453,11 @@ st.sidebar.markdown("""
             </defs>
         </svg>
     </div>
-    <div style="font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 900; line-height: 1.15; letter-spacing: 1px;">
+    <div style="font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 900; line-height: 1.15; letter-spacing: 1px;">
         <span style="color: #FFFFFF;">AUREVIA</span><br>
         <span style="color: #D4A72C;">SHIELD</span>
     </div>
-    <div style="color: #94a3b8; font-size: 0.75rem; margin-top: 15px; font-weight: 500; max-width: 220px; margin-left: auto; margin-right: auto; line-height: 1.5;">
+    <div style="color: #94a3b8; font-size: 1.15rem; margin-top: 15px; font-weight: 500; max-width: 220px; margin-left: auto; margin-right: auto; line-height: 1.5;">
         AI Financial Fraud Detection &<br>Risk Analysis System
     </div>
 </div>
@@ -491,8 +491,8 @@ st.sidebar.markdown('''
             <path d="M10 10V8a2 2 0 014 0v2" stroke="#D4A72C" stroke-width="1.2"/>
         </svg>
     </div>
-    <div style="color: #D4A72C; font-weight: 800; font-size: 1.15rem; line-height: 1.3; margin-bottom: 15px; font-family: 'Inter', sans-serif;">Stop fraud before<br>it reaches you.</div>
-    <div style="color: #E2E8F0; font-size: 0.75rem; line-height: 1.6; font-weight: 400; opacity: 0.9;">Real-time detection.<br>Smart decisions.<br>Secure future.</div>
+    <div style="color: #D4A72C; font-weight: 800; font-size: 1.35rem; line-height: 1.3; margin-bottom: 15px; font-family: 'Inter', sans-serif;">Stop fraud before<br>it reaches you.</div>
+    <div style="color: #E2E8F0; font-size: 1.15rem; line-height: 1.6; font-weight: 400; opacity: 0.9;">Real-time detection.<br>Smart decisions.<br>Secure future.</div>
 </div>
 ''', unsafe_allow_html=True)
 
@@ -578,7 +578,7 @@ if st.session_state.current_page == "💠 Dashboard":
     
     st.markdown("<br>", unsafe_allow_html=True)
     
-    st.markdown("<h1 style='text-align: center; color: #D4A72C; margin-bottom: 30px; font-weight: 800; font-size: 3.8rem; text-shadow: 0 0 20px rgba(212, 167, 44, 0.6); letter-spacing: -1px;'>Stop fraud before it reaches you.</h1>", unsafe_allow_html=True)
+    st.markdown("<h1 style='text-align: center; color: #D4A72C; margin-bottom: 30px; font-weight: 800; font-size: 4.5rem; text-shadow: 0 0 20px rgba(212, 167, 44, 0.6); letter-spacing: -1px;'>Stop fraud before it reaches you.</h1>", unsafe_allow_html=True)
     
     col_o1, col_o2 = st.columns([1.2, 1], gap="large")
     with col_o1:
@@ -692,13 +692,13 @@ if st.session_state.current_page == "🔑 Login":
             }
             .login-title {
                 color: #FFFFFF;
-                font-size: 1.9rem;
+                font-size: 2.3rem;
                 font-weight: 700;
                 margin-bottom: 5px;
             }
             .login-subtitle {
                 color: #E2E8F0;
-                font-size: 0.95rem;
+                font-size: 1.15rem;
                 margin-bottom: 25px;
             }
     
@@ -714,7 +714,7 @@ if st.session_state.current_page == "🔑 Login":
                 padding: 14px;
                 border-radius: 30px;
                 font-weight: 600;
-                font-size: 0.95rem;
+                font-size: 1.15rem;
                 cursor: pointer;
             }
             .tab-active {
@@ -740,7 +740,7 @@ if st.session_state.current_page == "🔑 Login":
                 border: 1px solid #334155;
                 color: #FFFFFF;
                 font-weight: 700;
-                font-size: 1rem;
+                font-size: 1.15rem;
                 cursor: pointer;
                 margin-bottom: 25px;
                 gap: 12px;
@@ -753,7 +753,7 @@ if st.session_state.current_page == "🔑 Login":
                 align-items: center;
                 text-align: center;
                 color: #CBD5E1;
-                font-size: 0.85rem;
+                font-size: 1.05rem;
                 margin-bottom: 20px;
                 font-family: monospace;
                 letter-spacing: 0.5px;
@@ -774,7 +774,7 @@ if st.session_state.current_page == "🔑 Login":
                 text-transform: uppercase;
                 color: #E2E8F0 !important;
                 font-weight: 800;
-                font-size: 0.8rem !important;
+                font-size: 1.25rem !important;
                 letter-spacing: 1px;
                 margin-bottom: -2px;
             }
@@ -792,7 +792,7 @@ if st.session_state.current_page == "🔑 Login":
                 color: #F8FAFC !important;
                 padding: 14px 16px !important;
                 font-family: monospace !important;
-                font-size: 1.05rem !important;
+                font-size: 1.25rem !important;
             }
             div[data-testid="stTextInput"] input::placeholder {
                 color: #64748B !important;
@@ -807,7 +807,7 @@ if st.session_state.current_page == "🔑 Login":
                 border-radius: 30px !important;
                 padding: 12px 15px !important;
                 font-weight: 800 !important;
-                font-size: 1.05rem !important;
+                font-size: 1.25rem !important;
                 margin-top: 15px !important;
                 transition: transform 0.2s ease, box-shadow 0.2s ease !important;
             }
@@ -818,7 +818,7 @@ if st.session_state.current_page == "🔑 Login":
                 border: none !important;
             }
             div[data-testid="stButton"] button p {
-                font-size: 1.05rem !important;
+                font-size: 1.25rem !important;
             }
     
 </style>
@@ -1016,7 +1016,7 @@ if st.session_state.current_page == "⚡ Live Risk Simulator":
             <span class="badge-{exp['risk_color']}">Status: {exp['risk_level']}</span>
         </div>
         <div class="action-box">
-            System Recommendation:<br><span style="font-size: 1.1rem; color: #f8fafc;">{exp['recommended_action']}</span>
+            System Recommendation:<br><span style="font-size: 1.3rem; color: #f8fafc;">{exp['recommended_action']}</span>
         </div>
         """, unsafe_allow_html=True)
         
@@ -1028,7 +1028,7 @@ if st.session_state.current_page == "⚡ Live Risk Simulator":
                 st.markdown(f"""
                 <div class="driver-box">
                     <strong>⚠️ {d['factor']} ({d['category']})</strong><br>
-                    <span style="font-size: 0.9rem; color: #cbd5e1;">{d['detail']}</span>
+                    <span style="font-size: 1.1rem; color: #cbd5e1;">{d['detail']}</span>
                 </div>
                 """, unsafe_allow_html=True)
 
@@ -1038,7 +1038,7 @@ if st.session_state.current_page == "⚡ Live Risk Simulator":
                 st.markdown(f"""
                 <div class="mitigator-box">
                     <strong>✅ {m['factor']}</strong><br>
-                    <span style="font-size: 0.9rem; color: #cbd5e1;">{m['detail']}</span>
+                    <span style="font-size: 1.1rem; color: #cbd5e1;">{m['detail']}</span>
                 </div>
                 """, unsafe_allow_html=True)
 
@@ -1151,7 +1151,7 @@ if st.session_state.current_page == "📊 Model Performance & Metrics":
             <div class="metric-card">
                 <div class="card-title">{m_name}</div>
                 <div class="value" style="color: {'#D4A72C' if m_name==best_model_name else '#94a3b8'};">PR-AUC: {res['pr_auc']:.3f}</div>
-                <div style="margin-top: 10px; text-align: left; font-size: 0.9rem;">
+                <div style="margin-top: 10px; text-align: left; font-size: 1.1rem;">
                     • <strong>Recall:</strong> {res['recall']*100:.1f}%<br>
                     • <strong>Precision:</strong> {res['precision']*100:.1f}%<br>
                     • <strong>F1-Score:</strong> {res['f1']:.3f}<br>
