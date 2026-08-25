@@ -252,25 +252,34 @@ st.markdown("""
     color: #142B44 !important;
     }
     /* 🔘 Premium Sidebar Navigation Radio Buttons */
-    div[role="radiogroup"] label {
+    [data-testid="stSidebar"] div[role="radiogroup"] label {
     padding: 12px 16px !important;
     border-radius: 8px !important;
     margin-bottom: 4px !important;
     transition: all 0.2s ease !important;
     cursor: pointer !important;
     }
-    div[role="radiogroup"] label > div:first-child { display: none !important; }
-    div[role="radiogroup"] label:has(input:checked) {
+    [data-testid="stSidebar"] div[role="radiogroup"] label > div:first-child { display: none !important; }
+    [data-testid="stSidebar"] div[role="radiogroup"] label:has(input:checked) {
     background-color: rgba(255, 255, 255, 0.1) !important;
     border: 1px solid rgba(212, 167, 44, 0.4) !important;
     box-shadow: 0 4px 12px rgba(212, 167, 44, 0.15) !important;
     }
-    div[role="radiogroup"] label:has(input:checked) p {
+    [data-testid="stSidebar"] div[role="radiogroup"] label:has(input:checked) p {
     color: #D4A72C !important;
     font-weight: 700 !important;
     }
-    div[role="radiogroup"] label:not(:has(input:checked)):hover {
+    [data-testid="stSidebar"] div[role="radiogroup"] label:not(:has(input:checked)):hover {
     background-color: rgba(255, 255, 255, 0.05) !important;
+    }
+    
+    /* Main Page Radio Buttons & DataFrames (High Visibility) */
+    div[role="radiogroup"] label p {
+        color: #0F2740 !important;
+        font-weight: 600 !important;
+    }
+    [data-testid="stDataFrame"] * {
+        color: #0F2740 !important;
     }
     .metric-card .text-value {
     font-family: 'Inter', sans-serif !important;
