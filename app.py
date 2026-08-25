@@ -1251,10 +1251,12 @@ if st.session_state.current_page == "📊 Model Performance & Metrics":
     st.markdown("<br>", unsafe_allow_html=True)
     
     # Precision-Recall & ROC Curve Charts
-    col_pr, col_thresh = st.columns([1, 1], gap="large")
+    st.markdown("<hr style='border: none; border-top: 1px solid rgba(0,0,0,0.1); margin: 30px 0;'>", unsafe_allow_html=True)
+    
+    col_pr, col_thresh = st.columns([1.3, 1], gap="large")
     
     with col_pr:
-        st.markdown("#### Precision-Recall Curve Comparison")
+        st.markdown("<h4 style='color: #142B44; margin-bottom: 10px;'>Precision-Recall Curve Comparison</h4>", unsafe_allow_html=True)
         fig_pr = go.Figure()
         for m_name, res in results.items():
             fig_pr.add_trace(go.Scatter(
@@ -1264,18 +1266,19 @@ if st.session_state.current_page == "📊 Model Performance & Metrics":
                 name=f"{m_name} (PR-AUC={res['pr_auc']:.3f})"
             ))
         fig_pr.update_layout(
-            title="Precision vs Recall Trade-off Curve",
             xaxis_title="Recall (Sensitivity)",
             yaxis_title="Precision (Positive Predictive Value)",
             template="plotly_white",
             paper_bgcolor='rgba(0,0,0,0)',
             plot_bgcolor='rgba(0,0,0,0)',
-            height=350
+            height=400,
+            margin=dict(l=20, r=20, t=30, b=20),
+            legend=dict(yanchor="top", y=0.99, xanchor="left", x=0.01)
         )
         st.plotly_chart(fig_pr, use_container_width=True)
         
     with col_thresh:
-        st.markdown("#### Dynamic Decision Threshold Adjuster")
+        st.markdown("<h4 style='color: #142B44; margin-bottom: 10px;'>Dynamic Decision Threshold Adjuster</h4>", unsafe_allow_html=True)
         threshold = st.slider("Select Classification Threshold", 0.10, 0.90, 0.50, step=0.02)
         
         y_test = metrics_bundle['y_test']
@@ -1290,31 +1293,50 @@ if st.session_state.current_page == "📊 Model Performance & Metrics":
         tn, fp, fn, tp = cm_t.ravel()
         
         st.markdown(f"""
-        **Performance at Threshold = {threshold:.2f}:**
-        - **Precision:** `{prec_t*100:.1f}%` (Of flagged items, {prec_t*100:.1f}% were real fraud)
-        - **Recall:** `{rec_t*100:.1f}%` (Caught {rec_t*100:.1f}% of total fraud)
-        - **F1-Score:** `{f1_t:.3f}`
-        - **False Positives (Innocent flagged):** `{fp:,}`
-        - **False Negatives (Missed fraud):** `{fn:,}`
-        """)
+        <div style='background-color: #FFFFFF; padding: 20px; border-radius: 8px; border: 1px solid #E2E8F0; margin-top: 15px;'>
+            <div style='font-size: 1.1rem; font-weight: 600; color: #142B44; margin-bottom: 15px;'>Performance at Threshold = {threshold:.2f}:</div>
+            <ul style='color: #334155; font-size: 1.05rem; line-height: 1.8;'>
+                <li><strong>Precision:</strong> <span style='background:#E2E8F0; padding:2px 6px; border-radius:4px;'>{prec_t*100:.1f}%</span> (Of flagged items, {prec_t*100:.1f}% were real fraud)</li>
+                <li><strong>Recall:</strong> <span style='background:#E2E8F0; padding:2px 6px; border-radius:4px;'>{rec_t*100:.1f}%</span> (Caught {rec_t*100:.1f}% of total fraud)</li>
+                <li><strong>F1-Score:</strong> <span style='background:#E2E8F0; padding:2px 6px; border-radius:4px;'>{f1_t:.3f}</span></li>
+                <li><strong>False Positives (Innocent flagged):</strong> <span style='color: #DC2626; font-weight: bold;'>{fp:,}</span></li>
+                <li><strong>False Negatives (Missed fraud):</strong> <span style='color: #DC2626; font-weight: bold;'>{fn:,}</span></li>
+            </ul>
+            <div style='margin-top: 15px; font-style: italic; color: #475569;'>
+                <strong>Plain English Summary:</strong> At this threshold, out of {tn+fp+fn+tp:,} test transactions, the model correctly caught {tp:,} out of {tp+fn:,} real fraud cases.
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
         
-        st.markdown(f"*(**Plain English Summary:** At this threshold, out of {tn+fp+fn+tp:,} test transactions, the model correctly caught {tp:,} out of {tp+fn:,} real fraud cases.)*")
-        
+    st.markdown("<hr style='border: none; border-top: 1px solid rgba(0,0,0,0.1); margin: 30px 0;'>", unsafe_allow_html=True)
+    st.markdown("<h4 style='color: #142B44; text-align: center; margin-bottom: 20px;'>Confusion Matrix Analysis</h4>", unsafe_allow_html=True)
+    
+    col_cm1, col_cm2, col_cm3 = st.columns([1, 2, 1])
+    with col_cm2:
         # Confusion Matrix Heatmap
+        z_text = [[f"{tn:,}<br>(True Negatives)", f"{fp:,}<br>(False Positives)"],
+                  [f"{fn:,}<br>(False Negatives)", f"{tp:,}<br>(True Positives)"]]
+                  
         fig_cm = px.imshow(
             cm_t, 
-            labels=dict(x="Predicted Label", y="Actual Ground Truth", color="Count"),
-            x=['Legitimate (0)', 'Fraud (1)'],
-            y=['Legitimate (0)', 'Fraud (1)'],
-            text_auto=True,
-            color_continuous_scale="Blues",
-            title=f"Confusion Matrix (Threshold = {threshold:.2f})"
+            labels=dict(x="Predicted Diagnosis", y="Actual Ground Truth"),
+            x=['Predicted: Legitimate', 'Predicted: Fraud'],
+            y=['Actual: Legitimate', 'Actual: Fraud'],
+            text_auto=False,
+            color_continuous_scale="Blues"
+        )
+        fig_cm.update_traces(
+            text=z_text,
+            texttemplate="%{text}",
+            textfont=dict(size=14)
         )
         fig_cm.update_layout(
             template="plotly_white",
             paper_bgcolor='rgba(0,0,0,0)',
             plot_bgcolor='rgba(0,0,0,0)',
-            height=280
+            height=400,
+            coloraxis_showscale=False,
+            margin=dict(l=20, r=20, t=20, b=20)
         )
         st.plotly_chart(fig_cm, use_container_width=True)
 
