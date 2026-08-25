@@ -1229,6 +1229,9 @@ if st.session_state.current_page == "📂 Batch CSV Fraud Scanner":
                         return 'background-color: #F0FDF4; color: #3F6212;'
                     return ''
                 
+                # Increase Pandas Styler max elements limit to prevent StreamlitAPIException on massive batch datasets
+                pd.set_option("styler.render.max_elements", 10000000)
+                
                 styled_df = display_df[cols_to_show].style.applymap(style_risk_level, subset=['predicted_risk_level']) if hasattr(display_df.style, 'applymap') else display_df[cols_to_show].style.map(style_risk_level, subset=['predicted_risk_level'])
                 
                 st.dataframe(
