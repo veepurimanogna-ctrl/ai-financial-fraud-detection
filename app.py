@@ -930,18 +930,25 @@ if st.session_state.current_page == "🔑 Login":
         
         st.markdown("<div class='login-divider'>Or continue with Aurevia Account</div>", unsafe_allow_html=True)
         
-        st.text_input("EMAIL", placeholder="Enter your email")
-        st.text_input("PASSWORD", type="password", placeholder="Enter your password")
+        email_input = st.text_input("EMAIL", placeholder="Enter your email")
+        pass_input = st.text_input("PASSWORD", type="password", placeholder="Enter your password")
         
         st.markdown("<div style='text-align: right; margin-top: -10px; margin-bottom: 20px;'><a href='#' style='color: #2563EB; text-decoration: none; font-size: 0.9rem;'>Forgot your password?</a></div>", unsafe_allow_html=True)
         
         col_b1, col_b2 = st.columns(2)
         with col_b1:
-            st.button("Cancel", use_container_width=True)
+            if st.button("Cancel", use_container_width=True):
+                st.toast("Action cancelled", icon="⚠️")
         with col_b2:
-            st.button("Sign In", type="primary", use_container_width=True)
+            if st.button("Sign In", type="primary", use_container_width=True):
+                if email_input and pass_input:
+                    st.session_state.logged_in = True
+                    st.session_state.user_email = email_input
+                    st.rerun()
+                else:
+                    st.error("Please enter both email and password to sign in.")
             
-        st.markdown("<div style='text-align: center; margin-top: 15px;'><span style='color: #64748B; font-size: 0.95rem;'>Need an Aurevia account?</span> <a href='#' class='footer-link'>Sign Up</a></div>", unsafe_allow_html=True)
+        st.markdown("<div style='text-align: center; margin-top: 15px;'><span style='color: #64748B; font-size: 0.95rem;'>Need an Aurevia account?</span> <a href='#' class='footer-link' onclick='alert(\"Sign up functionality coming soon!\")'>Sign Up</a></div>", unsafe_allow_html=True)
         
         if auth_result and isinstance(auth_result, dict) and auth_result.get("auth_success"):
             st.session_state.logged_in = True
