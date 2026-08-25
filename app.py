@@ -23,8 +23,9 @@ if 'welcome_shown' not in st.session_state:
     st.session_state.welcome_shown = False
 
 if not st.session_state.welcome_shown:
-    st.markdown('''<style>
-    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@400;500&family=JetBrains+Mono:wght@500&display=swap');
+    st.markdown('''<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+    /* :wght@600&family=Inter:wght@400;500&family=JetBrains+Mono:wght@500&display=swap');
 
     html, body, [class*="css"] {
         font-family: 'Inter', sans-serif;
@@ -79,7 +80,7 @@ if not st.session_state.welcome_shown:
 <h1 style="color: #FFD700; font-weight: 800; font-size: 5.5rem; margin-bottom: 0; margin-top: 0; text-shadow: 0 0 30px rgba(212,167,44,0.8); line-height: 1.1;">AUREVIA SHIELD</h1>
 </div>
 <div class="gradient-divider"></div>
-<h3 style="color: #FFFFFF; margin-top: 0; margin-bottom: 40px; font-weight: 400; font-size: 1.6rem;">AI Financial Fraud Detection & Risk Analysis System</h3>
+<h3 style="color: #FFFFFF; margin-top: 0; margin-bottom: 40px; font-weight: 400; font-size: 1.6rem;">AI Financial Fraud Detection & Risk Analysis System</div>
 </div>''', unsafe_allow_html=True)
     
     col1, col2, col3 = st.columns([1, 1, 1])
@@ -92,8 +93,9 @@ if not st.session_state.welcome_shown:
 
 # Top-Left Persistent Brand Mark
 st.markdown('''
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@400;500&family=JetBrains+Mono:wght@500&display=swap');
+    /* :wght@600&family=Inter:wght@400;500&family=JetBrains+Mono:wght@500&display=swap');
 
     html, body, [class*="css"] {
         font-family: 'Inter', sans-serif;
@@ -127,8 +129,16 @@ text-shadow: 0 0 10px rgba(212, 167, 44, 0.3);
 
 # --- Premium Light Dashboard Theme ---
 st.markdown("""
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap');
+    /* :wght@600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap');
+
+    
+    /* Fix Sidebar text colors */
+    [data-testid="stSidebar"] * { color: #E2E8F0 !important; }
+    [data-testid="stSidebar"] h1, [data-testid="stSidebar"] h2, [data-testid="stSidebar"] h3 { color: #D4A72C !important; }
+    div[role="radiogroup"] label p { color: #E2E8F0 !important; }
+    div[role="radiogroup"] label:has(input:checked) p { color: #D4A72C !important; font-weight: 700 !important; }
 
     /* Global Typography Reset */
     html, body, [class*="css"], .stApp {
@@ -211,7 +221,7 @@ st.markdown("""
         border: 1px solid rgba(212, 167, 44, 0.5) !important;
     }
     
-    .metric-card h3 {
+    .metric-card .card-title {
         color: #D4A72C !important;
         font-size: 0.95rem !important;
         margin-bottom: 12px !important;
@@ -222,7 +232,7 @@ st.markdown("""
     }
     
     .metric-card .value {
-        font-size: 1.6rem !important;
+        font-size: 1.3rem !important;
         font-weight: 800 !important;
         word-break: normal !important;
         line-height: 1.2 !important;
@@ -387,8 +397,9 @@ if selected_page != st.session_state.current_page and selected_page != "🚪 Log
 # ==========================================
 if st.session_state.current_page == "🏠 System Overview":
 
-    st.markdown('''<style>
-    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@400;500&family=JetBrains+Mono:wght@500&display=swap');
+    st.markdown('''<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+    /* :wght@600&family=Inter:wght@400;500&family=JetBrains+Mono:wght@500&display=swap');
 
     html, body, [class*="css"] {
         font-family: 'Inter', sans-serif;
@@ -410,7 +421,7 @@ if st.session_state.current_page == "🏠 System Overview":
 </style>
 <div class="page-starfield"><div class="splash-star" style="width: 1.8px; height: 1.8px; top: 4.4%; left: 28.4%; animation-duration: 2.33s; animation-delay: 1.1s;"></div><div class="splash-star" style="width: 1.8px; height: 1.8px; top: 87.6%; left: 10.3%; animation-duration: 2.63s; animation-delay: 0.04s;"></div><div class="splash-star" style="width: 1.6px; height: 1.6px; top: 50.5%; left: 4.5%; animation-duration: 2.3s; animation-delay: 0.97s;"></div><div class="splash-star" style="width: 1.8px; height: 1.8px; top: 23.2%; left: 58.6%; animation-duration: 3.21s; animation-delay: 0.01s;"></div><div class="splash-star" style="width: 1.9px; height: 1.9px; top: 69.0%; left: 34.7%; animation-duration: 2.23s; animation-delay: 1.44s;"></div><div class="splash-star" style="width: 1.7px; height: 1.7px; top: 10.9%; left: 11.3%; animation-duration: 3.27s; animation-delay: 0.91s;"></div><div class="splash-star" style="width: 1.9px; height: 1.9px; top: 72.1%; left: 53.5%; animation-duration: 3.46s; animation-delay: 0.57s;"></div><div class="splash-star" style="width: 1.8px; height: 1.8px; top: 81.6%; left: 61.4%; animation-duration: 3.29s; animation-delay: 0.87s;"></div><div class="splash-star" style="width: 1.9px; height: 1.9px; top: 6.4%; left: 23.9%; animation-duration: 2.43s; animation-delay: 0.12s;"></div><div class="splash-star" style="width: 1.6px; height: 1.6px; top: 11.7%; left: 28.7%; animation-duration: 2.95s; animation-delay: 0.55s;"></div><div class="splash-star" style="width: 1.7px; height: 1.7px; top: 22.1%; left: 27.6%; animation-duration: 3.4s; animation-delay: 0.97s;"></div><div class="splash-star" style="width: 1.8px; height: 1.8px; top: 18.4%; left: 72.0%; animation-duration: 2.25s; animation-delay: 0.57s;"></div><div class="splash-star" style="width: 2.0px; height: 2.0px; top: 63.4%; left: 55.5%; animation-duration: 3.03s; animation-delay: 1.26s;"></div><div class="splash-star" style="width: 1.9px; height: 1.9px; top: 24.0%; left: 5.1%; animation-duration: 2.47s; animation-delay: 0.4s;"></div><div class="splash-star" style="width: 1.6px; height: 1.6px; top: 92.5%; left: 86.1%; animation-duration: 2.47s; animation-delay: 0.98s;"></div><div class="splash-star" style="width: 1.7px; height: 1.7px; top: 89.8%; left: 46.0%; animation-duration: 2.4s; animation-delay: 0.37s;"></div><div class="splash-star" style="width: 1.8px; height: 1.8px; top: 27.2%; left: 58.1%; animation-duration: 3.35s; animation-delay: 0.6s;"></div><div class="splash-star" style="width: 1.6px; height: 1.6px; top: 97.8%; left: 50.9%; animation-duration: 2.14s; animation-delay: 0.07s;"></div><div class="splash-star" style="width: 1.6px; height: 1.6px; top: 62.2%; left: 78.0%; animation-duration: 2.63s; animation-delay: 0.1s;"></div><div class="splash-star" style="width: 1.7px; height: 1.7px; top: 97.6%; left: 52.8%; animation-duration: 3.46s; animation-delay: 1.29s;"></div></div>''', unsafe_allow_html=True)
     # --- Header Section ---
-    st.title("🛡️ AI Financial Fraud Detection & Risk Analysis System")
+    st.title("AI Financial Fraud Detection & Risk Analysis System")
     st.caption("Real-Time Machine Learning Pipeline for Financial Transaction Risk Scoring, Class Imbalance Mitigation, & Explainable AI")
     
     st.markdown("**How this works:** This app analyzes transaction patterns (like location, time, and purchase history) to flag potentially fraudulent activity before it is approved.")
@@ -421,7 +432,7 @@ if st.session_state.current_page == "🏠 System Overview":
     with col_m1:
         st.markdown(f"""
         <div class="metric-card">
-            <h3>Primary Model</h3>
+            <div class="card-title">Primary Model</div>
             <div class="value" style="color: #D4A72C;">{best_model_name}</div>
             <div class="subtext">SMOTE Resampled</div>
         </div>
@@ -432,7 +443,7 @@ if st.session_state.current_page == "🏠 System Overview":
         best_roc = metrics_bundle['results'][best_model_name]['roc_auc']
         st.markdown(f"""
         <div class="metric-card">
-            <h3>Model PR-AUC</h3>
+            <div class="card-title">Model PR-AUC</div>
             <div class="value" style="color: #10b981;">{best_pr:.3f}</div>
             <div class="subtext">ROC-AUC: {best_roc:.3f}</div>
         </div>
@@ -445,7 +456,7 @@ if st.session_state.current_page == "🏠 System Overview":
         best_rec = metrics_bundle['results'][best_model_name]['recall']
         st.markdown(f"""
         <div class="metric-card">
-            <h3>Fraud Recall Rate</h3>
+            <div class="card-title">Fraud Recall Rate</div>
             <div class="value" style="color: #f59e0b;">{best_rec*100:.1f}%</div>
             <div class="subtext">Caught Fraud Cases</div>
         </div>
@@ -457,7 +468,7 @@ if st.session_state.current_page == "🏠 System Overview":
         total_len = len(df_transactions) if df_transactions is not None else 50000
         st.markdown(f"""
         <div class="metric-card">
-            <h3>Dataset Size</h3>
+            <div class="card-title">Dataset Size</div>
             <div class="value" style="color: #c084fc;">{total_len:,}</div>
             <div class="subtext">Synthetic data matching real Sparkov schema</div>
         </div>
@@ -498,8 +509,9 @@ if st.session_state.current_page == "🏠 System Overview":
 # ==========================================
 if st.session_state.current_page == "🔑 Login":
 
-    st.markdown('''<style>
-    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@400;500&family=JetBrains+Mono:wght@500&display=swap');
+    st.markdown('''<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+    /* :wght@600&family=Inter:wght@400;500&family=JetBrains+Mono:wght@500&display=swap');
 
     html, body, [class*="css"] {
         font-family: 'Inter', sans-serif;
@@ -521,8 +533,9 @@ if st.session_state.current_page == "🔑 Login":
 </style>
 <div class="page-starfield"><div class="splash-star" style="width: 1.8px; height: 1.8px; top: 4.4%; left: 28.4%; animation-duration: 2.33s; animation-delay: 1.1s;"></div><div class="splash-star" style="width: 1.8px; height: 1.8px; top: 87.6%; left: 10.3%; animation-duration: 2.63s; animation-delay: 0.04s;"></div><div class="splash-star" style="width: 1.6px; height: 1.6px; top: 50.5%; left: 4.5%; animation-duration: 2.3s; animation-delay: 0.97s;"></div><div class="splash-star" style="width: 1.8px; height: 1.8px; top: 23.2%; left: 58.6%; animation-duration: 3.21s; animation-delay: 0.01s;"></div><div class="splash-star" style="width: 1.9px; height: 1.9px; top: 69.0%; left: 34.7%; animation-duration: 2.23s; animation-delay: 1.44s;"></div><div class="splash-star" style="width: 1.7px; height: 1.7px; top: 10.9%; left: 11.3%; animation-duration: 3.27s; animation-delay: 0.91s;"></div><div class="splash-star" style="width: 1.9px; height: 1.9px; top: 72.1%; left: 53.5%; animation-duration: 3.46s; animation-delay: 0.57s;"></div><div class="splash-star" style="width: 1.8px; height: 1.8px; top: 81.6%; left: 61.4%; animation-duration: 3.29s; animation-delay: 0.87s;"></div><div class="splash-star" style="width: 1.9px; height: 1.9px; top: 6.4%; left: 23.9%; animation-duration: 2.43s; animation-delay: 0.12s;"></div><div class="splash-star" style="width: 1.6px; height: 1.6px; top: 11.7%; left: 28.7%; animation-duration: 2.95s; animation-delay: 0.55s;"></div><div class="splash-star" style="width: 1.7px; height: 1.7px; top: 22.1%; left: 27.6%; animation-duration: 3.4s; animation-delay: 0.97s;"></div><div class="splash-star" style="width: 1.8px; height: 1.8px; top: 18.4%; left: 72.0%; animation-duration: 2.25s; animation-delay: 0.57s;"></div><div class="splash-star" style="width: 2.0px; height: 2.0px; top: 63.4%; left: 55.5%; animation-duration: 3.03s; animation-delay: 1.26s;"></div><div class="splash-star" style="width: 1.9px; height: 1.9px; top: 24.0%; left: 5.1%; animation-duration: 2.47s; animation-delay: 0.4s;"></div><div class="splash-star" style="width: 1.6px; height: 1.6px; top: 92.5%; left: 86.1%; animation-duration: 2.47s; animation-delay: 0.98s;"></div><div class="splash-star" style="width: 1.7px; height: 1.7px; top: 89.8%; left: 46.0%; animation-duration: 2.4s; animation-delay: 0.37s;"></div><div class="splash-star" style="width: 1.8px; height: 1.8px; top: 27.2%; left: 58.1%; animation-duration: 3.35s; animation-delay: 0.6s;"></div><div class="splash-star" style="width: 1.6px; height: 1.6px; top: 97.8%; left: 50.9%; animation-duration: 2.14s; animation-delay: 0.07s;"></div><div class="splash-star" style="width: 1.6px; height: 1.6px; top: 62.2%; left: 78.0%; animation-duration: 2.63s; animation-delay: 0.1s;"></div><div class="splash-star" style="width: 1.7px; height: 1.7px; top: 97.6%; left: 52.8%; animation-duration: 3.46s; animation-delay: 1.29s;"></div></div>''', unsafe_allow_html=True)
     st.markdown('''
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@400;500&family=JetBrains+Mono:wght@500&display=swap');
+    /* :wght@600&family=Inter:wght@400;500&family=JetBrains+Mono:wght@500&display=swap');
 
     html, body, [class*="css"] {
         font-family: 'Inter', sans-serif;
@@ -573,7 +586,7 @@ box-shadow: 0 0 20px rgba(212, 167, 44, 0.1);
     col_l1, col_l2, col_l3 = st.columns([1, 2, 1])
     with col_l2:
         st.markdown("<div class='login-bg-anchor'></div>", unsafe_allow_html=True)
-        st.markdown("<h3 style='text-align: center; color: #D4A72C; font-size: 1.5rem; text-transform: uppercase; letter-spacing: 0.1em;'>Developer Login</h3>", unsafe_allow_html=True)
+        st.markdown("<h3 style='text-align: center; color: #D4A72C; font-size: 1.5rem; text-transform: uppercase; letter-spacing: 0.1em;'>Developer Login</div>", unsafe_allow_html=True)
         st.markdown("<p style='text-align: center; color: #475569; margin-bottom: 20px; font-family: monospace;'>Sign in to access the fraud detection dashboard.</p>", unsafe_allow_html=True)
         
         st.text_input("Work Email", placeholder="developer@company.com")
@@ -842,7 +855,7 @@ if st.session_state.current_page == "📊 Model Performance & Metrics":
         with col:
             st.markdown(f"""
             <div class="metric-card">
-                <h3>{m_name}</h3>
+                <div class="card-title">{m_name}</div>
                 <div class="value" style="color: {'#D4A72C' if m_name==best_model_name else '#94a3b8'};">PR-AUC: {res['pr_auc']:.3f}</div>
                 <div style="margin-top: 10px; text-align: left; font-size: 0.9rem;">
                     • <strong>Recall:</strong> {res['recall']*100:.1f}%<br>
