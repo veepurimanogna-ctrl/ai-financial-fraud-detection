@@ -309,7 +309,8 @@ st.markdown("""
     flex-direction: column !important;
     justify-content: center !important;
     align-items: center !important;
-    height: 190px !important;
+    min-height: 190px !important;
+    height: auto !important;
     }
     .metric-card:hover {
     transform: translateY(-5px) !important;
