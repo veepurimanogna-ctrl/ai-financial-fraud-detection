@@ -697,7 +697,7 @@ if st.session_state.current_page == "🔑 Login":
 ''', unsafe_allow_html=True)
     
     st.markdown("<br>", unsafe_allow_html=True)
-    col_l1, col_l2, col_l3 = st.columns([1.2, 1.3, 1.2])
+    col_l1, col_l2, col_l3 = st.columns([1, 2, 1])
     with col_l2:
         st.markdown("<div class='login-bg-anchor'></div>", unsafe_allow_html=True)
         st.markdown('''
@@ -816,6 +816,7 @@ if st.session_state.current_page == "🔑 Login":
                 box-shadow: 0 0 0 2px rgba(212, 167, 44, 0.2) !important;
             }
             div[data-testid="stTextInput"] input {
+                background-color: transparent !important;
                 color: #0F2740 !important;
                 padding: 14px 16px !important;
                 font-family: monospace !important;
