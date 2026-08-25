@@ -697,7 +697,7 @@ if st.session_state.current_page == "🔑 Login":
 ''', unsafe_allow_html=True)
     
     st.markdown("<br>", unsafe_allow_html=True)
-    col_l1, col_l2, col_l3 = st.columns([1, 2, 1])
+    col_l1, col_l2, col_l3 = st.columns([1.2, 1.3, 1.2])
     with col_l2:
         st.markdown("<div class='login-bg-anchor'></div>", unsafe_allow_html=True)
         st.markdown('''
@@ -806,17 +806,17 @@ if st.session_state.current_page == "🔑 Login":
                 margin-bottom: -2px;
             }
             div[data-testid="stTextInput"] div[data-baseweb="input"] {
-                background-color: rgba(255, 255, 255, 0.08) !important;
-                border: 1px solid rgba(255, 255, 255, 0.2) !important;
+                background-color: #FFFFFF !important;
+                border: 2px solid #CBD5E1 !important;
                 border-radius: 8px !important;
                 transition: all 0.2s ease !important;
             }
             div[data-testid="stTextInput"] div[data-baseweb="input"]:focus-within {
-                border: 1px solid #3B82F6 !important;
-                box-shadow: 0 0 0 1px #3B82F6 !important;
+                border: 2px solid #D4A72C !important;
+                box-shadow: 0 0 0 2px rgba(212, 167, 44, 0.2) !important;
             }
             div[data-testid="stTextInput"] input {
-                color: #F8FAFC !important;
+                color: #0F2740 !important;
                 padding: 14px 16px !important;
                 font-family: monospace !important;
                 font-size: 1.05rem !important;
