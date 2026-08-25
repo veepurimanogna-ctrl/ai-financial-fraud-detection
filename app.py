@@ -1215,6 +1215,15 @@ if st.session_state.current_page == "📂 Batch CSV Fraud Scanner":
                     height=400
                 )
                 
+                st.markdown("""
+                  <style>
+                  [data-testid="stDataFrame"] th { background-color: #0F2740 !important; color: #FFFFFF !important; }
+                  [data-testid="stDownloadButton"] button { background-color: #0F2740 !important; color: #FFFFFF !important; border: 1px solid #D4A72C !important; transition: all 0.2s ease; }
+                  [data-testid="stDownloadButton"] button p { color: #FFFFFF !important; font-weight: 600; }
+                  [data-testid="stDownloadButton"] button:hover { background-color: #1a365d !important; border: 1px solid #F4D879 !important; box-shadow: 0 4px 12px rgba(15, 39, 64, 0.2) !important; }
+                  </style>
+                  """, unsafe_allow_html=True)
+                
                 # Download button
                 csv_bytes = scored_df.to_csv(index=False).encode('utf-8')
                 st.download_button(
