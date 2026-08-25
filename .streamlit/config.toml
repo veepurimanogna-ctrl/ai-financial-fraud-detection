@@ -1,2 +1,12 @@
+[theme]
+base="light"
+primaryColor="#D4A72C"
+backgroundColor="#F5F8FC"
+secondaryBackgroundColor="#0F2740"
+textColor="#475569"
+font="sans serif"
+
 [server]
-maxUploadSize = 2500
+maxUploadSize = 1000
+
+enableStaticServing = true
