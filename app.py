@@ -1246,7 +1246,7 @@ if st.session_state.current_page == "📊 Model Performance & Metrics":
             st.markdown(f"""
             <div class="metric-card">
                 <div class="card-title">{m_name}</div>
-                <div class="pr-auc-score" style="color: {'#D4A72C' if m_name==best_model_name else '#F8FAFC'}; font-size: 1.5rem; font-weight: 700; text-align: center; margin: 15px 0;">PR-AUC: {res['pr_auc']:.3f}</div>
+                <div class="pr-auc-score" style="color: #D4A72C; font-size: 1.5rem; font-weight: 700; text-align: center; margin: 15px 0;">PR-AUC: {res['pr_auc']:.3f}</div>
                 <table style="width: 100%; color: #E2E8F0; font-size: 0.95rem; margin-top: 15px; border-collapse: collapse; border: none;">
                     <tr><td style="text-align: left; padding: 4px 0; border: none;"><strong>Recall:</strong></td><td style="text-align: right; padding: 4px 0; border: none; font-family: monospace;">{res['recall']*100:.1f}%</td></tr>
                     <tr><td style="text-align: left; padding: 4px 0; border: none;"><strong>Precision:</strong></td><td style="text-align: right; padding: 4px 0; border: none; font-family: monospace;">{res['precision']*100:.1f}%</td></tr>
