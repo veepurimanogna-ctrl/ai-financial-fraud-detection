@@ -1112,6 +1112,14 @@ if st.session_state.current_page == "📂 Batch CSV Fraud Scanner":
     st.subheader("📂 Batch Financial Transaction Fraud Scanner")
     st.markdown("Upload a batch CSV file of transactions (Sparkov Kaggle or standard format) or scan the pre-loaded dataset.")
     
+    with open("data/sample_batch.csv", "rb") as file:
+        st.download_button(
+            label="📄 Download Sample CSV Template",
+            data=file,
+            file_name="sample_batch.csv",
+            mime="text/csv",
+        )
+        
     uploaded_file = st.file_uploader("Upload Transaction Batch (CSV)", type=["csv"])
     
     scan_df = None
