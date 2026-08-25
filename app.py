@@ -645,31 +645,19 @@ if st.session_state.current_page == "💠 Overview":
     
     st.markdown("<h1 style='text-align: center; color: #D4A72C; margin-bottom: 30px; font-weight: 800; font-size: 3.8rem; text-shadow: 0 0 20px rgba(212, 167, 44, 0.6); letter-spacing: -1px;'>Stop fraud before it reaches you.</h1>", unsafe_allow_html=True)
     
-    col_o1, col_o2 = st.columns([1.2, 1], gap="large")
-    with col_o1:
-        st.markdown("### 🛡️ Why Our System?")
-        st.markdown("""
-        **Real-time request analysis in under 3 milliseconds.**  
-        One API call, instant verdict, zero friction for real users. 
-        Drop it in today, stop the bleeding tomorrow.
-        
-        <br>
-        
-        #### Stops at the Edge:
-        - **Account Takeover:** Prevents unauthorized logins.
-        - **Card Testing:** Blocks mass automated transaction trials.
-        - **Promo Abuse:** Identifies synthetic identities.
-        """, unsafe_allow_html=True)
-        
-    with col_o2:
-        st.markdown("### ⚡ Live Verdict Stream (Simulation)")
-        st.code("""
-12:42:58  ALLOW    US POST /login      1.2ms
-12:42:43  ALERT    IN POST /otp        1.4ms
-12:42:45  ALLOW    CA POST /payment    1.3ms
-12:42:47  BLOCK    RU POST /signup     0.8ms
-12:42:49  ALLOW    GB POST /login      1.0ms
-        """, language="shell")
+    st.markdown("### 🛡️ Why Our System?")
+    st.markdown("""
+    **Real-time request analysis in under 3 milliseconds.**  
+    One API call, instant verdict, zero friction for real users. 
+    Drop it in today, stop the bleeding tomorrow.
+    
+    <br>
+    
+    #### Stops at the Edge:
+    - **Account Takeover:** Prevents unauthorized logins.
+    - **Card Testing:** Blocks mass automated transaction trials.
+    - **Promo Abuse:** Identifies synthetic identities.
+    """, unsafe_allow_html=True)
         
     st.markdown("<br><br>", unsafe_allow_html=True)
     col_btn1, col_btn2, col_btn3 = st.columns([1, 1, 1])
