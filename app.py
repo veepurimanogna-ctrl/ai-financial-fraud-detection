@@ -200,7 +200,7 @@ st.markdown("""
     }
     /* Beautiful Dashboard Background */
     .stApp {
-    background: #F5F8FC !important;
+    background: linear-gradient(135deg, #FDFDFD 0%, #FDF7E2 100%) !important;
     }
     /* Elegant Serif Headings */
     h1, h2, h3, h4, h5, h6,
@@ -253,16 +253,16 @@ st.markdown("""
     font-family: 'Inter', sans-serif !important;
     font-size: 1.3rem !important;
     font-weight: 800 !important;
-    color: #142B44 !important;
+    color: #FFFFFF !important;
     word-break: normal !important;
     line-height: 1.2 !important;
     }
     /* 🛡️ Premium Elevated Metric Cards */
     .metric-card {
-    background: rgba(255, 255, 255, 0.9) !important;
+    background: linear-gradient(135deg, #0B1221 0%, #142B44 100%) !important;
     backdrop-filter: blur(10px) !important;
     -webkit-backdrop-filter: blur(10px) !important;
-    border: 1px solid rgba(255, 255, 255, 0.6) !important;
+    border: 1px solid rgba(212, 167, 44, 0.3) !important;
     border-radius: 12px !important;
     padding: 24px !important;
     text-align: center !important;
@@ -296,7 +296,7 @@ st.markdown("""
     line-height: 1.2 !important;
     }
     .metric-card .subtext {
-    color: #64748B !important;
+    color: #94A3B8 !important;
     font-size: 0.9rem !important;
     margin-top: 8px !important;
     font-family: 'Inter', sans-serif !important;
@@ -558,7 +558,7 @@ if st.session_state.current_page == "💠 Dashboard":
         st.markdown(f"""
         <div class="metric-card">
             <div class="card-title">Model PR-AUC</div>
-            <div class="value" style="color: #10b981;">{best_pr:.3f}</div>
+            <div class="value" style="color: #34D399;">{best_pr:.3f}</div>
             <div class="subtext">ROC-AUC: {best_roc:.3f}</div>
         </div>
         """, unsafe_allow_html=True)
@@ -569,7 +569,7 @@ if st.session_state.current_page == "💠 Dashboard":
         st.markdown(f"""
         <div class="metric-card">
             <div class="card-title">Fraud Recall Rate</div>
-            <div class="value" style="color: #f59e0b;">{best_rec*100:.1f}%</div>
+            <div class="value" style="color: #FBBF24;">{best_rec*100:.1f}%</div>
             <div class="subtext">Caught Fraud Cases</div>
         </div>
         """, unsafe_allow_html=True)
@@ -580,7 +580,7 @@ if st.session_state.current_page == "💠 Dashboard":
         st.markdown(f"""
         <div class="metric-card">
             <div class="card-title">Dataset Size</div>
-            <div class="value" style="color: #c084fc;">{total_len:,}</div>
+            <div class="value" style="color: #D8B4FE;">{total_len:,}</div>
             <div class="subtext">Synthetic data matching real Sparkov schema</div>
         </div>
         """, unsafe_allow_html=True)
@@ -811,7 +811,7 @@ if st.session_state.current_page == "🔑 Login":
                 font-size: 1.05rem !important;
             }
             div[data-testid="stTextInput"] input::placeholder {
-                color: #64748B !important;
+                color: #94A3B8 !important;
             }
     
             /* Main Login Button Override */
