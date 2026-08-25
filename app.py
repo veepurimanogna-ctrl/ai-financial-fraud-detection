@@ -279,9 +279,6 @@ st.markdown("""
     
     /* Main Page Radio Buttons (Batch Filter Pills) */
     [data-testid="stAppViewContainer"] div[role="radiogroup"] { flex-wrap: wrap; gap: 10px; }
-    [data-testid="stAppViewContainer"] div[role="radiogroup"] label > div:first-child { 
-        display: flex !important; /* Restore the radio circle */
-    }
     [data-testid="stAppViewContainer"] div[role="radiogroup"] label {
         padding: 8px 16px !important;
         border-radius: 6px !important;
@@ -290,25 +287,21 @@ st.markdown("""
         border: 1px solid #E2E8F0 !important;
         box-shadow: 0 1px 3px rgba(0,0,0,0.05) !important;
     }
-    [data-testid="stAppViewContainer"] div[role="radiogroup"] label:nth-child(1) {
+    
+    /* Only color the SELECTED radio button Gold */
+    [data-testid="stAppViewContainer"] div[role="radiogroup"] label:has(input:checked) {
         background-color: #D4A72C !important;
         border-color: #A88222 !important;
     }
-    [data-testid="stAppViewContainer"] div[role="radiogroup"] label:nth-child(1) * {
+    [data-testid="stAppViewContainer"] div[role="radiogroup"] label:has(input:checked) * {
         color: #142B44 !important;
         font-weight: 700 !important;
     }
-    [data-testid="stAppViewContainer"] div[role="radiogroup"] label:nth-child(2) { border-color: #DC3545 !important; }
-    [data-testid="stAppViewContainer"] div[role="radiogroup"] label:nth-child(2) * { color: #DC3545 !important; font-weight: 700 !important; }
     
-    [data-testid="stAppViewContainer"] div[role="radiogroup"] label:nth-child(3) { border-color: #F59E0B !important; }
-    [data-testid="stAppViewContainer"] div[role="radiogroup"] label:nth-child(3) * { color: #F59E0B !important; font-weight: 700 !important; }
-    
-    [data-testid="stAppViewContainer"] div[role="radiogroup"] label:nth-child(4) { border-color: #159447 !important; }
-    [data-testid="stAppViewContainer"] div[role="radiogroup"] label:nth-child(4) * { color: #159447 !important; font-weight: 700 !important; }
-    
-    [data-testid="stDataFrame"] * {
+    /* Unselected radio buttons text color */
+    [data-testid="stAppViewContainer"] div[role="radiogroup"] label:not(:has(input:checked)) * {
         color: #0F2740 !important;
+        font-weight: 600 !important;
     }
     .metric-card .text-value {
     font-family: 'Inter', sans-serif !important;
@@ -1220,29 +1213,8 @@ if st.session_state.current_page == "📂 Batch CSV Fraud Scanner":
                 if not cols_to_show:
                     cols_to_show = display_df.columns.tolist()[:7]
                     
-                def style_risk_level(val):
-                    if val == "HIGH RISK - FLAGGED":
-                        return 'background-color: #FDECEC; color: #991B1B;'
-                    elif val == "MEDIUM RISK - 2FA":
-                        return 'background-color: #FEF3C7; color: #92400E;'
-                    elif val == "LOW RISK":
-                        return 'background-color: #F0FDF4; color: #3F6212;'
-                    return ''
-                
-                # Increase Pandas Styler max elements limit to prevent StreamlitAPIException on massive batch datasets
-                pd.set_option("styler.render.max_elements", 10000000)
-                
-                # First explicitly style ALL cells to have dark navy text so they don't get washed out by the Canvas renderer
-                base_styled_df = display_df[cols_to_show].style.set_properties(**{
-                    'color': '#0F2740',
-                    'background-color': '#FFFFFF'
-                })
-                
-                # Then map the specific risk level column colors
-                styled_df = base_styled_df.applymap(style_risk_level, subset=['predicted_risk_level']) if hasattr(base_styled_df, 'applymap') else base_styled_df.map(style_risk_level, subset=['predicted_risk_level'])
-                
                 st.dataframe(
-                    styled_df,
+                    display_df[cols_to_show],
                     use_container_width=True,
                     height=400
                 )
