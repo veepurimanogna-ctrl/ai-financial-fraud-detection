@@ -167,8 +167,8 @@ st.markdown("""
     font-size: 0.95rem !important;
     }
     div[role="radiogroup"] label:has(input:checked) {
-    background: linear-gradient(90deg, #D4A72C 0%, #B9862A 100%) !important;
-    box-shadow: 0 4px 15px rgba(212, 167, 44, 0.2) !important;
+    background: linear-gradient(90deg, #C19934 0%, #A67B28 100%) !important;
+    box-shadow: 0 4px 15px rgba(193, 153, 52, 0.15) !important;
     }
     div[role="radiogroup"] label:has(input:checked) * {
     color: #FFFFFF !important;
@@ -183,7 +183,7 @@ st.markdown("""
     }
     /* Beautiful Dashboard Background */
     .stApp {
-    background: linear-gradient(135deg, #F8FAFC 0%, #E2E8F0 100%) !important;
+    background: #F5F8FC !important;
     }
     /* Elegant Serif Headings */
     h1, h2, h3, h4, h5, h6,
