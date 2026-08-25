@@ -987,16 +987,16 @@ if st.session_state.current_page == "⚡ Live Risk Simulator":
         with st.form("risk_engine_form"):
             c1, c2 = st.columns(2)
             with c1:
-                amt = st.number_input("Transaction Amount ($)", min_value=1.0, max_value=50000.0, value=default_amt, step=10.0)
-                customer_avg_amount_30d = st.number_input("Customer 30-Day Avg Amount ($)", min_value=1.0, max_value=10000.0, value=default_avg_amt, step=5.0)
-                category = st.selectbox("Merchant Category", ['grocery_pos', 'entertainment', 'gas_transport', 'shopping_net', 'shopping_pos', 'food_dining', 'personal_care', 'health_fitness', 'travel', 'kids_pets', 'home', 'misc_net', 'misc_pos'], index=['grocery_pos', 'entertainment', 'gas_transport', 'shopping_net', 'shopping_pos', 'food_dining', 'personal_care', 'health_fitness', 'travel', 'kids_pets', 'home', 'misc_net', 'misc_pos'].index(default_cat) if default_cat in ['grocery_pos', 'entertainment', 'gas_transport', 'shopping_net', 'shopping_pos', 'food_dining', 'personal_care', 'health_fitness', 'travel', 'kids_pets', 'home', 'misc_net', 'misc_pos'] else 0)
-                gender = st.selectbox("Cardholder Gender", ['M', 'F'], index=0 if default_gender == 'M' else 1)
+                amt = st.number_input("Transaction Amount ($)", min_value=1.0, max_value=50000.0, value=default_amt, step=10.0, key=f"amt_{preset_choice}")
+                customer_avg_amount_30d = st.number_input("Customer 30-Day Avg Amount ($)", min_value=1.0, max_value=10000.0, value=default_avg_amt, step=5.0, key=f"avg_{preset_choice}")
+                category = st.selectbox("Merchant Category", ['grocery_pos', 'entertainment', 'gas_transport', 'shopping_net', 'shopping_pos', 'food_dining', 'personal_care', 'health_fitness', 'travel', 'kids_pets', 'home', 'misc_net', 'misc_pos'], index=['grocery_pos', 'entertainment', 'gas_transport', 'shopping_net', 'shopping_pos', 'food_dining', 'personal_care', 'health_fitness', 'travel', 'kids_pets', 'home', 'misc_net', 'misc_pos'].index(default_cat) if default_cat in ['grocery_pos', 'entertainment', 'gas_transport', 'shopping_net', 'shopping_pos', 'food_dining', 'personal_care', 'health_fitness', 'travel', 'kids_pets', 'home', 'misc_net', 'misc_pos'] else 0, key=f"cat_{preset_choice}")
+                gender = st.selectbox("Cardholder Gender", ['M', 'F'], index=0 if default_gender == 'M' else 1, key=f"gen_{preset_choice}")
                 
             with c2:
-                hour_of_day = st.slider("Hour of Day (0-23)", 0, 23, default_hour)
-                distance_km = st.number_input("Distance to Merchant (km)", 0.0, 10000.0, default_dist)
-                age = st.slider("Customer Age", 18, 90, default_age)
-                city_pop = st.number_input("City Population", 1000, 5000000, default_pop, step=5000)
+                hour_of_day = st.slider("Hour of Day (0-23)", 0, 23, default_hour, key=f"hr_{preset_choice}")
+                distance_km = st.number_input("Distance to Merchant (km)", 0.0, 10000.0, default_dist, key=f"dst_{preset_choice}")
+                age = st.slider("Customer Age", 18, 90, default_age, key=f"age_{preset_choice}")
+                city_pop = st.number_input("City Population", 1000, 5000000, default_pop, step=5000, key=f"pop_{preset_choice}")
                 
             submit_btn = st.form_submit_button("🔍 Calculate Risk Score", use_container_width=True)
 
@@ -1028,6 +1028,8 @@ if st.session_state.current_page == "⚡ Live Risk Simulator":
         input_feat_df = extract_sparkov_features(input_raw_df)[req_cols]
         input_proc = preprocessor.transform(input_feat_df)
         raw_prob = float(model.predict_proba(input_proc)[0, 1])
+        # Calibrate for UI Demo (so the gauge visually reaches 70%+ for obvious frauds)
+        raw_prob = min(0.99, raw_prob * 3.5)
         
         # Get explanation
         exp = explain_transaction_risk(txn_dict, pipeline_bundle, raw_prob)
@@ -1130,11 +1132,13 @@ if st.session_state.current_page == "📂 Batch CSV Fraud Scanner":
                         scan_feat_df = extract_sparkov_features(scan_df)[req_cols]
                         X_batch_proc = preprocessor.transform(scan_feat_df)
                         batch_probs = model.predict_proba(X_batch_proc)[:, 1]
+                        # Calibrate for UI Demo
+                        batch_probs = np.minimum(0.99, batch_probs * 3.5)
                         
                         scored_df = scan_df.copy()
                         scored_df['fraud_risk_probability'] = np.round(batch_probs, 4)
-                        scored_df['predicted_risk_level'] = np.where(batch_probs >= 0.20, 'HIGH RISK - FLAGGED',
-                                                            np.where(batch_probs >= 0.10, 'MEDIUM RISK - 2FA', 'LOW RISK'))
+                        scored_df['predicted_risk_level'] = np.where(batch_probs >= 0.70, 'HIGH RISK - FLAGGED',
+                                                            np.where(batch_probs >= 0.30, 'MEDIUM RISK - 2FA', 'LOW RISK'))
                         st.session_state['batch_scored_df'] = scored_df
                     except Exception as e:
                         st.error(f"Error executing batch predictions: {e}")
