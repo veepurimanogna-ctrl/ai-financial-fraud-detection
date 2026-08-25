@@ -715,15 +715,16 @@ if st.session_state.current_page == "🔑 Login":
     /* Target the column containing the anchor */
     /* Apply SVG background to the entire page behind the login form */
     [data-testid="stAppViewContainer"]:has(.login-bg-anchor) {
-    background-color: #F5F8FC !important;
+    background-color: #0F2740 !important;
+    background-image: radial-gradient(circle at center, #142B44 0%, #0B192C 100%) !important;
     }
     
     div[data-testid="stColumn"]:has(.login-bg-anchor) {
-    background-color: #0F2740 !important;
-    border-radius: 20px;
-    padding: 40px;
-    border: 1px solid rgba(255,255,255,0.05);
-    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    background-color: #FDF7E2 !important;
+    border-radius: 12px;
+    padding: 50px 40px;
+    border: 2px solid #D4A72C;
+    box-shadow: 10px 10px 0px #D4A72C;
     }
     
 </style>
@@ -751,13 +752,13 @@ if st.session_state.current_page == "🔑 Login":
                 padding: 12px;
             }
             .login-title {
-                color: #FFFFFF;
+                color: #0F2740;
                 font-size: 1.9rem;
-                font-weight: 700;
+                font-weight: 800;
                 margin-bottom: 5px;
             }
             .login-subtitle {
-                color: #E2E8F0;
+                color: #475569;
                 font-size: 0.95rem;
                 margin-bottom: 25px;
             }
@@ -812,7 +813,7 @@ if st.session_state.current_page == "🔑 Login":
                 display: flex;
                 align-items: center;
                 text-align: center;
-                color: #CBD5E1;
+                color: #94A3B8;
                 font-size: 0.85rem;
                 margin-bottom: 20px;
                 font-family: monospace;
@@ -821,7 +822,7 @@ if st.session_state.current_page == "🔑 Login":
             .login-divider::before, .login-divider::after {
                 content: '';
                 flex: 1;
-                border-bottom: 1px solid #334155;
+                border-bottom: 1px solid #CBD5E1;
             }
             .login-divider:not(:empty)::before { margin-right: 1em; }
             .login-divider:not(:empty)::after { margin-left: 1em; }
@@ -832,8 +833,8 @@ if st.session_state.current_page == "🔑 Login":
             }
             div[data-testid="stTextInput"] label p {
                 text-transform: uppercase;
-                color: #E2E8F0 !important;
-                font-weight: 800;
+                color: #0F2740 !important;
+                font-weight: 900;
                 font-size: 0.8rem !important;
                 letter-spacing: 1px;
                 margin-bottom: -2px;
