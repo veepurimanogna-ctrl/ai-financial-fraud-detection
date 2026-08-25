@@ -1203,8 +1203,8 @@ if st.session_state.current_page == "📊 Model Performance & Metrics":
             st.markdown(f"""
             <div class="metric-card">
                 <div class="card-title">{m_name}</div>
-                <div class="value" style="color: {'#D4A72C' if m_name==best_model_name else '#94a3b8'};">PR-AUC: {res['pr_auc']:.3f}</div>
-                <div style="margin-top: 10px; text-align: left; font-size: 0.9rem; color: #F8FAFC;">
+                <div class="value" style="color: {'#D4A72C' if m_name==best_model_name else '#F8FAFC'} !important; text-align: center; margin: 10px 0;">PR-AUC: {res['pr_auc']:.3f}</div>
+                <div style="margin-top: 15px; text-align: left; font-size: 0.95rem; color: #F8FAFC;">
                     • <strong>Recall:</strong> {res['recall']*100:.1f}%<br>
                     • <strong>Precision:</strong> {res['precision']*100:.1f}%<br>
                     • <strong>F1-Score:</strong> {res['f1']:.3f}<br>
@@ -1212,11 +1212,6 @@ if st.session_state.current_page == "📊 Model Performance & Metrics":
                 </div>
             </div>
             """, unsafe_allow_html=True)
-            with st.popover("ℹ️ Metrics Info", use_container_width=True):
-                st.markdown("**Recall:** The percentage of actual fraud cases the model successfully catches. Higher recall = catches more real fraud.")
-                st.markdown("**Precision:** Of the transactions the model flagged as fraud, how many were actually fraud? Higher precision = fewer false alarms.")
-                st.markdown("**F1-Score:** A balanced score combining Precision and Recall.")
-                st.markdown("**ROC-AUC:** Overall accuracy of distinguishing fraud from normal.")
             
     st.markdown("<br>", unsafe_allow_html=True)
     
