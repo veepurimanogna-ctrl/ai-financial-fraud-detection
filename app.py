@@ -97,6 +97,15 @@ if not st.session_state.welcome_shown:
             
     st.stop()
 
+# Hide sidebar if not logged in
+if not st.session_state.get('logged_in', False):
+    st.markdown('''
+    <style>
+        [data-testid="stSidebar"] { display: none !important; }
+        [data-testid="collapsedControl"] { display: none !important; }
+    </style>
+    ''', unsafe_allow_html=True)
+
 # Top-Left Persistent Brand Mark
 st.markdown('''
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
@@ -605,6 +614,13 @@ if st.session_state.current_page == "💠 Dashboard":
 12:42:47  BLOCK    RU POST /signup     0.8ms
 12:42:49  ALLOW    GB POST /login      1.0ms
         """, language="shell")
+        
+    st.markdown("<br><br>", unsafe_allow_html=True)
+    col_btn1, col_btn2, col_btn3 = st.columns([1, 1, 1])
+    with col_btn2:
+        if st.button("Access Login Portal →", type="primary", use_container_width=True):
+            st.session_state.current_page = "🔑 Login"
+            st.rerun()
 
 # ==========================================
 # TAB LOGIN: LOGIN / API ACCESS
