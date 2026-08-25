@@ -853,21 +853,29 @@ Sign in with Google Account
         import streamlit.components.v1 as components
         components.html('''
         <script>
-            setTimeout(() => {
+            const hideAndBind = () => {
                 const doc = window.parent.document;
                 const googleBtn = doc.querySelector('.google-btn');
-
                 
                 let hiddenBtn = null;
                 doc.querySelectorAll('button').forEach(btn => {
-                    if(btn.innerText.includes('hidden_login_trigger')) hiddenBtn = btn;
+                    if(btn.innerText.includes('hidden_login_trigger')) {
+                        hiddenBtn = btn;
+                        // Hide the button's entire container immediately
+                        const container = btn.closest('div[data-testid="element-container"]');
+                        if (container) container.style.display = 'none';
+                        else btn.style.display = 'none';
+                    }
                 });
                 
-                if (hiddenBtn) {
-                    if (googleBtn) googleBtn.onclick = () => hiddenBtn.click();
-
+                if (hiddenBtn && googleBtn && !googleBtn.onclick) {
+                    googleBtn.onclick = () => hiddenBtn.click();
                 }
-            }, 500);
+            };
+            
+            hideAndBind();
+            setTimeout(hideAndBind, 50);
+            setTimeout(hideAndBind, 500);
         </script>
         ''', height=0)
 
