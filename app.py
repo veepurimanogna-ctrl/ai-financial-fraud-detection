@@ -149,7 +149,7 @@ st.markdown('''
 <div class="top-left-brand"><span>🛡️</span> AUREVIA SHIELD</div>
 ''', unsafe_allow_html=True)
 
-# --- Premium Light Dashboard Theme ---
+# --- Premium Light Overview Theme ---
 st.markdown("""
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 <style>
@@ -221,7 +221,7 @@ st.markdown("""
     [data-testid="stFileUploader"] section * {
         color: #142B44 !important;
     }
-    /* Beautiful Dashboard Background */
+    /* Beautiful Overview Background */
     .stApp {
     background: linear-gradient(135deg, #FDFDFD 0%, #FDF7E2 100%) !important;
     }
@@ -233,7 +233,7 @@ st.markdown("""
     font-family: 'Playfair Display', serif !important;
     color: #142B44 !important;
     }
-    /* Gradient Main Dashboard Title */
+    /* Gradient Main Overview Title */
     [data-testid="stHeader"] { background-color: transparent !important; }
     div.block-container > div:first-child [data-testid="stMarkdownContainer"] h1 {
     background: linear-gradient(90deg, #142B44, #D4A72C);
@@ -465,14 +465,14 @@ req_cols = pipeline_bundle['num_features'] + pipeline_bundle['cat_features'] + p
 if 'logged_in' not in st.session_state:
     st.session_state.logged_in = False
 if 'current_page' not in st.session_state:
-    st.session_state.current_page = "💠 Dashboard"
+    st.session_state.current_page = "💠 Overview"
 
 # --- Full-Page Custom Navigation ---
 if not st.session_state.logged_in:
-    nav_options = ["💠 Dashboard", "🔑 Login"]
+    nav_options = ["💠 Overview", "🔑 Login"]
 else:
     nav_options = [
-        "💠 Dashboard",
+        "💠 Overview",
         "⚡ Live Risk Simulator", 
         "📂 Batch CSV Fraud Scanner", 
         "📊 Model Performance & Metrics", 
@@ -537,7 +537,7 @@ selected_page = st.sidebar.radio(
 # Handle Logout immediately
 if selected_page == "🚪 Logout":
     st.session_state.logged_in = False
-    st.session_state.current_page = "💠 Dashboard"
+    st.session_state.current_page = "💠 Overview"
     st.rerun()
 
 
@@ -565,7 +565,7 @@ st.sidebar.markdown('''
 # ==========================================
 # TAB OVERVIEW: SYSTEM OVERVIEW
 # ==========================================
-if st.session_state.current_page == "💠 Dashboard":
+if st.session_state.current_page == "💠 Overview":
 
     st.markdown('''<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 <style>
