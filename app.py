@@ -1222,11 +1222,11 @@ if st.session_state.current_page == "📂 Batch CSV Fraud Scanner":
                     
                 def style_risk_level(val):
                     if val == "HIGH RISK - FLAGGED":
-                        return 'background-color: #FDECEC; color: #991B1B; font-weight: 700;'
+                        return 'background-color: #FDECEC; color: #991B1B;'
                     elif val == "MEDIUM RISK - 2FA":
-                        return 'background-color: #FEF3C7; color: #92400E; font-weight: 700;'
+                        return 'background-color: #FEF3C7; color: #92400E;'
                     elif val == "LOW RISK":
-                        return 'background-color: #F0FDF4; color: #3F6212; font-weight: 700;'
+                        return 'background-color: #F0FDF4; color: #3F6212;'
                     return ''
                 
                 styled_df = display_df[cols_to_show].style.applymap(style_risk_level, subset=['predicted_risk_level']) if hasattr(display_df.style, 'applymap') else display_df[cols_to_show].style.map(style_risk_level, subset=['predicted_risk_level'])
