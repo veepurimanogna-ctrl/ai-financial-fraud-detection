@@ -806,8 +806,8 @@ if st.session_state.current_page == "🔑 Login":
                 margin-bottom: -2px;
             }
             div[data-testid="stTextInput"] div[data-baseweb="input"] {
-                background-color: #0B1121 !important;
-                border: 1px solid #1E293B !important;
+                background-color: rgba(255, 255, 255, 0.08) !important;
+                border: 1px solid rgba(255, 255, 255, 0.2) !important;
                 border-radius: 8px !important;
                 transition: all 0.2s ease !important;
             }
@@ -1178,7 +1178,7 @@ if st.session_state.current_page == "📊 Model Performance & Metrics":
             <div class="metric-card">
                 <div class="card-title">{m_name}</div>
                 <div class="value" style="color: {'#D4A72C' if m_name==best_model_name else '#94a3b8'};">PR-AUC: {res['pr_auc']:.3f}</div>
-                <div style="margin-top: 10px; text-align: left; font-size: 0.9rem;">
+                <div style="margin-top: 10px; text-align: left; font-size: 0.9rem; color: #F8FAFC;">
                     • <strong>Recall:</strong> {res['recall']*100:.1f}%<br>
                     • <strong>Precision:</strong> {res['precision']*100:.1f}%<br>
                     • <strong>F1-Score:</strong> {res['f1']:.3f}<br>
