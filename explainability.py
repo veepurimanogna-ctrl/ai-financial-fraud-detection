@@ -92,15 +92,15 @@ def explain_transaction_risk(txn_dict, pipeline_bundle, risk_score):
     # Risk Assessment Categorization
     if risk_score >= 0.20:
         risk_level = "HIGH RISK - FLAGGED"
-        risk_color = "red"
+        risk_color = "#DC3545"
         action = "🛑 BLOCK TRANSACTION & ALERT FRAUD INVESTIGATION TEAM"
     elif risk_score >= 0.10:
         risk_level = "MEDIUM RISK - REVIEW"
-        risk_color = "orange"
+        risk_color = "#D4A72C"
         action = "⚠️ PROMPT SECOND-FACTOR AUTHENTICATION (2FA / OTP)"
     else:
         risk_level = "LOW RISK - CLEARED"
-        risk_color = "green"
+        risk_color = "#159447"
         action = "✅ AUTOMATICALLY APPROVE TRANSACTION"
 
     return {
