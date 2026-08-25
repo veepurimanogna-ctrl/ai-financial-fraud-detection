@@ -719,6 +719,8 @@ if st.session_state.current_page == "🔑 Login":
     background-image: linear-gradient(135deg, #1d2f3d 0%, #111e29 100%) !important;
     }
     
+    .page-starfield { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 0; pointer-events: none; }
+    
     div[data-testid="stColumn"]:has(.login-bg-anchor) {
     background-color: #FDF7E2 !important;
     border-radius: 12px;
