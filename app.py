@@ -472,7 +472,6 @@ if not st.session_state.logged_in:
     nav_options = ["💠 Overview", "🔑 Login"]
 else:
     nav_options = [
-        "💠 Overview",
         "⚡ Live Risk Simulator", 
         "📂 Batch CSV Fraud Scanner", 
         "📊 Model Performance & Metrics", 
