@@ -1046,9 +1046,9 @@ if st.session_state.current_page == "⚡ Live Risk Simulator":
                 'borderwidth': 2,
                 'bordercolor': "#E2E8F0",
                 'steps': [
-                    {'range': [0, 10], 'color': 'rgba(21, 148, 71, 0.2)'},
-                    {'range': [10, 20], 'color': 'rgba(245, 158, 11, 0.2)'},
-                    {'range': [20, 100], 'color': 'rgba(220, 53, 69, 0.2)'}
+                    {'range': [0, 30], 'color': 'rgba(21, 148, 71, 0.2)'},
+                    {'range': [30, 70], 'color': 'rgba(212, 167, 44, 0.2)'},
+                    {'range': [70, 100], 'color': 'rgba(220, 53, 69, 0.2)'}
                 ],
                 'threshold': {
                     'line': {'color': "#DC3545", 'width': 4},
