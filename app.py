@@ -212,6 +212,15 @@ st.markdown("""
         background-color: transparent !important;
         color: #142B44 !important;
     }
+    /* Fix File Uploader Visibility */
+    [data-testid="stFileUploader"] section {
+        background-color: #FFFFFF !important;
+        border: 2px dashed #CBD5E1 !important;
+        border-radius: 8px !important;
+    }
+    [data-testid="stFileUploader"] section * {
+        color: #142B44 !important;
+    }
     /* Beautiful Dashboard Background */
     .stApp {
     background: linear-gradient(135deg, #FDFDFD 0%, #FDF7E2 100%) !important;
