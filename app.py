@@ -266,8 +266,8 @@ st.markdown("""
     box-shadow: 0 4px 12px rgba(212, 167, 44, 0.15) !important;
     }
     [data-testid="stSidebar"] div[role="radiogroup"] label:has(input:checked) p {
-    color: #D4A72C !important;
-    font-weight: 700 !important;
+    color: #FFFFFF !important;
+    font-weight: 800 !important;
     }
     [data-testid="stSidebar"] div[role="radiogroup"] label:not(:has(input:checked)):hover {
     background-color: rgba(255, 255, 255, 0.05) !important;
@@ -1318,7 +1318,7 @@ if st.session_state.current_page == "🔍 Fraud Insights & Analytics (EDA)":
                 color='fraud_rate',
                 color_continuous_scale='reds'
             )
-            fig_hour.update_layout(template="plotly_white", paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', height=320)
+            fig_hour.update_layout(template="plotly_white", paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', height=320, font=dict(color='#0F2740', size=13))
             st.plotly_chart(fig_hour, use_container_width=True)
             st.caption("Takeaway: Fraud is highest in the late night / early morning hours (1 AM - 5 AM).")
 
@@ -1338,7 +1338,7 @@ if st.session_state.current_page == "🔍 Fraud Insights & Analytics (EDA)":
                 color='fraud_rate',
                 color_continuous_scale='Oranges'
             )
-            fig_cat.update_layout(template="plotly_white", paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', height=320)
+            fig_cat.update_layout(template="plotly_white", paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', height=320, font=dict(color='#0F2740', size=13))
             st.plotly_chart(fig_cat, use_container_width=True)
             st.caption("Takeaway: Fraud is highly concentrated in online shopping and grocery transactions.")
 
@@ -1357,6 +1357,6 @@ if st.session_state.current_page == "🔍 Fraud Insights & Analytics (EDA)":
                 color='Importance',
                 color_continuous_scale='Viridis'
             )
-            fig_fi.update_layout(template="plotly_white", paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', height=350)
+            fig_fi.update_layout(template="plotly_white", paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', height=350, font=dict(color='#0F2740', size=13))
             st.plotly_chart(fig_fi, use_container_width=True)
             st.caption("Takeaway: The amount of the transaction and geographical distance are the strongest predictors of fraud risk.")
