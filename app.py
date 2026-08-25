@@ -54,8 +54,8 @@ if not st.session_state.welcome_shown:
     /* Animate the start button below as well */
     .stButton > button { animation: zi 0.7s cubic-bezier(0.2,0.8,0.3,1) both; }
 .shield-glow-container { position: relative; display: inline-block; }
-.shield-glow { position: absolute; width: 180px; height: 180px; background: radial-gradient(circle, rgba(212, 167, 44,0.15) 0%, transparent 70%); top: 50%; left: 50%; transform: translate(-50%, -50%); border-radius: 50%; animation: pulseGlow 3s infinite ease-in-out; z-index: -1; pointer-events: none; }
-@keyframes pulseGlow { 0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.6; } 50% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; } }
+.shield-glow { position: absolute; width: 700px; height: 700px; background: radial-gradient(circle, rgba(212, 167, 44, 0.3) 0%, rgba(212, 167, 44, 0.1) 30%, transparent 70%); top: 50%; left: 50%; transform: translate(-50%, -50%); border-radius: 50%; animation: pulseGlow 6s infinite ease-in-out; z-index: -1; pointer-events: none; }
+@keyframes pulseGlow { 0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.7; } 50% { transform: translate(-50%, -50%) scale(1.15); opacity: 1; } }
 .gradient-divider { width: 60%; height: 1px; background: linear-gradient(90deg, transparent 0%, #D4A72C 50%, transparent 100%); margin: 20px auto; opacity: 0.5; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 </style>
@@ -73,15 +73,15 @@ if not st.session_state.welcome_shown:
     </linearGradient>
   </defs>
 </svg>
-<h1 style="background: linear-gradient(180deg, #FCEBB8, #D4A72C); -webkit-background-clip: text; background-clip: text; color: transparent; font-weight: 800; font-size: 5.5rem; margin-bottom: 0; margin-top: 0; text-shadow: 0 0 30px rgba(212,167,44,0.4); line-height: 1.1;">AUREVIA SHIELD</h1>
+<h1 style="color: #FCEBB8; font-weight: 800; font-size: 5.5rem; margin-bottom: 0; margin-top: 0; text-shadow: 0 0 30px rgba(212,167,44,0.8); line-height: 1.1;">AUREVIA SHIELD</h1>
 </div>
 <div class="gradient-divider"></div>
-<h3 style="color: #E2E8F0; margin-top: 0; margin-bottom: 40px; font-weight: 400; font-size: 1.6rem;">AI Financial Fraud Detection & Risk Analysis System</h3>
+<h3 style="color: #FFFFFF; margin-top: 0; margin-bottom: 40px; font-weight: 400; font-size: 1.6rem;">AI Financial Fraud Detection & Risk Analysis System</h3>
 </div>''', unsafe_allow_html=True)
     
     col1, col2, col3 = st.columns([1, 1, 1])
     with col2:
-        if st.button("Let's Start", use_container_width=True):
+        if st.button("Let's Start", use_container_width=True, type="primary"):
             st.session_state.welcome_shown = True
             st.rerun()
             
