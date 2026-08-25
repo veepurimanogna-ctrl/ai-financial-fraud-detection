@@ -125,43 +125,52 @@ text-shadow: 0 0 10px rgba(212, 167, 44, 0.3);
 <div class="top-left-brand">🛡️ AUREVIA SHIELD</div>
 ''', unsafe_allow_html=True)
 
-# --- Custom Dark Theme CSS ---
-st.markdown("""
+# --- Premium Light Dashboard Theme ---
+st.markdown('''
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@400;500&family=JetBrains+Mono:wght@500&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap');
 
-    html, body, [class*="css"] {
-        font-family: 'Inter', sans-serif;
+    /* Global Typography Reset */
+    html, body, [class*="css"], .stApp {
+        font-family: 'Inter', sans-serif !important;
     }
-    h1, h2, h3, h4, h5, h6, .stMarkdown h1, .stMarkdown h2, .stMarkdown h3 {
+    
+    /* Beautiful Dashboard Background */
+    .stApp {
+        background: linear-gradient(135deg, #F8FAFC 0%, #E2E8F0 100%) !important;
+    }
+
+    /* Elegant Serif Headings */
+    h1, h2, h3, h4, h5, h6, 
+    [data-testid="stMarkdownContainer"] h1, 
+    [data-testid="stMarkdownContainer"] h2, 
+    [data-testid="stMarkdownContainer"] h3 {
         font-family: 'Playfair Display', serif !important;
         color: #142B44 !important;
     }
+    
+    /* Gradient Main Dashboard Title */
+    [data-testid="stHeader"] { background-color: transparent !important; }
+    div.block-container > div:first-child [data-testid="stMarkdownContainer"] h1 {
+        background: linear-gradient(90deg, #142B44, #D4A72C);
+        -webkit-background-clip: text !important;
+        -webkit-text-fill-color: transparent !important;
+        background-clip: text !important;
+        color: transparent !important;
+        text-shadow: 0 4px 15px rgba(212, 167, 44, 0.15);
+    }
+
     p, span, div, label {
         font-family: 'Inter', sans-serif;
     }
+    
+    /* Numeric Font for Metrics */
     [data-testid="stMetricValue"] > div, .metric-card .value, .stMetric [data-testid="stMetricValue"] {
         font-family: 'JetBrains Mono', monospace !important;
+        color: #142B44 !important;
     }
 
-    /* 🤖 Cyber-Sec Neon Theme Setup */
-    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;800&display=swap');
-
-    html, body, [class*="css"] {
-        font-family: 'Outfit', sans-serif;
-    }
-
-    .main {
-        background-color: #050505;
-        color: #475569;
-        background-image: radial-gradient(circle at 50% 0%, #112233 0%, #050505 70%);
-    }
-    
-    .stAppHeader {
-        background-color: transparent !important;
-    }
-
-    /* 🔘 Custom Sidebar Navigation Radio Buttons */
+    /* 🔘 Premium Sidebar Navigation Radio Buttons */
     div[role="radiogroup"] label {
         padding: 12px 16px !important;
         border-radius: 8px !important;
@@ -169,74 +178,61 @@ st.markdown("""
         transition: all 0.2s ease !important;
         cursor: pointer !important;
     }
-
-    /* Hide the circular radio dot completely */
-    div[role="radiogroup"] label > div:first-child {
-        display: none !important;
-    }
-
-    /* Style the Selected Button using the teal accent */
+    div[role="radiogroup"] label > div:first-child { display: none !important; }
+    
     div[role="radiogroup"] label:has(input:checked) {
-        background-color: rgba(212, 167, 44, 0.15) !important;
-        border: 1px solid rgba(212, 167, 44, 0.3) !important;
-        box-shadow: 0 0 10px rgba(212, 167, 44, 0.1) !important;
+        background-color: rgba(255, 255, 255, 0.1) !important;
+        border: 1px solid rgba(212, 167, 44, 0.4) !important;
+        box-shadow: 0 4px 12px rgba(212, 167, 44, 0.15) !important;
     }
-
-    /* Make selected text bolder and cyan */
     div[role="radiogroup"] label:has(input:checked) p {
         color: #D4A72C !important;
-        font-weight: 800 !important;
-        text-shadow: 0 0 5px rgba(212, 167, 44, 0.3) !important;
+        font-weight: 700 !important;
     }
-
-    /* Hover effect for unselected buttons */
     div[role="radiogroup"] label:not(:has(input:checked)):hover {
         background-color: rgba(255, 255, 255, 0.05) !important;
     }
 
-    /* 🛡️ Glassmorphism Metric Cards */
+    /* 🛡️ Premium Elevated Metric Cards */
     .metric-card {
-        background: #FFFFFF;
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        border: 1px solid #E2E8F0;
-        border-radius: 12px;
-        padding: 20px;
-        text-align: center;
-        box-shadow: 0 0 15px rgba(212, 167, 44, 0.05);
-        transition: transform 0.2s, box-shadow 0.2s;
+        background: rgba(255, 255, 255, 0.9) !important;
+        backdrop-filter: blur(10px) !important;
+        -webkit-backdrop-filter: blur(10px) !important;
+        border: 1px solid rgba(255, 255, 255, 0.6) !important;
+        border-radius: 12px !important;
+        padding: 24px !important;
+        text-align: center !important;
+        box-shadow: 0 8px 30px rgba(15, 39, 64, 0.06) !important;
+        transition: transform 0.3s cubic-bezier(0.2,0.8,0.2,1), box-shadow 0.3s ease !important;
     }
-    
     .metric-card:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 0 20px rgba(212, 167, 44, 0.15);
-        border: 1px solid #D4A72C;
+        transform: translateY(-5px) !important;
+        box-shadow: 0 15px 40px rgba(15, 39, 64, 0.12) !important;
+        border: 1px solid rgba(212, 167, 44, 0.5) !important;
     }
     
     .metric-card h3 {
-        color: #D4A72C;
-        font-size: 0.9rem;
-        margin-bottom: 8px;
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-        text-shadow: 0 0 8px rgba(212, 167, 44, 0.3);
+        color: #D4A72C !important;
+        font-size: 0.95rem !important;
+        margin-bottom: 12px !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.1em !important;
+        font-family: 'Inter', sans-serif !important;
+        font-weight: 700 !important;
     }
     
     .metric-card .value {
-        color: #142B44;
-        font-size: 1.4rem;
-        font-weight: 800;
-        text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
-        word-break: normal;
-        overflow-wrap: break-word;
-        line-height: 1.2;
+        font-size: 1.6rem !important;
+        font-weight: 800 !important;
+        word-break: normal !important;
+        line-height: 1.2 !important;
     }
 
     .metric-card .subtext {
-        color: #475569;
-        font-size: 0.85rem;
-        margin-top: 4px;
-        font-family: monospace;
+        color: #64748B !important;
+        font-size: 0.9rem !important;
+        margin-top: 8px !important;
+        font-family: 'Inter', sans-serif !important;
     }
 
     /* 🚨 Neon Risk Badges */
