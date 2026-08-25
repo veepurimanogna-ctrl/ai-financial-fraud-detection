@@ -44,7 +44,9 @@ if not st.session_state.welcome_shown:
     [data-testid="stSidebar"] { display: none !important; }
     [data-testid="collapsedControl"] { display: none !important; }
     .stAppHeader { display: none !important; }
-    .splash-starfield { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 0; pointer-events: none; }
+    body, .stApp { background-color: #0F2740 !important; }
+    .splash-starfield { position: fixed; top: -25%; left: -25%; width: 150%; height: 150%; z-index: 0; pointer-events: none; animation: swirl 180s linear infinite; }
+    @keyframes swirl { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
     .splash-star { position: absolute; background: #D4A72C; border-radius: 50%; box-shadow: 0 0 4px 1px rgba(212, 167, 44,0.7); animation: twinkle linear infinite; }
     @keyframes twinkle { 0%, 100% { opacity: 0.15; } 50% { opacity: 1; } }
     @keyframes zi { from { opacity:0; transform:scale(0.85); } to { opacity:1; transform:scale(1); } }
@@ -74,7 +76,7 @@ if not st.session_state.welcome_shown:
 <h1 style="background: linear-gradient(180deg, #FCEBB8, #D4A72C); -webkit-background-clip: text; background-clip: text; color: transparent; font-weight: 800; font-size: 5.5rem; margin-bottom: 0; margin-top: 0; text-shadow: 0 0 30px rgba(212,167,44,0.4); line-height: 1.1;">AUREVIA SHIELD</h1>
 </div>
 <div class="gradient-divider"></div>
-<h3 style="color: #475569; margin-top: 0; margin-bottom: 40px; font-weight: 400; font-size: 1.6rem;">AI Financial Fraud Detection & Risk Analysis System</h3>
+<h3 style="color: #E2E8F0; margin-top: 0; margin-bottom: 40px; font-weight: 400; font-size: 1.6rem;">AI Financial Fraud Detection & Risk Analysis System</h3>
 </div>''', unsafe_allow_html=True)
     
     col1, col2, col3 = st.columns([1, 1, 1])
