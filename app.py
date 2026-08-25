@@ -138,11 +138,11 @@ st.markdown("""
 <style>
     
     /* Fix Sidebar text colors */
-    [data-testid="stSidebar"] * { color: #E2E8F0 !important; }
+    [data-testid="stSidebar"] * { color: #142B44 !important; }
     /* Sidebar UI Overhaul */
     [data-testid="stSidebar"] {
-    background-color: #0F2740 !important; /* Lighter Navy Blue to match reference */
-    border-right: 1px solid rgba(255,255,255,0.05) !important;
+    background-color: #F5F8F7 !important; /* User requested light color */
+    border-right: 1px solid rgba(0,0,0,0.1) !important;
     }
     [data-testid="stSidebarNav"] { display: none !important; }
     div[role="radiogroup"] { gap: 4px !important; position: relative; z-index: 10; padding: 0 10px; }
@@ -162,20 +162,20 @@ st.markdown("""
         display: none !important; 
     }
     div[role="radiogroup"] label p {
-    color: #E2E8F0 !important;
+    color: #142B44 !important;
     font-weight: 600 !important;
     font-size: 0.95rem !important;
     }
     div[role="radiogroup"] label:has(input:checked) {
-    background: linear-gradient(90deg, #C19934 0%, #A67B28 100%) !important;
-    box-shadow: 0 4px 15px rgba(193, 153, 52, 0.15) !important;
+    background: linear-gradient(90deg, #A88222 0%, #8A6413 100%) !important;
+    box-shadow: 0 4px 10px rgba(168, 130, 34, 0.15) !important;
     }
     div[role="radiogroup"] label:has(input:checked) * {
     color: #FFFFFF !important;
     text-shadow: 0 1px 2px rgba(0,0,0,0.2) !important;
     }
     div[role="radiogroup"] label:not(:has(input:checked)):hover {
-    background-color: rgba(255, 255, 255, 0.08) !important;
+    background-color: rgba(0, 0, 0, 0.05) !important;
     }
     /* Global Typography Reset */
     html, body, [class*="css"], .stApp {
