@@ -146,11 +146,11 @@ st.markdown("""
 <style>
     
     /* Fix Sidebar text colors */
-    [data-testid="stSidebar"] * { color: #142B44 !important; }
+    [data-testid="stSidebar"] * { color: #E2E8F0 !important; }
     /* Sidebar UI Overhaul */
     [data-testid="stSidebar"] {
-    background-color: #F5F8F7 !important; /* User requested light color */
-    border-right: 1px solid rgba(0,0,0,0.1) !important;
+    background-color: #0F2740 !important; /* Lighter Navy Blue to match reference */
+    border-right: 1px solid rgba(255,255,255,0.05) !important;
     }
     [data-testid="stSidebarNav"] { display: none !important; }
     div[role="radiogroup"] { gap: 4px !important; position: relative; z-index: 10; padding: 0 10px; }
@@ -170,7 +170,7 @@ st.markdown("""
         display: none !important; 
     }
     div[role="radiogroup"] label p {
-    color: #142B44 !important;
+    color: #E2E8F0 !important;
     font-weight: 600 !important;
     font-size: 0.95rem !important;
     }
@@ -183,7 +183,7 @@ st.markdown("""
     text-shadow: 0 1px 2px rgba(0,0,0,0.2) !important;
     }
     div[role="radiogroup"] label:not(:has(input:checked)):hover {
-    background-color: rgba(0, 0, 0, 0.05) !important;
+    background-color: rgba(255, 255, 255, 0.08) !important;
     }
     /* Global Typography Reset */
     html, body, [class*="css"], .stApp {
@@ -454,10 +454,10 @@ st.sidebar.markdown("""
         </svg>
     </div>
     <div style="font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 900; line-height: 1.15; letter-spacing: 1px;">
-        <span style="color: #142B44;">AUREVIA</span><br>
+        <span style="color: #FFFFFF;">AUREVIA</span><br>
         <span style="color: #D4A72C;">SHIELD</span>
     </div>
-    <div style="color: #475569; font-size: 0.75rem; margin-top: 15px; font-weight: 500; max-width: 220px; margin-left: auto; margin-right: auto; line-height: 1.5;">
+    <div style="color: #94a3b8; font-size: 0.75rem; margin-top: 15px; font-weight: 500; max-width: 220px; margin-left: auto; margin-right: auto; line-height: 1.5;">
         AI Financial Fraud Detection &<br>Risk Analysis System
     </div>
 </div>
@@ -483,7 +483,7 @@ if selected_page != st.session_state.current_page and selected_page != "🚪 Log
 
 # --- Custom Bottom Security Card ---
 st.sidebar.markdown('''
-<div style="margin-top: 50px; margin-bottom: 30px; padding: 25px 20px; border: 1px solid rgba(212, 167, 44, 0.3); border-radius: 12px; background: rgba(255, 255, 255, 0.6); text-align: center; position: relative; z-index: 10; box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
+<div style="margin-top: 50px; margin-bottom: 30px; padding: 25px 20px; border: 1px solid rgba(212, 167, 44, 0.3); border-radius: 12px; background: rgba(15, 39, 64, 0.4); text-align: center; position: relative; z-index: 10; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
     <div style="margin-bottom: 12px;">
         <svg width="24" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="#D4A72C" stroke-width="1.5"/>
