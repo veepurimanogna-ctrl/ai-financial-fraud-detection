@@ -846,8 +846,8 @@ if st.session_state.current_page == "🔑 Login":
                 margin-bottom: -2px;
             }
             div[data-testid="stTextInput"] div[data-baseweb="input"] {
-                background-color: #2563EB !important;
-                border: 2px solid #1D4ED8 !important;
+                background-color: #142B44 !important;
+                border: 2px solid #1E3A8A !important;
                 border-radius: 8px !important;
                 transition: all 0.2s ease !important;
             }
@@ -863,7 +863,7 @@ if st.session_state.current_page == "🔑 Login":
                 font-size: 1.05rem !important;
             }
             div[data-testid="stTextInput"] input::placeholder {
-                color: #93C5FD !important;
+                color: #94A3B8 !important;
             }
     
             /* Main Login Button Override */
@@ -876,12 +876,12 @@ if st.session_state.current_page == "🔑 Login":
                 transition: all 0.2s ease !important;
             }
             div[data-testid="stButton"] button[kind="primary"] {
-                background-color: #2563EB !important;
+                background-color: #142B44 !important;
                 color: #FFFFFF !important;
-                border: 1px solid #2563EB !important;
+                border: 1px solid #1E3A8A !important;
             }
             div[data-testid="stButton"] button[kind="primary"]:hover {
-                background-color: #1D4ED8 !important;
+                background-color: #0F2740 !important;
             }
             div[data-testid="stButton"] button[kind="secondary"] {
                 background-color: #FFFFFF !important;
