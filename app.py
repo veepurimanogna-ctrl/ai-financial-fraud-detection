@@ -25,6 +25,7 @@ if 'welcome_shown' not in st.session_state:
 if not st.session_state.welcome_shown:
     st.markdown('''<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 <style>
+    
     html, body, [class*="css"] {
     font-family: 'Inter', sans-serif;
     }
@@ -58,6 +59,7 @@ if not st.session_state.welcome_shown:
     @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     .splash-container h1 { color: #FFD700 !important; }
     .splash-container h3 { color: #FFFFFF !important; }
+    
 </style>
 <div class="splash-starfield"><div class="splash-star" style="width: 1.8px; height: 1.8px; top: 4.4%; left: 28.4%; animation-duration: 2.33s; animation-delay: 1.1s;"></div><div class="splash-star" style="width: 1.8px; height: 1.8px; top: 87.6%; left: 10.3%; animation-duration: 2.63s; animation-delay: 0.04s;"></div><div class="splash-star" style="width: 1.6px; height: 1.6px; top: 50.5%; left: 4.5%; animation-duration: 2.3s; animation-delay: 0.97s;"></div><div class="splash-star" style="width: 1.8px; height: 1.8px; top: 23.2%; left: 58.6%; animation-duration: 3.21s; animation-delay: 0.01s;"></div><div class="splash-star" style="width: 1.9px; height: 1.9px; top: 69.0%; left: 34.7%; animation-duration: 2.23s; animation-delay: 1.44s;"></div><div class="splash-star" style="width: 1.7px; height: 1.7px; top: 10.9%; left: 11.3%; animation-duration: 3.27s; animation-delay: 0.91s;"></div><div class="splash-star" style="width: 1.9px; height: 1.9px; top: 72.1%; left: 53.5%; animation-duration: 3.46s; animation-delay: 0.57s;"></div><div class="splash-star" style="width: 1.8px; height: 1.8px; top: 81.6%; left: 61.4%; animation-duration: 3.29s; animation-delay: 0.87s;"></div><div class="splash-star" style="width: 1.9px; height: 1.9px; top: 6.4%; left: 23.9%; animation-duration: 2.43s; animation-delay: 0.12s;"></div><div class="splash-star" style="width: 1.6px; height: 1.6px; top: 11.7%; left: 28.7%; animation-duration: 2.95s; animation-delay: 0.55s;"></div><div class="splash-star" style="width: 1.7px; height: 1.7px; top: 22.1%; left: 27.6%; animation-duration: 3.4s; animation-delay: 0.97s;"></div><div class="splash-star" style="width: 1.8px; height: 1.8px; top: 18.4%; left: 72.0%; animation-duration: 2.25s; animation-delay: 0.57s;"></div><div class="splash-star" style="width: 2.0px; height: 2.0px; top: 63.4%; left: 55.5%; animation-duration: 3.03s; animation-delay: 1.26s;"></div><div class="splash-star" style="width: 1.9px; height: 1.9px; top: 24.0%; left: 5.1%; animation-duration: 2.47s; animation-delay: 0.4s;"></div><div class="splash-star" style="width: 1.6px; height: 1.6px; top: 92.5%; left: 86.1%; animation-duration: 2.47s; animation-delay: 0.98s;"></div><div class="splash-star" style="width: 1.7px; height: 1.7px; top: 89.8%; left: 46.0%; animation-duration: 2.4s; animation-delay: 0.37s;"></div><div class="splash-star" style="width: 1.8px; height: 1.8px; top: 27.2%; left: 58.1%; animation-duration: 3.35s; animation-delay: 0.6s;"></div><div class="splash-star" style="width: 1.6px; height: 1.6px; top: 97.8%; left: 50.9%; animation-duration: 2.14s; animation-delay: 0.07s;"></div><div class="splash-star" style="width: 1.6px; height: 1.6px; top: 62.2%; left: 78.0%; animation-duration: 2.63s; animation-delay: 0.1s;"></div><div class="splash-star" style="width: 1.7px; height: 1.7px; top: 97.6%; left: 52.8%; animation-duration: 3.46s; animation-delay: 1.29s;"></div></div>
 <div class="splash-container">
@@ -91,6 +93,7 @@ if not st.session_state.welcome_shown:
 st.markdown('''
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 <style>
+    
     /* :wght@600&family=Inter:wght@400;500&family=JetBrains+Mono:wght@500&display=swap');
     html, body, [class*="css"] {
     font-family: 'Inter', sans-serif;
@@ -124,6 +127,7 @@ st.markdown('''
     .top-left-brand span {
     font-size: 2.8rem !important;
     }
+    
 </style>
 <div class="top-left-brand"><span>🛡️</span> AUREVIA SHIELD</div>
 ''', unsafe_allow_html=True)
@@ -132,6 +136,7 @@ st.markdown('''
 st.markdown("""
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 <style>
+    
     /* Fix Sidebar text colors */
     [data-testid="stSidebar"] * { color: #E2E8F0 !important; }
     /* Sidebar UI Overhaul */
@@ -350,6 +355,7 @@ st.markdown("""
     text-transform: uppercase;
     letter-spacing: 1px;
     }
+    
 </style>
 """, unsafe_allow_html=True)
 
@@ -468,6 +474,7 @@ if st.session_state.current_page == "💠 Dashboard":
 
     st.markdown('''<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 <style>
+    
     /* :wght@600&family=Inter:wght@400;500&family=JetBrains+Mono:wght@500&display=swap');
     html, body, [class*="css"] {
     font-family: 'Inter', sans-serif;
@@ -485,6 +492,7 @@ if st.session_state.current_page == "💠 Dashboard":
     .page-starfield { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 0; pointer-events: none; }
     .splash-star { position: absolute; background: #D4A72C; border-radius: 50%; box-shadow: 0 0 4px 1px rgba(212, 167, 44,0.7); animation: twinkle linear infinite; }
     @keyframes twinkle { 0%, 100% { opacity: 0.15; } 50% { opacity: 1; } }
+    
 </style>
 <div class="page-starfield"><div class="splash-star" style="width: 1.8px; height: 1.8px; top: 4.4%; left: 28.4%; animation-duration: 2.33s; animation-delay: 1.1s;"></div><div class="splash-star" style="width: 1.8px; height: 1.8px; top: 87.6%; left: 10.3%; animation-duration: 2.63s; animation-delay: 0.04s;"></div><div class="splash-star" style="width: 1.6px; height: 1.6px; top: 50.5%; left: 4.5%; animation-duration: 2.3s; animation-delay: 0.97s;"></div><div class="splash-star" style="width: 1.8px; height: 1.8px; top: 23.2%; left: 58.6%; animation-duration: 3.21s; animation-delay: 0.01s;"></div><div class="splash-star" style="width: 1.9px; height: 1.9px; top: 69.0%; left: 34.7%; animation-duration: 2.23s; animation-delay: 1.44s;"></div><div class="splash-star" style="width: 1.7px; height: 1.7px; top: 10.9%; left: 11.3%; animation-duration: 3.27s; animation-delay: 0.91s;"></div><div class="splash-star" style="width: 1.9px; height: 1.9px; top: 72.1%; left: 53.5%; animation-duration: 3.46s; animation-delay: 0.57s;"></div><div class="splash-star" style="width: 1.8px; height: 1.8px; top: 81.6%; left: 61.4%; animation-duration: 3.29s; animation-delay: 0.87s;"></div><div class="splash-star" style="width: 1.9px; height: 1.9px; top: 6.4%; left: 23.9%; animation-duration: 2.43s; animation-delay: 0.12s;"></div><div class="splash-star" style="width: 1.6px; height: 1.6px; top: 11.7%; left: 28.7%; animation-duration: 2.95s; animation-delay: 0.55s;"></div><div class="splash-star" style="width: 1.7px; height: 1.7px; top: 22.1%; left: 27.6%; animation-duration: 3.4s; animation-delay: 0.97s;"></div><div class="splash-star" style="width: 1.8px; height: 1.8px; top: 18.4%; left: 72.0%; animation-duration: 2.25s; animation-delay: 0.57s;"></div><div class="splash-star" style="width: 2.0px; height: 2.0px; top: 63.4%; left: 55.5%; animation-duration: 3.03s; animation-delay: 1.26s;"></div><div class="splash-star" style="width: 1.9px; height: 1.9px; top: 24.0%; left: 5.1%; animation-duration: 2.47s; animation-delay: 0.4s;"></div><div class="splash-star" style="width: 1.6px; height: 1.6px; top: 92.5%; left: 86.1%; animation-duration: 2.47s; animation-delay: 0.98s;"></div><div class="splash-star" style="width: 1.7px; height: 1.7px; top: 89.8%; left: 46.0%; animation-duration: 2.4s; animation-delay: 0.37s;"></div><div class="splash-star" style="width: 1.8px; height: 1.8px; top: 27.2%; left: 58.1%; animation-duration: 3.35s; animation-delay: 0.6s;"></div><div class="splash-star" style="width: 1.6px; height: 1.6px; top: 97.8%; left: 50.9%; animation-duration: 2.14s; animation-delay: 0.07s;"></div><div class="splash-star" style="width: 1.6px; height: 1.6px; top: 62.2%; left: 78.0%; animation-duration: 2.63s; animation-delay: 0.1s;"></div><div class="splash-star" style="width: 1.7px; height: 1.7px; top: 97.6%; left: 52.8%; animation-duration: 3.46s; animation-delay: 1.29s;"></div></div>''', unsafe_allow_html=True)
     # --- Header Section ---
@@ -575,6 +583,7 @@ if st.session_state.current_page == "🔑 Login":
 
     st.markdown('''<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 <style>
+    
     /* :wght@600&family=Inter:wght@400;500&family=JetBrains+Mono:wght@500&display=swap');
     html, body, [class*="css"] {
     font-family: 'Inter', sans-serif;
@@ -592,11 +601,13 @@ if st.session_state.current_page == "🔑 Login":
     .page-starfield { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 0; pointer-events: none; }
     .splash-star { position: absolute; background: #D4A72C; border-radius: 50%; box-shadow: 0 0 4px 1px rgba(212, 167, 44,0.7); animation: twinkle linear infinite; }
     @keyframes twinkle { 0%, 100% { opacity: 0.15; } 50% { opacity: 1; } }
+    
 </style>
 <div class="page-starfield"><div class="splash-star" style="width: 1.8px; height: 1.8px; top: 4.4%; left: 28.4%; animation-duration: 2.33s; animation-delay: 1.1s;"></div><div class="splash-star" style="width: 1.8px; height: 1.8px; top: 87.6%; left: 10.3%; animation-duration: 2.63s; animation-delay: 0.04s;"></div><div class="splash-star" style="width: 1.6px; height: 1.6px; top: 50.5%; left: 4.5%; animation-duration: 2.3s; animation-delay: 0.97s;"></div><div class="splash-star" style="width: 1.8px; height: 1.8px; top: 23.2%; left: 58.6%; animation-duration: 3.21s; animation-delay: 0.01s;"></div><div class="splash-star" style="width: 1.9px; height: 1.9px; top: 69.0%; left: 34.7%; animation-duration: 2.23s; animation-delay: 1.44s;"></div><div class="splash-star" style="width: 1.7px; height: 1.7px; top: 10.9%; left: 11.3%; animation-duration: 3.27s; animation-delay: 0.91s;"></div><div class="splash-star" style="width: 1.9px; height: 1.9px; top: 72.1%; left: 53.5%; animation-duration: 3.46s; animation-delay: 0.57s;"></div><div class="splash-star" style="width: 1.8px; height: 1.8px; top: 81.6%; left: 61.4%; animation-duration: 3.29s; animation-delay: 0.87s;"></div><div class="splash-star" style="width: 1.9px; height: 1.9px; top: 6.4%; left: 23.9%; animation-duration: 2.43s; animation-delay: 0.12s;"></div><div class="splash-star" style="width: 1.6px; height: 1.6px; top: 11.7%; left: 28.7%; animation-duration: 2.95s; animation-delay: 0.55s;"></div><div class="splash-star" style="width: 1.7px; height: 1.7px; top: 22.1%; left: 27.6%; animation-duration: 3.4s; animation-delay: 0.97s;"></div><div class="splash-star" style="width: 1.8px; height: 1.8px; top: 18.4%; left: 72.0%; animation-duration: 2.25s; animation-delay: 0.57s;"></div><div class="splash-star" style="width: 2.0px; height: 2.0px; top: 63.4%; left: 55.5%; animation-duration: 3.03s; animation-delay: 1.26s;"></div><div class="splash-star" style="width: 1.9px; height: 1.9px; top: 24.0%; left: 5.1%; animation-duration: 2.47s; animation-delay: 0.4s;"></div><div class="splash-star" style="width: 1.6px; height: 1.6px; top: 92.5%; left: 86.1%; animation-duration: 2.47s; animation-delay: 0.98s;"></div><div class="splash-star" style="width: 1.7px; height: 1.7px; top: 89.8%; left: 46.0%; animation-duration: 2.4s; animation-delay: 0.37s;"></div><div class="splash-star" style="width: 1.8px; height: 1.8px; top: 27.2%; left: 58.1%; animation-duration: 3.35s; animation-delay: 0.6s;"></div><div class="splash-star" style="width: 1.6px; height: 1.6px; top: 97.8%; left: 50.9%; animation-duration: 2.14s; animation-delay: 0.07s;"></div><div class="splash-star" style="width: 1.6px; height: 1.6px; top: 62.2%; left: 78.0%; animation-duration: 2.63s; animation-delay: 0.1s;"></div><div class="splash-star" style="width: 1.7px; height: 1.7px; top: 97.6%; left: 52.8%; animation-duration: 3.46s; animation-delay: 1.29s;"></div></div>''', unsafe_allow_html=True)
     st.markdown('''
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 <style>
+    
     /* :wght@600&family=Inter:wght@400;500&family=JetBrains+Mono:wght@500&display=swap');
     html, body, [class*="css"] {
     font-family: 'Inter', sans-serif;
@@ -637,23 +648,202 @@ if st.session_state.current_page == "🔑 Login":
     border: 1px solid #E2E8F0;
     box-shadow: 0 0 20px rgba(212, 167, 44, 0.1);
     }
+    
 </style>
 ''', unsafe_allow_html=True)
     
-    st.markdown("<br><br>", unsafe_allow_html=True)
+    st.markdown("<br>", unsafe_allow_html=True)
     col_l1, col_l2, col_l3 = st.columns([1, 2, 1])
     with col_l2:
         st.markdown("<div class='login-bg-anchor'></div>", unsafe_allow_html=True)
-        st.markdown("<h3 style='text-align: center; color: #D4A72C; font-size: 1.5rem; text-transform: uppercase; letter-spacing: 0.1em;'>Developer Login</div>", unsafe_allow_html=True)
-        st.markdown("<p style='text-align: center; color: #475569; margin-bottom: 20px; font-family: monospace;'>Sign in to access the fraud detection dashboard.</p>", unsafe_allow_html=True)
+        st.markdown('''
+        <style>
+    
+            .login-container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin-top: -10px;
+                font-family: 'Inter', sans-serif;
+            }
+            .login-logo {
+                margin-bottom: 15px;
+                filter: drop-shadow(0 0 15px rgba(59, 130, 246, 0.4));
+                background: linear-gradient(135deg, #60A5FA 0%, #2563EB 100%);
+                border-radius: 12px;
+                padding: 12px;
+            }
+            .login-title {
+                color: #FFFFFF;
+                font-size: 1.9rem;
+                font-weight: 700;
+                margin-bottom: 5px;
+            }
+            .login-subtitle {
+                color: #E2E8F0;
+                font-size: 0.95rem;
+                margin-bottom: 25px;
+            }
+    
+            .login-tabs {
+                display: flex;
+                width: 100%;
+                gap: 15px;
+                margin-bottom: 25px;
+            }
+            .login-tab {
+                flex: 1;
+                text-align: center;
+                padding: 14px;
+                border-radius: 30px;
+                font-weight: 600;
+                font-size: 0.95rem;
+                cursor: pointer;
+            }
+            .tab-active {
+                background: linear-gradient(90deg, #1E3A8A 0%, #2563EB 100%);
+                color: #FFFFFF;
+                border: 1px solid #3B82F6;
+                box-shadow: 0 4px 15px rgba(37, 99, 235, 0.2);
+            }
+            .tab-inactive {
+                background: transparent;
+                color: #F8FAFC;
+                border: 1px solid #334155;
+            }
+    
+            .google-btn {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                padding: 14px;
+                border-radius: 30px;
+                background: transparent;
+                border: 1px solid #334155;
+                color: #FFFFFF;
+                font-weight: 700;
+                font-size: 1rem;
+                cursor: pointer;
+                margin-bottom: 25px;
+                gap: 12px;
+                transition: background 0.2s;
+            }
+            .google-btn:hover { background: rgba(255,255,255,0.05); }
+    
+            .login-divider {
+                display: flex;
+                align-items: center;
+                text-align: center;
+                color: #CBD5E1;
+                font-size: 0.85rem;
+                margin-bottom: 20px;
+                font-family: monospace;
+                letter-spacing: 0.5px;
+            }
+            .login-divider::before, .login-divider::after {
+                content: '';
+                flex: 1;
+                border-bottom: 1px solid #334155;
+            }
+            .login-divider:not(:empty)::before { margin-right: 1em; }
+            .login-divider:not(:empty)::after { margin-left: 1em; }
+    
+            /* Streamlit Inputs Styling */
+            div[data-testid="stTextInput"] {
+                margin-bottom: 10px;
+            }
+            div[data-testid="stTextInput"] label p {
+                text-transform: uppercase;
+                color: #E2E8F0 !important;
+                font-weight: 800;
+                font-size: 0.8rem !important;
+                letter-spacing: 1px;
+                margin-bottom: -2px;
+            }
+            div[data-testid="stTextInput"] div[data-baseweb="input"] {
+                background-color: #0B1121 !important;
+                border: 1px solid #1E293B !important;
+                border-radius: 8px !important;
+                transition: all 0.2s ease !important;
+            }
+            div[data-testid="stTextInput"] div[data-baseweb="input"]:focus-within {
+                border: 1px solid #3B82F6 !important;
+                box-shadow: 0 0 0 1px #3B82F6 !important;
+            }
+            div[data-testid="stTextInput"] input {
+                color: #F8FAFC !important;
+                padding: 14px 16px !important;
+                font-family: monospace !important;
+                font-size: 1.05rem !important;
+            }
+            div[data-testid="stTextInput"] input::placeholder {
+                color: #64748B !important;
+            }
+    
+            /* Main Login Button Override */
+            div[data-testid="stButton"] button {
+                width: 100% !important;
+                background-color: #FFFFFF !important;
+                color: #000000 !important;
+                border: none !important;
+                border-radius: 30px !important;
+                padding: 12px 15px !important;
+                font-weight: 800 !important;
+                font-size: 1.05rem !important;
+                margin-top: 15px !important;
+                transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+            }
+            div[data-testid="stButton"] button:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 15px rgba(255,255,255,0.2) !important;
+                color: #000000 !important;
+                border: none !important;
+            }
+            div[data-testid="stButton"] button p {
+                font-size: 1.05rem !important;
+            }
+    
+</style>
         
-        st.text_input("Work Email", placeholder="developer@company.com")
-        st.text_input("Password", type="password", placeholder="••••••••")
-        st.markdown("<br>", unsafe_allow_html=True)
-        if st.button("Log In", use_container_width=True):
+        <div class="login-container">
+            <div class="login-logo">
+                <svg width="28" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M13 2L3 22H11L11 32L21 12H13L13 2Z" fill="#FFFFFF"/>
+                </svg>
+            </div>
+            <div class="login-title">Aurevia Access Portal</div>
+            <div class="login-subtitle">Sign in to access the Fraud Detection Dashboard</div>
+            
+            <div class="login-tabs">
+                <div class="login-tab tab-active">Sign In</div>
+                <div class="login-tab tab-inactive">Create Account</div>
+            </div>
+            
+            <div class="google-btn">
+                <svg viewBox="0 0 24 24" width="22" height="22" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+                Sign in with Google Account
+            </div>
+            
+            <div class="login-divider">or sign in with email</div>
+        </div>
+        ''', unsafe_allow_html=True)
+        
+        st.text_input("EMAIL ADDRESS", placeholder="you@example.com")
+        st.text_input("PASSWORD", type="password", placeholder="Enter password")
+        
+        if st.button("Sign In & Enter Dashboard →"):
             st.session_state.logged_in = True
             st.session_state.current_page = "⚡ Live Risk Simulator"
             st.rerun()
+            
+        st.markdown('''
+        <div style="text-align: center; color: #94A3B8; font-size: 0.8rem; margin: 35px 0 15px 0; font-family: 'Inter', sans-serif;">Fast Sign-In</div>
+        <div style="display: flex; gap: 15px; width: 100%;">
+            <div style="flex: 1; text-align: center; padding: 12px; border: 1px solid #1E293B; border-radius: 20px; color: #F8FAFC; cursor: pointer; font-size: 0.9rem; font-weight: 700; font-family: 'Inter', sans-serif; transition: background 0.2s;"><span style="color:#D4A72C;">⚡</span> Operator</div>
+            <div style="flex: 1; text-align: center; padding: 12px; border: 1px solid #1E293B; border-radius: 20px; color: #F8FAFC; cursor: pointer; font-size: 0.9rem; font-weight: 700; font-family: 'Inter', sans-serif; transition: background 0.2s;"><span style="color:#9333EA;">👤</span> User</div>
+        </div>
+        ''', unsafe_allow_html=True)
 
 # ==========================================
 # TAB 1: LIVE RISK SIMULATOR
