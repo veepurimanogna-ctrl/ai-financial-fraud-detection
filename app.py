@@ -270,7 +270,7 @@ st.markdown("""
     }
     /* 🛡️ Premium Elevated Metric Cards */
     .metric-card {
-    background: linear-gradient(135deg, #0B1221 0%, #142B44 100%) !important;
+    background-color: #0F2740 !important;
     backdrop-filter: blur(10px) !important;
     -webkit-backdrop-filter: blur(10px) !important;
     border: 1px solid rgba(212, 167, 44, 0.3) !important;
@@ -686,7 +686,7 @@ if st.session_state.current_page == "🔑 Login":
     }
     
     div[data-testid="stColumn"]:has(.login-bg-anchor) {
-    background-color: #0B1221 !important;
+    background-color: #0F2740 !important;
     border-radius: 20px;
     padding: 40px;
     border: 1px solid rgba(255,255,255,0.05);
