@@ -25,7 +25,6 @@ if 'welcome_shown' not in st.session_state:
 if not st.session_state.welcome_shown:
     st.markdown('''<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 <style>
-    /* :wght@600&family=Inter:wght@400;500&family=JetBrains+Mono:wght@500&display=swap');
 
     html, body, [class*="css"] {
         font-family: 'Inter', sans-serif;
@@ -131,7 +130,6 @@ text-shadow: 0 0 10px rgba(212, 167, 44, 0.3);
 st.markdown("""
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 <style>
-    /* :wght@600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap');
 
     
     /* Fix Sidebar text colors */
