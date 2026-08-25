@@ -47,7 +47,10 @@ if not st.session_state.welcome_shown:
     .splash-starfield { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 0; pointer-events: none; }
     .splash-star { position: absolute; background: #D4A72C; border-radius: 50%; box-shadow: 0 0 4px 1px rgba(212, 167, 44,0.7); animation: twinkle linear infinite; }
     @keyframes twinkle { 0%, 100% { opacity: 0.15; } 50% { opacity: 1; } }
-    .splash-container { position: relative; z-index: 10; display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 75vh; text-align: center; animation: fadeIn 0.8s ease-in; }
+    @keyframes zi { from { opacity:0; transform:scale(0.85); } to { opacity:1; transform:scale(1); } }
+    .splash-container { position: relative; z-index: 10; display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 75vh; text-align: center; animation: zi 0.7s cubic-bezier(0.2,0.8,0.3,1) both; }
+    /* Animate the start button below as well */
+    .stButton > button { animation: zi 0.7s cubic-bezier(0.2,0.8,0.3,1) both; }
 .shield-glow-container { position: relative; display: inline-block; }
 .shield-glow { position: absolute; width: 180px; height: 180px; background: radial-gradient(circle, rgba(212, 167, 44,0.15) 0%, transparent 70%); top: 50%; left: 50%; transform: translate(-50%, -50%); border-radius: 50%; animation: pulseGlow 3s infinite ease-in-out; z-index: -1; pointer-events: none; }
 @keyframes pulseGlow { 0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.6; } 50% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; } }
@@ -56,14 +59,22 @@ if not st.session_state.welcome_shown:
 </style>
 <div class="splash-starfield"><div class="splash-star" style="width: 1.8px; height: 1.8px; top: 4.4%; left: 28.4%; animation-duration: 2.33s; animation-delay: 1.1s;"></div><div class="splash-star" style="width: 1.8px; height: 1.8px; top: 87.6%; left: 10.3%; animation-duration: 2.63s; animation-delay: 0.04s;"></div><div class="splash-star" style="width: 1.6px; height: 1.6px; top: 50.5%; left: 4.5%; animation-duration: 2.3s; animation-delay: 0.97s;"></div><div class="splash-star" style="width: 1.8px; height: 1.8px; top: 23.2%; left: 58.6%; animation-duration: 3.21s; animation-delay: 0.01s;"></div><div class="splash-star" style="width: 1.9px; height: 1.9px; top: 69.0%; left: 34.7%; animation-duration: 2.23s; animation-delay: 1.44s;"></div><div class="splash-star" style="width: 1.7px; height: 1.7px; top: 10.9%; left: 11.3%; animation-duration: 3.27s; animation-delay: 0.91s;"></div><div class="splash-star" style="width: 1.9px; height: 1.9px; top: 72.1%; left: 53.5%; animation-duration: 3.46s; animation-delay: 0.57s;"></div><div class="splash-star" style="width: 1.8px; height: 1.8px; top: 81.6%; left: 61.4%; animation-duration: 3.29s; animation-delay: 0.87s;"></div><div class="splash-star" style="width: 1.9px; height: 1.9px; top: 6.4%; left: 23.9%; animation-duration: 2.43s; animation-delay: 0.12s;"></div><div class="splash-star" style="width: 1.6px; height: 1.6px; top: 11.7%; left: 28.7%; animation-duration: 2.95s; animation-delay: 0.55s;"></div><div class="splash-star" style="width: 1.7px; height: 1.7px; top: 22.1%; left: 27.6%; animation-duration: 3.4s; animation-delay: 0.97s;"></div><div class="splash-star" style="width: 1.8px; height: 1.8px; top: 18.4%; left: 72.0%; animation-duration: 2.25s; animation-delay: 0.57s;"></div><div class="splash-star" style="width: 2.0px; height: 2.0px; top: 63.4%; left: 55.5%; animation-duration: 3.03s; animation-delay: 1.26s;"></div><div class="splash-star" style="width: 1.9px; height: 1.9px; top: 24.0%; left: 5.1%; animation-duration: 2.47s; animation-delay: 0.4s;"></div><div class="splash-star" style="width: 1.6px; height: 1.6px; top: 92.5%; left: 86.1%; animation-duration: 2.47s; animation-delay: 0.98s;"></div><div class="splash-star" style="width: 1.7px; height: 1.7px; top: 89.8%; left: 46.0%; animation-duration: 2.4s; animation-delay: 0.37s;"></div><div class="splash-star" style="width: 1.8px; height: 1.8px; top: 27.2%; left: 58.1%; animation-duration: 3.35s; animation-delay: 0.6s;"></div><div class="splash-star" style="width: 1.6px; height: 1.6px; top: 97.8%; left: 50.9%; animation-duration: 2.14s; animation-delay: 0.07s;"></div><div class="splash-star" style="width: 1.6px; height: 1.6px; top: 62.2%; left: 78.0%; animation-duration: 2.63s; animation-delay: 0.1s;"></div><div class="splash-star" style="width: 1.7px; height: 1.7px; top: 97.6%; left: 52.8%; animation-duration: 3.46s; animation-delay: 1.29s;"></div></div>
 <div class="splash-container">
-<div class="shield-glow-container">
+<div class="shield-glow-container" style="display:flex; flex-direction:column; align-items:center;">
 <div class="shield-glow"></div>
-<h1 style="color: #D4A72C; font-weight: 800; font-size: 4rem; margin-bottom: 0; text-shadow: 0 0 20px rgba(212, 167, 44, 0.4);">🛡️ AUREVIA SHIELD</h1>
+<svg width="100" height="100" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-bottom: 10px; z-index: 1;">
+  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" fill="url(#shield-grad)" stroke="#FCEBB8" stroke-width="0.5"/>
+  <path d="M9 12l2 2 4-4" stroke="#0F2740" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <defs>
+    <linearGradient id="shield-grad" x1="12" y1="2" x2="12" y2="22" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F4D879"/>
+      <stop offset="1" stop-color="#B9862A"/>
+    </linearGradient>
+  </defs>
+</svg>
+<h1 style="background: linear-gradient(180deg, #FCEBB8, #D4A72C); -webkit-background-clip: text; background-clip: text; color: transparent; font-weight: 800; font-size: 5.5rem; margin-bottom: 0; margin-top: 0; text-shadow: 0 0 30px rgba(212,167,44,0.4); line-height: 1.1;">AUREVIA SHIELD</h1>
 </div>
 <div class="gradient-divider"></div>
-<h3 style="color: #475569; margin-top: 0; margin-bottom: 40px; font-weight: 400;">AI Financial Fraud Detection & Risk Analysis System</h3>
-<p style="max-width: 700px; margin: 0 auto 20px auto; font-size: 1.1rem; line-height: 1.6; color: #475569;">Welcome to the Aurevia Shield dashboard. This interface provides real-time fraud monitoring, high-accuracy model performance metrics, and deep behavioral risk insights.</p>
-<div style="max-width: 700px; margin: 0 auto 40px auto; background: rgba(212, 167, 44, 0.05); border: 1px solid rgba(212, 167, 44, 0.2); padding: 15px; border-radius: 8px; color: #475569; font-size: 0.95rem;"><strong>Data Disclosure:</strong> This project uses a synthetic dataset generated to match the schema of the real-world Sparkov Credit Card Transactions Fraud Detection dataset on Kaggle. It contains 50,000 transactions preserving a realistic class imbalance (~1.6% fraud).</div>
+<h3 style="color: #475569; margin-top: 0; margin-bottom: 40px; font-weight: 400; font-size: 1.6rem;">AI Financial Fraud Detection & Risk Analysis System</h3>
 </div>''', unsafe_allow_html=True)
     
     col1, col2, col3 = st.columns([1, 1, 1])
