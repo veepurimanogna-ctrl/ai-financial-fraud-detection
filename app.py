@@ -846,8 +846,8 @@ if st.session_state.current_page == "🔑 Login":
                 margin-bottom: -2px;
             }
             div[data-testid="stTextInput"] div[data-baseweb="input"] {
-                background-color: #FFFFFF !important;
-                border: 2px solid #CBD5E1 !important;
+                background-color: #2563EB !important;
+                border: 2px solid #1D4ED8 !important;
                 border-radius: 8px !important;
                 transition: all 0.2s ease !important;
             }
@@ -857,13 +857,13 @@ if st.session_state.current_page == "🔑 Login":
             }
             div[data-testid="stTextInput"] input {
                 background-color: transparent !important;
-                color: #0F2740 !important;
+                color: #FFFFFF !important;
                 padding: 14px 16px !important;
                 font-family: monospace !important;
                 font-size: 1.05rem !important;
             }
             div[data-testid="stTextInput"] input::placeholder {
-                color: #94A3B8 !important;
+                color: #93C5FD !important;
             }
     
             /* Main Login Button Override */
