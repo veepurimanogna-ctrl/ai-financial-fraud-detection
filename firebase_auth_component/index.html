@@ -78,8 +78,8 @@
         signInWithPopup(auth, provider)
           .then((result) => {
             const user = result.user;
-            // Redirect the Streamlit parent window and pass the authentication state
-            window.parent.location.href = window.parent.location.pathname + "?auth_success=true&email=" + encodeURIComponent(user.email);
+            // Send the authentication state perfectly through Streamlit's official API
+            sendMessageToStreamlitClient("streamlit:setComponentValue", {value: {auth_success: true, email: user.email}});
           }).catch((error) => {
             console.error("Firebase Auth Error:", error);
             if (error.code === 'auth/unauthorized-domain') {

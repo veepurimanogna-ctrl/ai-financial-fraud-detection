@@ -467,16 +467,6 @@ if 'logged_in' not in st.session_state:
 if 'current_page' not in st.session_state:
     st.session_state.current_page = "🔹 Overview"
 
-# --- Check for Firebase Auth Callback ---
-if 'auth_success' in st.query_params and st.query_params['auth_success'] == 'true':
-    st.session_state.logged_in = True
-    if 'email' in st.query_params:
-        st.session_state.user_email = st.query_params['email']
-    # Clear query parameters to prevent re-triggering on refresh
-    st.query_params.clear()
-    st.session_state.current_page = "⚡ Live Risk Simulator"
-    st.rerun()
-
 # --- Full-Page Custom Navigation ---
 if not st.session_state.logged_in:
     nav_options = ["💠 Overview", "🔑 Login"]
@@ -931,7 +921,13 @@ if st.session_state.current_page == "🔑 Login":
         
         import streamlit.components.v1 as components
         firebase_login_btn = components.declare_component("firebase_login", path="firebase_auth_component")
-        firebase_login_btn()
+        auth_result = firebase_login_btn()
+        
+        if auth_result and isinstance(auth_result, dict) and auth_result.get("auth_success"):
+            st.session_state.logged_in = True
+            st.session_state.user_email = auth_result.get("email")
+            st.session_state.current_page = "⚡ Live Risk Simulator"
+            st.rerun()
 
 # ==========================================
 # TAB 1: LIVE RISK SIMULATOR
