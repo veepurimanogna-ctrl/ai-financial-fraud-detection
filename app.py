@@ -944,6 +944,7 @@ if st.session_state.current_page == "🔑 Login":
                 if email_input and pass_input:
                     st.session_state.logged_in = True
                     st.session_state.user_email = email_input
+                    st.session_state.current_page = "s Live Risk Simulator"
                     st.rerun()
                 else:
                     st.error("Please enter both email and password to sign in.")
