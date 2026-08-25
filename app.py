@@ -1232,7 +1232,14 @@ if st.session_state.current_page == "📂 Batch CSV Fraud Scanner":
                 # Increase Pandas Styler max elements limit to prevent StreamlitAPIException on massive batch datasets
                 pd.set_option("styler.render.max_elements", 10000000)
                 
-                styled_df = display_df[cols_to_show].style.applymap(style_risk_level, subset=['predicted_risk_level']) if hasattr(display_df.style, 'applymap') else display_df[cols_to_show].style.map(style_risk_level, subset=['predicted_risk_level'])
+                # First explicitly style ALL cells to have dark navy text so they don't get washed out by the Canvas renderer
+                base_styled_df = display_df[cols_to_show].style.set_properties(**{
+                    'color': '#0F2740',
+                    'background-color': '#FFFFFF'
+                })
+                
+                # Then map the specific risk level column colors
+                styled_df = base_styled_df.applymap(style_risk_level, subset=['predicted_risk_level']) if hasattr(base_styled_df, 'applymap') else base_styled_df.map(style_risk_level, subset=['predicted_risk_level'])
                 
                 st.dataframe(
                     styled_df,
