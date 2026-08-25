@@ -835,7 +835,7 @@ if st.session_state.current_page == "🔑 Login":
             </style>
         ''', unsafe_allow_html=True)
         
-        btn_main = st.button("Sign In →")
+        btn_main = st.button("Sign In →", use_container_width=True)
         st.markdown("<div style='display: none;'>", unsafe_allow_html=True)
         btn_hidden = st.button("hidden_login_trigger")
         st.markdown("</div>", unsafe_allow_html=True)
