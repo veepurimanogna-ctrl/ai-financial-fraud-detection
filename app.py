@@ -403,22 +403,27 @@ st.markdown("""
     box-shadow: 0 0 15px rgba(21, 148, 71, 0.3);
     }
     /* 📊 Explanation & Terminal Boxes */
-    .driver-box {
-    background-color: rgba(220, 53, 69, 0.08);
-    border-left: 3px solid #DC3545;
-    padding: 12px;
-    margin-bottom: 10px;
-    font-family: monospace;
-    color: #B91C1C;
-    }
-    .mitigator-box {
-    background-color: rgba(21, 148, 71, 0.08);
-    border-left: 3px solid #159447;
-    padding: 12px;
-    margin-bottom: 10px;
-    font-family: monospace;
-    color: #047857;
-    }
+      .driver-box {
+      background-color: #2a1115;
+      border: 1px solid #5a1e23;
+      border-radius: 10px;
+      padding: 16px;
+      margin-bottom: 12px;
+      }
+      .driver-box strong { color: #ffffff; font-size: 1.05rem; display: flex; align-items: center; gap: 8px; font-family: 'Inter', sans-serif; margin-bottom: 6px; }
+      .driver-box .detail { color: #8C9CAB; font-size: 0.95rem; font-family: 'Inter', sans-serif; margin-bottom: 10px; line-height: 1.4; }
+      .driver-box .footer { color: #ff5757; font-size: 0.9rem; font-weight: 600; font-family: 'Inter', sans-serif; }
+      
+      .mitigator-box {
+      background-color: #0d2127;
+      border: 1px solid #144b41;
+      border-radius: 10px;
+      padding: 16px;
+      margin-bottom: 12px;
+      }
+      .mitigator-box strong { color: #ffffff; font-size: 1.05rem; display: flex; align-items: center; gap: 8px; font-family: 'Inter', sans-serif; margin-bottom: 6px; }
+      .mitigator-box .detail { color: #8C9CAB; font-size: 0.95rem; font-family: 'Inter', sans-serif; margin-bottom: 10px; line-height: 1.4; }
+      .mitigator-box .footer { color: #00E699; font-size: 0.9rem; font-weight: 600; font-family: 'Inter', sans-serif; }
     /* ⚡ Action Box */
     .action-box {
     background: rgba(212, 167, 44, 0.05);
@@ -1097,27 +1102,50 @@ if st.session_state.current_page == "⚡ Live Risk Simulator":
         </div>
         """, unsafe_allow_html=True)
         
-        st.markdown("#### 🧠 Explainable AI: Key Decision Drivers")
+        # Explainable AI Container Header
+        st.markdown(f"""
+        <div style="background-color: #121A23; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); overflow: hidden; margin-top: 25px;">
+            <div style="padding: 20px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; gap: 15px;">
+                <div style="width: 40px; height: 40px; background: rgba(255,105,180,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px;">🧠</div>
+                <div>
+                    <div style="color: #FFFFFF; font-size: 1.2rem; font-weight: 700; font-family: 'Inter', sans-serif; letter-spacing: -0.2px;">Explainable AI — Key Decision Drivers</div>
+                    <div style="color: #8C9CAB; font-size: 0.9rem; font-family: 'Inter', sans-serif; margin-top: 3px;">Rule-based interpretation layer — reflects genuine input values</div>
+                </div>
+            </div>
+            <div style="padding: 20px;">
+        """, unsafe_allow_html=True)
         
         if exp['positive_drivers']:
-            st.markdown("**Risk-Increasing Drivers:**")
+            st.markdown(f"<div style='color: #ff5757; font-weight: 700; font-size: 0.85rem; letter-spacing: 0.8px; margin-bottom: 12px; font-family: \"Inter\", sans-serif; text-transform: uppercase;'>📈 RISK AMPLIFIERS ({len(exp['positive_drivers'])})</div>", unsafe_allow_html=True)
             for d in exp['positive_drivers']:
                 st.markdown(f"""
                 <div class="driver-box">
-                    <strong>⚠️ {d['factor']} ({d['category']})</strong><br>
-                    <span style="font-size: 0.9rem; color: #555555;">{d['detail']}</span>
+                    <strong><span style="color: #ff5757;">📈</span> {d['factor']} ({d['category']})</strong>
+                    <div class="detail">{d['detail']}</div>
+                    <div class="footer">Increases risk score</div>
                 </div>
                 """, unsafe_allow_html=True)
 
         if exp['mitigating_factors']:
-            st.markdown("**Risk-Mitigating Factors:**")
+            if exp['positive_drivers']:
+                st.markdown("<br>", unsafe_allow_html=True)
+            st.markdown(f"<div style='color: #00E699; font-weight: 700; font-size: 0.85rem; letter-spacing: 0.8px; margin-bottom: 12px; font-family: \"Inter\", sans-serif; text-transform: uppercase;'>📉 RISK MITIGATORS ({len(exp['mitigating_factors'])})</div>", unsafe_allow_html=True)
             for m in exp['mitigating_factors']:
+                icon = "📉"
+                if "Amount" in m['factor']: icon = "📉"
+                elif "Location" in m['factor'] or "Nearby" in m['factor']: icon = "📍"
+                elif "Hour" in m['factor'] or "Time" in m['factor']: icon = "🌙"
+                
                 st.markdown(f"""
                 <div class="mitigator-box">
-                    <strong>✅ {m['factor']}</strong><br>
-                    <span style="font-size: 0.9rem; color: #555555;">{m['detail']}</span>
+                    <strong><span style="color: #00E699;">{icon}</span> {m['factor']}</strong>
+                    <div class="detail">{m['detail']}</div>
+                    <div class="footer">Reduces risk score</div>
                 </div>
                 """, unsafe_allow_html=True)
+
+        # Close the outer container
+        st.markdown("</div></div>", unsafe_allow_html=True)
 
 # ==========================================
 # TAB 2: BATCH CSV FRAUD SCANNER
