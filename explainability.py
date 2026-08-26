@@ -35,39 +35,37 @@ def explain_transaction_risk(txn_dict, pipeline_bundle, risk_score):
     if ratio >= 4.0:
         drivers.append({
             'factor': 'Unusual Transaction Amount',
-            'detail': f'The transaction amount (₹{amount:,.2f}) is alarmingly high—{ratio:.1f}x greater than the customer\\'s normal 30-day baseline (₹{avg_amt:,.2f}). Sudden, massive deviations in spending behavior are strong leading indicators of potential account takeover or compromised credentials, severely amplifying the overall risk score.',
+            'detail': f"The transaction amount (${amount:,.2f}) is alarmingly high—{ratio:.1f}x greater than the customer's normal 30-day baseline (${avg_amt:,.2f}). Sudden, massive deviations in spending behavior are strong leading indicators of potential account takeover or compromised credentials, severely amplifying the overall risk score.",
             'impact_weight': 0.35,
             'category': 'High Impact'
         })
     elif ratio >= 2.5:
         drivers.append({
             'factor': 'Elevated Transaction Amount',
-            'detail': f'The amount requested (₹{amount:,.2f}) is noticeably elevated at {ratio:.1f}x the customer\\'s typical 30-day average (₹{avg_amt:,.2f}). While not necessarily fraudulent on its own, this abnormal deviation flags the transaction for closer scrutiny and moderately increases the risk score.',
+            'detail': f"The amount requested (${amount:,.2f}) is noticeably elevated at {ratio:.1f}x the customer's typical 30-day average (${avg_amt:,.2f}). While not necessarily fraudulent on its own, this abnormal deviation flags the transaction for closer scrutiny and moderately increases the risk score.",
             'impact_weight': 0.20,
             'category': 'Medium Impact'
         })
     elif ratio <= 1.2:
         mitigators.append({
             'factor': 'Normal Purchase Amount',
-            'detail': f'The transaction amount is highly consistent with the customer\\'s historical 30-day baseline (₹{avg_amt:,.2f}). Predictable, routine spending patterns indicate legitimate account usage, thereby lowering the transaction\\'s overall risk profile.',
+            'detail': f"The transaction amount is highly consistent with the customer's historical 30-day baseline (${avg_amt:,.2f}). Predictable, routine spending patterns indicate legitimate account usage, thereby lowering the transaction's overall risk profile.",
             'impact_weight': -0.15
         })
-
-    # 2. Hourly / Daily Velocity Spikes (Removed - Not collected in app)
 
     # 3. Night & High Risk Merchant Combination
     high_risk_merchants = ['travel', 'shopping_net', 'misc_net']
     if is_night == 1 and merchant in high_risk_merchants:
         drivers.append({
             'factor': 'Late-Night High-Risk Merchant',
-            'detail': f'This transaction to a historically high-risk merchant category ({merchant}) was initiated during early morning hours (1 AM - 5 AM). Fraudsters frequently operate during these off-hours to exploit delayed customer awareness, making this a critical risk amplifier.',
+            'detail': f"This transaction to a historically high-risk merchant category ({merchant}) was initiated during early morning hours (1 AM - 5 AM). Fraudsters frequently operate during these off-hours to exploit delayed customer awareness, making this a critical risk amplifier.",
             'impact_weight': 0.30,
             'category': 'High Impact'
         })
     elif merchant in high_risk_merchants:
         drivers.append({
             'factor': 'High Risk Merchant Category',
-            'detail': f'The merchant type is classified as "{merchant}". Historical network data shows this category suffers from a statistically higher rate of fraudulent chargebacks and stolen card testing, contributing to an elevated risk score.',
+            'detail': f"The merchant type is classified as '{merchant}'. Historical network data shows this category suffers from a statistically higher rate of fraudulent chargebacks and stolen card testing, contributing to an elevated risk score.",
             'impact_weight': 0.15,
             'category': 'Medium Impact'
         })
@@ -76,32 +74,30 @@ def explain_transaction_risk(txn_dict, pipeline_bundle, risk_score):
     if dist > 100:
         drivers.append({
             'factor': 'Long Distance From Home',
-            'detail': f'The transaction occurred {dist:,.1f} km away from the customer\\'s registered home address. Without corresponding travel flags, large geographic anomalies heavily suggest the card is being used by an unauthorized third party in a different region.',
+            'detail': f"The transaction occurred {dist:,.1f} km away from the customer's registered home address. Without corresponding travel flags, large geographic anomalies heavily suggest the card is being used by an unauthorized third party in a different region.",
             'impact_weight': 0.25,
             'category': 'High Impact'
         })
     elif dist < 20:
         mitigators.append({
             'factor': 'Nearby Merchant Location',
-            'detail': f'The transaction occurred locally (only {dist:,.1f} km from the customer\\'s home). Transactions made within a known, familiar geographic radius strongly correlate with legitimate, routine customer behavior, acting as a powerful risk mitigator.',
+            'detail': f"The transaction occurred locally (only {dist:,.1f} km from the customer's home). Transactions made within a known, familiar geographic radius strongly correlate with legitimate, routine customer behavior, acting as a powerful risk mitigator.",
             'impact_weight': -0.15
         })
-
-    # 5. Location, Card Present, IP Risk, Failed Auth (Removed - Not collected in app)
 
     # Risk Assessment Categorization
     if risk_score >= 0.70:
         risk_level = "HIGH RISK - FLAGGED"
         risk_color = "#DC3545"
-        action = "🛑 BLOCK TRANSACTION & ALERT FRAUD INVESTIGATION TEAM"
+        action = "BLOCK TRANSACTION & ALERT FRAUD INVESTIGATION TEAM"
     elif risk_score >= 0.30:
         risk_level = "MEDIUM RISK - REVIEW"
         risk_color = "#D4A72C"
-        action = "⚠️ PROMPT SECOND-FACTOR AUTHENTICATION (2FA / OTP)"
+        action = "PROMPT SECOND-FACTOR AUTHENTICATION (2FA / OTP)"
     else:
         risk_level = "LOW RISK - CLEARED"
         risk_color = "#159447"
-        action = "✅ AUTOMATICALLY APPROVE TRANSACTION"
+        action = "AUTOMATICALLY APPROVE TRANSACTION"
 
     return {
         'risk_score_pct': round(risk_score * 100, 1),
