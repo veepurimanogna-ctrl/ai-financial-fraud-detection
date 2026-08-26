@@ -35,21 +35,21 @@ def explain_transaction_risk(txn_dict, pipeline_bundle, risk_score):
     if ratio >= 4.0:
         drivers.append({
             'factor': 'Unusual Transaction Amount',
-            'detail': f'Amount (₹{amount:,.2f}) is {ratio:.1f}x higher than customer 30-day baseline (₹{avg_amt:,.2f})',
+            'detail': f'The transaction amount (₹{amount:,.2f}) is alarmingly high—{ratio:.1f}x greater than the customer\\'s normal 30-day baseline (₹{avg_amt:,.2f}). Sudden, massive deviations in spending behavior are strong leading indicators of potential account takeover or compromised credentials, severely amplifying the overall risk score.',
             'impact_weight': 0.35,
             'category': 'High Impact'
         })
     elif ratio >= 2.5:
         drivers.append({
             'factor': 'Elevated Transaction Amount',
-            'detail': f'Amount (₹{amount:,.2f}) is {ratio:.1f}x customer 30-day average (₹{avg_amt:,.2f})',
+            'detail': f'The amount requested (₹{amount:,.2f}) is noticeably elevated at {ratio:.1f}x the customer\\'s typical 30-day average (₹{avg_amt:,.2f}). While not necessarily fraudulent on its own, this abnormal deviation flags the transaction for closer scrutiny and moderately increases the risk score.',
             'impact_weight': 0.20,
             'category': 'Medium Impact'
         })
     elif ratio <= 1.2:
         mitigators.append({
             'factor': 'Normal Purchase Amount',
-            'detail': f'Amount is consistent with customer 30-day baseline (₹{avg_amt:,.2f})',
+            'detail': f'The transaction amount is highly consistent with the customer\\'s historical 30-day baseline (₹{avg_amt:,.2f}). Predictable, routine spending patterns indicate legitimate account usage, thereby lowering the transaction\\'s overall risk profile.',
             'impact_weight': -0.15
         })
 
@@ -60,14 +60,14 @@ def explain_transaction_risk(txn_dict, pipeline_bundle, risk_score):
     if is_night == 1 and merchant in high_risk_merchants:
         drivers.append({
             'factor': 'Late-Night High-Risk Merchant',
-            'detail': f'Transaction to {merchant} initiated during early morning hours (1 AM - 5 AM)',
+            'detail': f'This transaction to a historically high-risk merchant category ({merchant}) was initiated during early morning hours (1 AM - 5 AM). Fraudsters frequently operate during these off-hours to exploit delayed customer awareness, making this a critical risk amplifier.',
             'impact_weight': 0.30,
             'category': 'High Impact'
         })
     elif merchant in high_risk_merchants:
         drivers.append({
             'factor': 'High Risk Merchant Category',
-            'detail': f'Merchant type is classified as {merchant}',
+            'detail': f'The merchant type is classified as "{merchant}". Historical network data shows this category suffers from a statistically higher rate of fraudulent chargebacks and stolen card testing, contributing to an elevated risk score.',
             'impact_weight': 0.15,
             'category': 'Medium Impact'
         })
@@ -76,14 +76,14 @@ def explain_transaction_risk(txn_dict, pipeline_bundle, risk_score):
     if dist > 100:
         drivers.append({
             'factor': 'Long Distance From Home',
-            'detail': f'Transaction occurred {dist:,.1f} km away from customer home',
+            'detail': f'The transaction occurred {dist:,.1f} km away from the customer\\'s registered home address. Without corresponding travel flags, large geographic anomalies heavily suggest the card is being used by an unauthorized third party in a different region.',
             'impact_weight': 0.25,
             'category': 'High Impact'
         })
     elif dist < 20:
         mitigators.append({
             'factor': 'Nearby Merchant Location',
-            'detail': f'Transaction occurred locally ({dist:,.1f} km from home)',
+            'detail': f'The transaction occurred locally (only {dist:,.1f} km from the customer\\'s home). Transactions made within a known, familiar geographic radius strongly correlate with legitimate, routine customer behavior, acting as a powerful risk mitigator.',
             'impact_weight': -0.15
         })
 
