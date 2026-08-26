@@ -35,21 +35,21 @@ def explain_transaction_risk(txn_dict, pipeline_bundle, risk_score):
     if ratio >= 4.0:
         drivers.append({
             'factor': 'Unusual Transaction Amount',
-            'detail': f"The transaction amount (\u20b9{amount:,.2f}) is alarmingly high—{ratio:.1f}x greater than the customer's normal 30-day baseline (\u20b9{avg_amt:,.2f}). Sudden, massive deviations in spending behavior are strong leading indicators of potential account takeover or compromised credentials, severely amplifying the overall risk score.",
+            'detail': f"The transaction amount (Rs.{amount:,.2f}) is alarmingly high—{ratio:.1f}x greater than the customer's normal 30-day baseline (Rs.{avg_amt:,.2f}). Sudden, massive deviations in spending behavior are strong leading indicators of potential account takeover or compromised credentials, severely amplifying the overall risk score.",
             'impact_weight': 0.35,
             'category': 'High Impact'
         })
     elif ratio >= 2.5:
         drivers.append({
             'factor': 'Elevated Transaction Amount',
-            'detail': f"The amount requested (\u20b9{amount:,.2f}) is noticeably elevated at {ratio:.1f}x the customer's typical 30-day average (\u20b9{avg_amt:,.2f}). While not necessarily fraudulent on its own, this abnormal deviation flags the transaction for closer scrutiny and moderately increases the risk score.",
+            'detail': f"The amount requested (Rs.{amount:,.2f}) is noticeably elevated at {ratio:.1f}x the customer's typical 30-day average (Rs.{avg_amt:,.2f}). While not necessarily fraudulent on its own, this abnormal deviation flags the transaction for closer scrutiny and moderately increases the risk score.",
             'impact_weight': 0.20,
             'category': 'Medium Impact'
         })
     elif ratio <= 1.2:
         mitigators.append({
             'factor': 'Normal Purchase Amount',
-            'detail': f"The transaction amount is highly consistent with the customer's historical 30-day baseline (\u20b9{avg_amt:,.2f}). Predictable, routine spending patterns indicate legitimate account usage, thereby lowering the transaction's overall risk profile.",
+            'detail': f"The transaction amount is highly consistent with the customer's historical 30-day baseline (Rs.{avg_amt:,.2f}). Predictable, routine spending patterns indicate legitimate account usage, thereby lowering the transaction's overall risk profile.",
             'impact_weight': -0.15
         })
 
